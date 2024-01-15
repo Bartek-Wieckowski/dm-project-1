@@ -1,15 +1,4 @@
-interface CardProps {
-  data: {
-    imgSrc: string;
-    name: string;
-    surname: string;
-    street: string;
-    postCode: string;
-    town: string;
-    subRegion: string;
-    phoneNumber: string;
-  };
-}
+import { CardProps } from '../types/CardProps.type';
 
 export default function Card({ data }: CardProps) {
   const {
@@ -33,8 +22,8 @@ export default function Card({ data }: CardProps) {
           className="h-[150px] rounded-full"
         />
         <div className="flex flex-col">
-          <h2>{`${name} ${surname}`}</h2>
-          <h2>Adres:</h2>
+          <h2 className="mb-2 text-lg">{`${name} ${surname}`}</h2>
+          <h2 className="text-lg">Adres:</h2>
           <p>{`${street} ${postCode}`}</p>
           <p>{town}</p>
           <p>{subRegion}</p>
