@@ -1,21 +1,44 @@
-export default function Card() {
+interface CardProps {
+  data: {
+    imgSrc: string;
+    name: string;
+    surname: string;
+    street: string;
+    postCode: string;
+    town: string;
+    subRegion: string;
+    phoneNumber: string;
+  };
+}
+
+export default function Card({ data }: CardProps) {
+  const {
+    imgSrc,
+    name,
+    surname,
+    street,
+    postCode,
+    town,
+    subRegion,
+    phoneNumber,
+  } = data;
   return (
     <div className="mx-auto w-full max-w-[400px] rounded bg-slate-400 text-stone-200">
-      <div className="flex flex-col items-center gap-3 p-3 sm:flex-row">
+      <div className="flex flex-col items-center justify-center gap-3 p-3 sm:flex-row">
         <img
-          src="https://placehold.jp/150x150.png"
-          alt="test"
+          src={imgSrc}
+          alt={`${name} ${surname}`}
           width="150"
           height="150"
-          className="rounded-full"
+          className="h-[150px] rounded-full"
         />
         <div className="flex flex-col">
-          <h2>Imie i nazwisko</h2>
-          <p>Address</p>
-          <p>Ulica i kod</p>
-          <p>Miasto</p>
-          <p>Wojewodztwo</p>
-          <p>Numer tel</p>
+          <h2>{`${name} ${surname}`}</h2>
+          <h2>Adres:</h2>
+          <p>{`${street} ${postCode}`}</p>
+          <p>{town}</p>
+          <p>{subRegion}</p>
+          <p>{phoneNumber}</p>
         </div>
       </div>
     </div>
