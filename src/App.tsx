@@ -1,9 +1,12 @@
-import cards from "./assets/dummy-data/data";
+import cards from "./assets/dummy-data/cards-data";
+import { data as commentsData } from "./assets/dummy-data/comments-data";
+import { footerData } from "./assets/dummy-data/footer-data";
+
 import Card from "./components/Card";
 import Wrapper from "./components/Wrapper";
 import AsideMenu from "./components/AsideMenu";
 import Comments from "./components/Comments";
-import { data as commentsData } from "./assets/dummy-data/comments-data";
+import Footer from "./components/Footer";
 
 export default function App() {
   return (
@@ -15,6 +18,11 @@ export default function App() {
             <Card data={card} key={card.id} />
           ))}
           <Comments comments={commentsData} />
+        </Wrapper>
+      </div>
+      <div className="w-full col-start-2 text-center">
+        <Wrapper>
+          <Footer footerData={footerData} />
         </Wrapper>
       </div>
     </main>

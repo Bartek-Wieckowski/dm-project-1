@@ -34,7 +34,7 @@ const menuData: MenuItem[] = [
 
 export default function AsideMenu() {
   return (
-    <aside className="size-full bg-slate-400">
+    <aside className="size-full bg-slate-400 row-span-2">
       <div className="my-4 mx-auto">
         <BsAmd className="block w-full" />
       </div>
