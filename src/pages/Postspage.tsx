@@ -1,3 +1,9 @@
+import Posts from '../components/Posts';
+
 export default function Postspage() {
-  return <div>test</div>;
+  return (
+    <>
+      <Posts />
+    </>
+  );
 }
