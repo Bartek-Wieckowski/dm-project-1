@@ -5,6 +5,7 @@ import {
   BsFillBagCheckFill,
   BsFillFileEarmarkRuledFill,
   BsFillHddRackFill,
+  BsTextWrap,
   BsAmd,
   BsListColumns,
   BsThreeDotsVertical,
@@ -27,6 +28,11 @@ const menuData: MenuItem[] = [
     linkName: 'Facture',
     link: '/invoices',
     icon: <BsFillFileEarmarkRuledFill />,
+  },
+  {
+    linkName: 'Comments',
+    link: '/comments',
+    icon: <BsTextWrap />,
   },
   {
     linkName: 'Posts',
@@ -58,7 +64,9 @@ export default function AsideMenu() {
         <div
           className={`${isOpen ? 'mx-auto' : 'ml-auto mr-2 size-[16px]'} my-4`}
         >
-          <BsAmd className="block w-full" />
+          <Link to="/">
+            <BsAmd className="block w-full cursor-pointer" />
+          </Link>
         </div>
         <ul className="flex flex-col gap-4 p-2">
           {menuData.map((menuItem) => (
@@ -67,8 +75,10 @@ export default function AsideMenu() {
                 to={menuItem.link}
                 className="transition-all hover:text-stone-200"
               >
-                <div className="grid grid-cols-[1fr_16px] items-center gap-1">
-                  <p>{menuItem.linkName}</p>
+                <div className="group grid grid-cols-[1fr_16px] items-center gap-1">
+                  <p className="group-[:nth-of-type(4)_&]:text-[10px]">
+                    {menuItem.linkName}
+                  </p>
                   {menuItem.icon}
                 </div>
               </Link>
