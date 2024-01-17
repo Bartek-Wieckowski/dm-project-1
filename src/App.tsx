@@ -4,6 +4,7 @@ import Homepage from './pages/Homepage';
 import Postspage from './pages/Postspage';
 import Commentspage from './pages/Commentspage';
 import NotFound from './pages/NotFound';
+import Example from './pages/Example';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
           <Route index element={<Homepage />}></Route>
           <Route path="comments" element={<Commentspage />}></Route>
           <Route path="posts" element={<Postspage />}></Route>
+          <Route path="modals-example" element={<Example />}></Route>
           <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
