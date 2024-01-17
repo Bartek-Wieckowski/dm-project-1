@@ -64,7 +64,9 @@ export default function AsideMenu() {
         <div
           className={`${isOpen ? 'mx-auto' : 'ml-auto mr-2 size-[16px]'} my-4`}
         >
-          <BsAmd className="block w-full" />
+          <Link to="/">
+            <BsAmd className="block w-full cursor-pointer" />
+          </Link>
         </div>
         <ul className="flex flex-col gap-4 p-2">
           {menuData.map((menuItem) => (
