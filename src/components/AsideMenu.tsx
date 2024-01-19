@@ -9,6 +9,7 @@ import {
   BsAmd,
   BsListColumns,
   BsThreeDotsVertical,
+  BsCart,
 } from 'react-icons/bs';
 import { MenuItem } from '../types/MenuItem.type';
 import { useState } from 'react';
@@ -38,6 +39,11 @@ const menuData: MenuItem[] = [
     linkName: 'Posts',
     link: '/posts',
     icon: <BsFillHddRackFill />,
+  },
+  {
+    linkName: 'Cart',
+    link: '/cart',
+    icon: <BsCart />,
   },
 ];
 
