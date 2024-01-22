@@ -1,4 +1,4 @@
-import TableLayout from '../components/TableLayout';
+import TableLayout from "../components/Tables/TableLayout";
 
 export default function Example2() {
   return (

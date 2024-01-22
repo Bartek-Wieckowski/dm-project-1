@@ -1,16 +1,15 @@
-import { CardProps } from '../types/CardProps.type';
+import { CardProps } from "../../types/CardProps.type";
 
-export default function Card({ data }: CardProps) {
-  const {
-    imgSrc,
-    name,
-    surname,
-    street,
-    postCode,
-    town,
-    subRegion,
-    phoneNumber,
-  } = data;
+export default function Card({
+  imgSrc,
+  name,
+  surname,
+  street,
+  postCode,
+  town,
+  subRegion,
+  phoneNumber,
+}: CardProps) {
   return (
     <div className="mx-auto w-full max-w-[400px] rounded bg-slate-400 text-stone-200">
       <div className="flex flex-col items-center justify-center gap-3 p-3 sm:flex-row">

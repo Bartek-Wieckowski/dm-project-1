@@ -1,8 +1,8 @@
-import { Outlet } from 'react-router';
-import { footerData } from '../assets/dummy-data/footer-data';
-import AsideMenu from '../components/AsideMenu';
-import Footer from '../components/Footer';
-import Wrapper from '../components/Wrapper';
+import { Outlet } from "react-router";
+import { footerData } from "../assets/dummy-data/footer-data";
+import AsideMenu from "../components/AsideMenu";
+import Footer from "../components/Footer";
+import Wrapper from "../components/Wrapper";
 
 export default function AppLayout() {
   return (
@@ -11,7 +11,7 @@ export default function AppLayout() {
       <div className="w-full py-4">
         <Outlet />
       </div>
-      <div className="col-start-2 w-full text-center">
+      <div className="col-start-2 w-full text-center self-end">
         <Wrapper>
           <Footer footerData={footerData} />
         </Wrapper>

@@ -1,4 +1,4 @@
-import { ChildsType } from '../types/Childs.type';
+import { ChildsType } from "../../types/Childs.type";
 
 interface TableProps {
   data: ChildsType[];

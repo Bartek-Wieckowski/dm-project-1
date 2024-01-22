@@ -1,5 +1,5 @@
-import { useRef, useState } from 'react';
-import { ChildsType } from '../types/Childs.type';
+import { useRef, useState } from "react";
+import { ChildsType } from "../../types/Childs.type";
 
 interface TableFormProps {
   onAddChild: (newChild: ChildsType) => void;
@@ -16,7 +16,7 @@ export default function TableForm({ onAddChild }: TableFormProps) {
     const newAge = ageRef.current?.value;
 
     if (!newName || !newAge) {
-      setError('Oba pola muszą być wypełnione');
+      setError("Oba pola muszą być wypełnione");
       return;
     }
 
@@ -24,8 +24,8 @@ export default function TableForm({ onAddChild }: TableFormProps) {
     onAddChild(newChild);
 
     setError(null);
-    nameRef.current.value = '';
-    ageRef.current.value = '';
+    nameRef.current.value = "";
+    ageRef.current.value = "";
   };
 
   return (
@@ -33,24 +33,17 @@ export default function TableForm({ onAddChild }: TableFormProps) {
       {error && <p className="text-red-500">{error}</p>}
       <div className="mb-4">
         <label htmlFor="name" className="block">
-          <span className="mb-2 block text-sm font-medium text-stone-200">
-            Imię
-          </span>
+          <span className="mb-2 block text-sm font-medium text-stone-200">Imię</span>
           <input type="text" name="name" id="name" ref={nameRef} />
         </label>
       </div>
       <div className="mb-4">
         <label htmlFor="age" className="block">
-          <span className="mb-2 block text-sm font-medium text-stone-200">
-            Wiek
-          </span>
+          <span className="mb-2 block text-sm font-medium text-stone-200">Wiek</span>
           <input type="text" name="age" id="age" ref={ageRef} />
         </label>
       </div>
-      <button
-        type="submit"
-        className="rounded-md bg-teal-400 p-4 text-stone-200"
-      >
+      <button type="submit" className="rounded-md bg-teal-400 p-4 text-stone-200">
         Wyślij
       </button>
     </form>

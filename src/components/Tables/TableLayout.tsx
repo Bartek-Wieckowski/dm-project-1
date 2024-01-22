@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import Table from './Table';
-import TableForm from './TableForm';
-import { ChildsType } from '../types/Childs.type';
+import { useState } from "react";
+import Table from "./Table";
+import TableForm from "./TableForm";
+import { ChildsType } from "../../types/Childs.type";
 
 const childsExample: ChildsType[] = [
   {
-    name: 'Barbara',
-    age: '10',
+    name: "Barbara",
+    age: "10",
   },
 ];
 
