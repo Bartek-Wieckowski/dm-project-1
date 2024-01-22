@@ -8,7 +8,7 @@ import Example from "./pages/Example";
 import Example2 from "./pages/Example2";
 import Cart from "./pages/Cart";
 import ClientAdd from "./components/Clients/ClientAdd";
-import Client from "./components/Clients/Client";
+import ClientDetails from "./components/Clients/ClientDetails";
 import ClientEdit from "./components/Clients/ClientEdit";
 import Clientspage from "./pages/Clientspage";
 import Orderspage from "./pages/Orderspage";
@@ -25,7 +25,7 @@ export default function App() {
 
           <Route path="clients" element={<Clientspage />} />
           <Route path="clients/add" element={<ClientAdd />} />
-          <Route path="clients/:id" element={<Client />} />
+          <Route path="clients/:id" element={<ClientDetails />} />
           <Route path="clients/:id/edit" element={<ClientEdit />} />
 
           <Route path="orders" element={<Orderspage />} />
