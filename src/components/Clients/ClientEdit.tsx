@@ -1,9 +1,9 @@
-import ClientForm from "./ClientForm";
+import ClientForm from './ClientForm';
 
 export default function ClientEdit() {
   return (
     <>
-      <ClientForm />
+      <ClientForm editForm={true} />
     </>
   );
 }
