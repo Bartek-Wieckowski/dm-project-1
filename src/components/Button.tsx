@@ -59,6 +59,6 @@ const styles = {
     "  text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900",
   btnQty:
     "inline-block rounded-full bg-yellow-400 px-2.5 py-1 text-sm font-semibold uppercase tracking-wide text-stone-800 transition-colors duration-300 hover:bg-yellow-300 focus:bg-yellow-300 focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-2 disabled:cursor-not-allowed md:px-3.5 md:py-2",
-  btnSimple: "rounded-md bg-teal-400 p-4 text-black",
+  btnSimple: "rounded-md bg-teal-400 p-4 text-black hover:bg-teal-500",
   //   link?:
 };
