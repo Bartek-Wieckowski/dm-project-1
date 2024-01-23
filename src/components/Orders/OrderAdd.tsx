@@ -1,3 +1,9 @@
+import OrderForm from "./OrderForm";
+
 export default function OrderAdd() {
-  return <div>Order add</div>;
+  return (
+    <>
+      <OrderForm />
+    </>
+  );
 }

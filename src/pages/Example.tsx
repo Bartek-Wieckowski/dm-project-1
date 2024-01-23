@@ -1,22 +1,16 @@
-import { useState } from 'react';
-import Modal from '../components/Modal';
-import { createPortal } from 'react-dom';
+import { useState } from "react";
+import { createPortal } from "react-dom";
+import Modal from "../components/Modal";
+import Button from "../components/Button";
 
 export default function Example() {
   const [showModal, setShowModal] = useState(false);
   return (
     <>
-      <button
-        onClick={() => setShowModal(true)}
-        className="ml-10 rounded-md bg-teal-400 p-4 text-stone-200"
-      >
+      <Button type="button" onClick={() => setShowModal(true)} btnStyles="btnSimple">
         Open
-      </button>
-      {showModal &&
-        createPortal(
-          <Modal onClose={() => setShowModal(false)} />,
-          document.body
-        )}
+      </Button>
+      {showModal && createPortal(<Modal onClose={() => setShowModal(false)} />, document.body)}
     </>
   );
 }

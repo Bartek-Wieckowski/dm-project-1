@@ -12,7 +12,7 @@ import ClientDetails from "./components/Clients/ClientDetails";
 import ClientEdit from "./components/Clients/ClientEdit";
 import Clientspage from "./pages/Clientspage";
 import Orderspage from "./pages/Orderspage";
-import Order from "./components/Orders/Order";
+import OrderDetails from "./components/Orders/OrderDetails";
 import OrderAdd from "./components/Orders/OrderAdd";
 import Invoicespage from "./pages/Invoicespage";
 
@@ -28,9 +28,11 @@ export default function App() {
           <Route path="clients/:id" element={<ClientDetails />} />
           <Route path="clients/:id/edit" element={<ClientEdit />} />
 
-          <Route path="orders" element={<Orderspage />} />
-          <Route path="orders/:id" element={<Order />} />
-          <Route path="orders/add" element={<OrderAdd />} />
+          <Route path="orders">
+            <Route index element={<Orderspage />} />
+            <Route path="add" element={<OrderAdd />} />
+            <Route path=":id" element={<OrderDetails />} />
+          </Route>
 
           <Route path="invoices" element={<Invoicespage />} />
 
