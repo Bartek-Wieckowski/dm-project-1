@@ -15,6 +15,7 @@ import Orderspage from "./pages/Orderspage";
 import OrderDetails from "./components/Orders/OrderDetails";
 import OrderAdd from "./components/Orders/OrderAdd";
 import Invoicespage from "./pages/Invoicespage";
+import Registerpage from "./pages/Registerpage";
 
 export default function App() {
   return (
@@ -41,6 +42,8 @@ export default function App() {
           <Route path="modals-example" element={<Example />} />
           <Route path="table-example" element={<Example2 />} />
           <Route path="cart" element={<Cart />} />
+
+          <Route path="register" element={<Registerpage />} />
 
           <Route path="*" element={<NotFound />} />
         </Route>
