@@ -1,3 +1,9 @@
+import CardList from "../Cards/CardList";
+
 export default function Clients() {
-  return <div className="text-stone-200">Client listsaaa</div>;
+  return (
+    <>
+      <CardList />
+    </>
+  );
 }

@@ -1,9 +1,7 @@
-import CardList from "../components/Cards/CardList";
-
 export default function Homepage() {
   return (
     <>
-      <CardList />
+      <h1 className="text-stone-200 text-center text-7xl">Strona główna</h1>
     </>
   );
 }

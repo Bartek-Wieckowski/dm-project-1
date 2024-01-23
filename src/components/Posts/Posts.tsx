@@ -3,6 +3,7 @@ import { BsChevronRight, BsChevronLeft } from "react-icons/bs";
 import Post from "./Post";
 import useAPI from "../../hooks/useAPI";
 import { Post as PostType } from "../../types/Post.type";
+import Button from "../Button";
 
 const BASE_URL = "https://jsonplaceholder.typicode.com/posts";
 const POSTS_PER_PAGE = 4;
@@ -12,11 +13,7 @@ export default function Posts() {
   const { data: posts, isError, isLoading } = useAPI<PostType[]>(BASE_URL);
 
   if (!posts) {
-    return (
-      <>
-        <p className="text-center text-stone-200 text-5xl">Wystapił błąd z url.</p>
-      </>
-    );
+    return <></>;
   }
 
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
@@ -34,7 +31,7 @@ export default function Posts() {
 
   return (
     <div>
-      {isLoading && <p className="text-center text-stone-200">Loading...</p>}
+      {isLoading && <p className="text-center text-stone-200">...</p>}
       {isError && <p className="text-center text-stone-200">Błąd ładowania</p>}
       <div className="mx-auto grid w-full max-w-[1100px] grid-cols-1 gap-4 sm:grid-cols-2">
         {slicedPosts.map((post) => (
@@ -42,22 +39,18 @@ export default function Posts() {
         ))}
       </div>
 
-      {/* //TODO: tutaj gdyby więcej czasu było to do zrobienia oddzielny komponent paginacji i komponent do buttonów */}
       <div className="mt-4 flex items-center justify-center gap-8">
-        <button
-          className={`rounded-md bg-teal-400 p-4 text-black ${currentPage === 1 ? "opacity-50" : ""}`}
-          onClick={handlePrevClick}
-          disabled={currentPage === 1}
-        >
+        <Button type="button" onClick={handlePrevClick} disabled={currentPage === 1} btnStyles="btnSimple">
           <BsChevronLeft />
-        </button>
-        <button
-          className={`rounded-md bg-teal-400 p-4 text-black ${endIndex >= posts.length ? "opacity-50" : ""}`}
+        </Button>
+        <Button
+          type="button"
           onClick={handleNextClick}
           disabled={endIndex >= posts.length}
+          btnStyles="btnSimple"
         >
           <BsChevronRight />
-        </button>
+        </Button>
       </div>
     </div>
   );
