@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { ChildsType } from "../../types/Childs.type";
+import Button from "../Button";
 
 interface TableFormProps {
   onAddChild: (newChild: ChildsType) => void;
@@ -43,9 +44,9 @@ export default function TableForm({ onAddChild }: TableFormProps) {
           <input type="text" name="age" id="age" ref={ageRef} />
         </label>
       </div>
-      <button type="submit" className="rounded-md bg-teal-400 p-4 text-stone-200">
+      <Button type="submit" btnStyles="btnSimple">
         Wyślij
-      </button>
+      </Button>
     </form>
   );
 }
