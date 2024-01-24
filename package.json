@@ -7,12 +7,14 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "json-server --watch database/db.json --port 8000"
   },
   "dependencies": {
     "@types/react-icons": "^3.0.0",
     "@types/react-router-dom": "^5.3.3",
     "formik": "^2.4.5",
+    "json-server": "^1.0.0-alpha.22",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",

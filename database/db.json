@@ -1,0 +1,247 @@
+{
+  "clients": [
+    {
+      "id": "1",
+      "imgSrc": "https://images.unsplash.com/photo-1661869535393-872dea2d9f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
+      "name": "Zbigniew",
+      "surname": "Herbert",
+      "street": "TestStreet",
+      "postCode": "00-123",
+      "town": "Town",
+      "subRegion": "Region",
+      "phoneNumber": "+48 123 456 789"
+    },
+    {
+      "id": "3",
+      "imgSrc": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww",
+      "name": "Maria",
+      "surname": "Wiśniewska",
+      "street": "TestStreet3",
+      "postCode": "00-789",
+      "town": "Village",
+      "subRegion": "Region",
+      "phoneNumber": "+48 111 222 333"
+    },
+    {
+      "id": "4",
+      "imgSrc": "https://plus.unsplash.com/premium_photo-1682724602143-a77d75d273b1?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGVyc29ufGVufDB8fDB8fHww",
+      "name": "Piotrek",
+      "surname": "Dąbrowski",
+      "street": "TestStreet4",
+      "postCode": "00-999",
+      "town": "Hamlet",
+      "subRegion": "Region",
+      "phoneNumber": "+48 444 555 666"
+    },
+    {
+      "id": "5",
+      "imgSrc": "https://via.placeholder.com/150",
+      "name": "Hanna",
+      "surname": "Mocna",
+      "street": "TestStreet5",
+      "postCode": "00-111",
+      "town": "Countryside",
+      "subRegion": "Region",
+      "phoneNumber": "+48 777 888 999"
+    },
+    {
+      "id": "6",
+      "imgSrc": "https://via.placeholder.com/150",
+      "name": "Krzysztof",
+      "surname": "Wójcik",
+      "street": "TestStreet6",
+      "postCode": "00-222",
+      "town": "Mountain",
+      "subRegion": "Region",
+      "phoneNumber": "+48 333 444 555"
+    },
+    {
+      "id": "7",
+      "imgSrc": "https://images.unsplash.com/photo-1494959764136-6be9eb3c261e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
+      "name": "Alicja",
+      "surname": "Kamińska",
+      "street": "TestStreet7",
+      "postCode": "00-333",
+      "town": "Island",
+      "subRegion": "Region",
+      "phoneNumber": "+48 555 111 222"
+    },
+    {
+      "id": "8",
+      "imgSrc": "https://via.placeholder.com/150",
+      "name": "Bartosz",
+      "surname": "Zieliński",
+      "street": "TestStreet8",
+      "postCode": "00-555",
+      "town": "Forest",
+      "subRegion": "Region",
+      "phoneNumber": "+48 666 777 888"
+    },
+    {
+      "id": "9",
+      "imgSrc": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
+      "name": "Monika",
+      "surname": "Szymańska",
+      "street": "TestStreet9",
+      "postCode": "00-444",
+      "town": "Desert",
+      "subRegion": "Region",
+      "phoneNumber": "+48 999 000 111"
+    },
+    {
+      "id": "10",
+      "imgSrc": "https://via.placeholder.com/150",
+      "name": "Michał",
+      "surname": "Woźniak",
+      "street": "TestStreet10",
+      "postCode": "00-666",
+      "town": "Jungle",
+      "subRegion": "Region",
+      "phoneNumber": "+48 000 111 222"
+    },
+    {
+      "id": "1706119366787",
+      "name": "lfc",
+      "surname": "lfc",
+      "street": "anfield road",
+      "postCode": "00-000",
+      "town": "liverpool",
+      "subRegion": "merseyside",
+      "imgSrc": "https://lfc.pl/images/opponents/Liverpool%201999.svg?m=1594473469",
+      "phoneNumber": "+489090909090"
+    },
+    {
+      "id": "1706126370547",
+      "name": "test2",
+      "surname": "theBart",
+      "street": "anfield road",
+      "postCode": "00-000",
+      "town": "testowe",
+      "subRegion": "testowy",
+      "imgSrc": "",
+      "phoneNumber": "+489090909090"
+    }
+  ],
+  "orders": [
+    {
+      "id": "1",
+      "client": {
+        "userId": 1,
+        "name": "Anna",
+        "surname": "Nowak",
+        "phoneNumber": "+48 555 111 222"
+      },
+      "quantity": 5,
+      "orderTitle": "Zamówienie 1",
+      "orderContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    },
+    {
+      "id": "2",
+      "client": {
+        "userId": 2,
+        "name": "Jan",
+        "surname": "Kowalski",
+        "phoneNumber": "+48 555 222 333"
+      },
+      "quantity": 8,
+      "orderTitle": "Zamówienie 2",
+      "orderContent": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
+    },
+    {
+      "id": "3",
+      "client": {
+        "userId": 3,
+        "name": "Maria",
+        "surname": "Wiśniewska",
+        "phoneNumber": "+48 555 333 444"
+      },
+      "quantity": 3,
+      "orderTitle": "Zamówienie 3",
+      "orderContent": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+    },
+    {
+      "id": "4",
+      "client": {
+        "userId": 4,
+        "name": "Piotr",
+        "surname": "Dąbrowski",
+        "phoneNumber": "+48 555 444 555"
+      },
+      "quantity": 10,
+      "orderTitle": "Zamówienie 4",
+      "orderContent": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+    },
+    {
+      "id": "5",
+      "client": {
+        "userId": 5,
+        "name": "Magdalena",
+        "surname": "Lewandowska",
+        "phoneNumber": "+48 555 555 666"
+      },
+      "quantity": 6,
+      "orderTitle": "Zamówienie 5",
+      "orderContent": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    {
+      "id": "6",
+      "client": {
+        "userId": 6,
+        "name": "Krzysztof",
+        "surname": "Wójcik",
+        "phoneNumber": "+48 555 666 777"
+      },
+      "quantity": 7,
+      "orderTitle": "Zamówienie 6",
+      "orderContent": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."
+    },
+    {
+      "id": "7",
+      "client": {
+        "userId": 7,
+        "name": "Alicja",
+        "surname": "Kamińska",
+        "phoneNumber": "+48 555 777 888"
+      },
+      "quantity": 2,
+      "orderTitle": "Zamówienie 7",
+      "orderContent": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident."
+    },
+    {
+      "id": "8",
+      "client": {
+        "userId": 8,
+        "name": "Bartosz",
+        "surname": "Zieliński",
+        "phoneNumber": "+48 555 888 999"
+      },
+      "quantity": 4,
+      "orderTitle": "Zamówienie 8",
+      "orderContent": "Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
+    },
+    {
+      "id": "9",
+      "client": {
+        "userId": 9,
+        "name": "Monika",
+        "surname": "Szymańska",
+        "phoneNumber": "+48 555 999 000"
+      },
+      "quantity": 9,
+      "orderTitle": "Zamówienie 9",
+      "orderContent": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit."
+    },
+    {
+      "id": "10",
+      "client": {
+        "userId": 10,
+        "name": "Michał",
+        "surname": "Woźniak",
+        "phoneNumber": "+48 555 000 111"
+      },
+      "quantity": 1,
+      "orderTitle": "Zamówienie 10",
+      "orderContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    }
+  ]
+}
