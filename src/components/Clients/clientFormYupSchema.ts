@@ -1,5 +1,6 @@
-import * as yup from "yup";
+import * as yup from 'yup';
 export const yupSchema = yup.object({
+  id: yup.string().required(),
   name: yup
     .string()
     .required('Pole "Imię" jest wymagane')
@@ -20,7 +21,9 @@ export const yupSchema = yup.object({
     .string()
     .required('Pole "Miasto" jest wymagane')
     .min(3, 'Pole "Miasto" musi mieć co najmniej 3 litery'),
-  subRegion: yup.string().min(3, 'Pole "Region" musi mieć co najmniej 3 litery'),
+  subRegion: yup
+    .string()
+    .min(3, 'Pole "Region" musi mieć co najmniej 3 litery'),
   imgSrc: yup.string(),
   phoneNumber: yup
     .string()
