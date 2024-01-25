@@ -1,3 +1,3 @@
 export default function Invoicespage() {
-  return <div>Invoices pages</div>;
+  return <div className="text-stone-200">Invoices pages</div>;
 }
