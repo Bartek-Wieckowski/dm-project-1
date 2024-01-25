@@ -1,24 +1,63 @@
 import * as yup from "yup";
-import { useFormik } from "formik";
 import { yupSchema } from "./orderFormYupSchema";
-import cards from "../../assets/dummy-data/cards-data";
+import { useFormik } from "formik";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { createOrder, getAllClientOrders } from "../../services/OrdersService";
+import { ClientProps } from "../../types/ClientProps.type";
 import Button from "../Button";
 
 type FormValues = yup.InferType<typeof yupSchema>;
 
 export default function OrderForm() {
+  const navigate = useNavigate();
   const formik = useFormik<FormValues>({
     initialValues: {
-      client: "",
+      id: Math.floor(new Date().getTime() + Math.random()).toString(),
+      client: {
+        userId: "",
+        name: "",
+        surname: "",
+        phoneNumber: "",
+      },
       quantity: 1,
       orderTitle: "",
       orderContent: "",
     },
-    onSubmit: (values: FormValues) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values: FormValues) => {
+      await createOrder(values);
+      alert("Zamówienie złożone poprawnie!");
+      navigate("/orders");
     },
     validationSchema: yupSchema,
   });
+  const [clientOrders, setClientOrders] = useState<ClientProps[]>([]);
+
+  useEffect(() => {
+    const fetchAllClient = async () => {
+      try {
+        const data: ClientProps[] = await getAllClientOrders();
+        setClientOrders(data);
+      } catch (error) {
+        console.error("Błąd ładowania danych");
+      }
+    };
+    fetchAllClient().catch((error) => {
+      console.error("Błąd podczas fetchAllClient:", error);
+    });
+  }, []);
+
+  const clientData =
+    clientOrders.length > 0
+      ? clientOrders.map((item) => {
+          return {
+            userId: item.id,
+            name: item.name,
+            surname: item.surname,
+            phoneNumber: item.phoneNumber,
+          };
+        })
+      : [];
 
   return (
     <form className="mx-auto grid max-w-sm grid-cols-1 " onSubmit={formik.handleSubmit}>
@@ -29,19 +68,23 @@ export default function OrderForm() {
         <select
           id="client"
           name="client"
-          onChange={formik.handleChange}
+          onChange={(event) => {
+            const selectedClient = clientData.find((client) => client.phoneNumber === event.target.value);
+            formik.setFieldValue("client", selectedClient);
+          }}
           onBlur={formik.handleBlur}
-          value={formik.values.client}
+          value={formik.values.client?.phoneNumber || ""}
         >
           <option value="" label="Wybierz klienta" />
-          {cards.map((client) => (
+          {clientData.map((client) => (
             <option key={client.phoneNumber} value={client.phoneNumber}>
               {client.name} {client.surname}
             </option>
           ))}
         </select>
+        {/* TODO: poprawić walidacje selecta */}
         {formik.touched.client && formik.errors.client && (
-          <p className={`${errorInfoClass}`}>{formik.errors.client}</p>
+          <p className={`${errorInfoClass}`}>Wybierz klienta</p>
         )}
       </div>
       <div className="mb-5">

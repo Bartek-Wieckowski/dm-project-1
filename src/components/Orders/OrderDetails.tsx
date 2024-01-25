@@ -1,14 +1,46 @@
 import { useParams } from "react-router-dom";
-import { ordersData } from "../../assets/dummy-data/orders-data";
-import { OrderType } from "./Orders";
+import { useEffect, useState } from "react";
+import { OrderData } from "../../types/Order.types";
+import { getSingleOrder } from "../../services/OrdersService";
 import Button from "../Button";
+import Loader from "../Loader";
 
 export default function OrderDetails() {
   const { id } = useParams();
-  const selectedOrder = ordersData.find((order: OrderType) => order.id === Number(id));
+  const [selectedOrder, setSelectedOrder] = useState<OrderData | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [orderNotFound, setOrderNotFound] = useState(false);
+
+  useEffect(() => {
+    const fetchSingleOrderData = async () => {
+      try {
+        setIsLoading(true);
+        const data: OrderData = await getSingleOrder(id ?? ""); //FIXME: id as string lepiej?
+        setSelectedOrder(data);
+        setOrderNotFound(false);
+      } catch (error) {
+        console.error("Błąd ładowania danych");
+        setOrderNotFound(true);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchSingleOrderData().catch((error) => {
+      console.error("Błąd podczas fetchSingleClientData:", error);
+    });
+  }, [id]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (orderNotFound) {
+    return <div className="text-stone-200 text-center text-5xl">Nie znaleziono zamówienia o ID: {id}</div>;
+  }
 
   if (!selectedOrder) {
-    return <div className="text-stone-200 text-center text-5xl">Nie znaleziono zamówienia o ID: {id}</div>;
+    return <></>;
   }
 
   const {
@@ -27,26 +59,32 @@ export default function OrderDetails() {
         </Button>
       </div>
 
-      <div className="relative overflow-x-auto max-w-[400px] mx-auto w-full">
+      <div className="relative overflow-x-auto max-w-5xl mx-auto w-full">
         <table className="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto">
           <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
             <tr>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="w-1/3 py-4 px-6 text-center text-gray-600 font-bold uppercase">
                 Tytuł:
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="w-1/3 py-4 px-6 text-center text-gray-600 font-bold uppercase">
                 Treść:
               </th>
-              <th scope="col" className="px-6 py-3">
+              <th scope="col" className="w-1/3 py-4 px-6 text-center text-gray-600 font-bold uppercase">
                 Ilość:
               </th>
             </tr>
           </thead>
           <tbody>
             <tr className="bg-gray-800">
-              <td className="px-6 py-4 font-medium  text-white">{orderTitle}</td>
-              <td className="px-6 py-4 font-medium  text-white">{orderContent}</td>
-              <td className="px-6 py-4 font-medium  text-white">{quantity}</td>
+              <td className="px-3 py-6 font-medium border-b border-slate-500  text-white  text-center">
+                {orderTitle}
+              </td>
+              <td className="px-3 py-6 font-medium border-b border-slate-500  text-white  text-center">
+                {orderContent}
+              </td>
+              <td className="px-3 py-6 font-medium border-b border-slate-500  text-white  text-center">
+                {quantity}
+              </td>
             </tr>
           </tbody>
         </table>
