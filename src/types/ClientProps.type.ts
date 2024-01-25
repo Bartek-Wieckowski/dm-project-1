@@ -1,4 +1,4 @@
-export interface CardProps {
+export interface ClientProps {
   id: string;
   imgSrc?: string;
   name: string;
