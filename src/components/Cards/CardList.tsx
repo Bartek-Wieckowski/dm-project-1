@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useState } from "react";
 // import cards from "../../assets/dummy-data/cards-data";
-import Card from './Card';
-import CardSearchForm from './CardSearchForm';
-import Wrapper from '../Wrapper';
-import { CardProps } from '../../types/CardProps.type';
-import Loader from '../Loader';
+import Card from "./Card";
+import CardSearchForm from "./CardSearchForm";
+import Wrapper from "../Wrapper";
+import { ClientProps } from "../../types/ClientProps.type";
+import Loader from "../Loader";
 
 interface ClientPropsType {
-  cards: CardProps[];
+  cards: ClientProps[];
 }
 
 export default function CardList({ cards }: ClientPropsType) {
-  const [searchName, setSearchName] = useState('');
+  const [searchName, setSearchName] = useState("");
 
   function handleChange(value: string) {
     setSearchName(value);

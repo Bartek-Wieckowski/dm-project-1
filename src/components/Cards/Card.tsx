@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { CardProps } from "../../types/CardProps.type";
+import { ClientProps } from "../../types/ClientProps.type";
 
 export default function Card({
   id,
@@ -11,7 +11,7 @@ export default function Card({
   town,
   subRegion,
   phoneNumber,
-}: CardProps) {
+}: ClientProps) {
   return (
     <div className="mx-auto w-full max-w-[400px] rounded bg-slate-400 text-stone-200">
       <Link to={`/clients/${id}`}>

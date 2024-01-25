@@ -1,13 +1,13 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { CardProps } from '../../types/CardProps.type';
-import Button from '../Button';
-import { useEffect, useState } from 'react';
-import { deleteClient, getSingleClient } from '../../services/ClientsService';
-import Loader from '../Loader';
+import { useNavigate, useParams } from "react-router-dom";
+import { ClientProps } from "../../types/ClientProps.type";
+import Button from "../Button";
+import { useEffect, useState } from "react";
+import { deleteClient, getSingleClient } from "../../services/ClientsService";
+import Loader from "../Loader";
 
 export default function ClientDetails() {
   const { id } = useParams();
-  const [client, setClient] = useState<CardProps | null>(null);
+  const [client, setClient] = useState<ClientProps | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [clientNotFound, setClientNotFound] = useState(false);
   const navigate = useNavigate();
@@ -16,11 +16,11 @@ export default function ClientDetails() {
     const fetchSingleClientData = async () => {
       try {
         setIsLoading(true);
-        const data: CardProps = await getSingleClient(id ?? '');
+        const data: ClientProps = await getSingleClient(id ?? "");
         setClient(data);
         setClientNotFound(false);
       } catch (error) {
-        console.error('Błąd ładowania danych');
+        console.error("Błąd ładowania danych");
         setClientNotFound(true);
       } finally {
         setIsLoading(false);
@@ -28,7 +28,7 @@ export default function ClientDetails() {
     };
 
     fetchSingleClientData().catch((error) => {
-      console.error('Błąd podczas fetchSingleClientData:', error);
+      console.error("Błąd podczas fetchSingleClientData:", error);
     });
   }, [id]);
 
@@ -37,48 +37,30 @@ export default function ClientDetails() {
   }
 
   if (clientNotFound) {
-    return (
-      <div className="text-center text-5xl text-stone-200">
-        Nie znaleziono klienta o ID: {id}
-      </div>
-    );
+    return <div className="text-center text-5xl text-stone-200">Nie znaleziono klienta o ID: {id}</div>;
   }
 
   if (!client) {
     return <></>;
   }
 
-  const {
-    id: clientId,
-    imgSrc,
-    name,
-    surname,
-    street,
-    postCode,
-    town,
-    subRegion,
-    phoneNumber,
-  } = client;
+  const { id: clientId, imgSrc, name, surname, street, postCode, town, subRegion, phoneNumber } = client;
 
   const handleClickDelete = () => {
-    const confirmDelete = window.confirm(
-      'Czy na pewno chcesz usunąć tego klienta?'
-    );
+    const confirmDelete = window.confirm("Czy na pewno chcesz usunąć tego klienta?");
 
     if (confirmDelete) {
       deleteClient(clientId.toString()).catch((error) => {
-        console.error('Błąd podczas usuwania klienta:', error);
+        console.error("Błąd podczas usuwania klienta:", error);
       });
-      navigate('/clients');
+      navigate("/clients");
     }
   };
 
   return (
     <div className="flex flex-col items-center">
       <div className="p-3">
-        <h3 className="text-center text-5xl text-stone-200">
-          Klient: {clientId}{' '}
-        </h3>
+        <h3 className="text-center text-5xl text-stone-200">Klient: {clientId} </h3>
       </div>
       <div className="flex gap-4 p-3">
         <Button type="button" btnStyles="btnDelete" onClick={handleClickDelete}>
