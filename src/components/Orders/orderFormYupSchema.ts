@@ -1,6 +1,12 @@
 import * as yup from "yup";
 export const yupSchema = yup.object().shape({
-  client: yup.string().required("Pole wymagane"),
+  id: yup.string().required(),
+  client: yup.object().shape({
+    userId: yup.string().required("Pole wymagane"),
+    name: yup.string().required("Pole wymagane"),
+    surname: yup.string().required("Pole wymagane"),
+    phoneNumber: yup.string().required("Pole wymagane"),
+  }),
   quantity: yup
     .number()
     .min(1, "Ilość musi być większa lub równa 1")
