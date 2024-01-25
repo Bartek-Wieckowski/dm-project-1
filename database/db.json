@@ -52,7 +52,7 @@
       "street": "TestStreet6",
       "postCode": "00-222",
       "town": "Mountain",
-      "subRegion": "Region",
+      "subRegion": "Alaska",
       "phoneNumber": "+48 333 444 555"
     },
     {
@@ -100,17 +100,6 @@
       "phoneNumber": "+48 000 111 222"
     },
     {
-      "id": "1706119366787",
-      "name": "lfc",
-      "surname": "lfc",
-      "street": "anfield road",
-      "postCode": "00-000",
-      "town": "liverpool",
-      "subRegion": "merseyside",
-      "imgSrc": "https://lfc.pl/images/opponents/Liverpool%201999.svg?m=1594473469",
-      "phoneNumber": "+489090909090"
-    },
-    {
       "id": "1706126370547",
       "name": "test2",
       "surname": "theBart",
@@ -126,7 +115,7 @@
     {
       "id": "1",
       "client": {
-        "userId": 1,
+        "userId": "1",
         "name": "Anna",
         "surname": "Nowak",
         "phoneNumber": "+48 555 111 222"
@@ -138,7 +127,7 @@
     {
       "id": "2",
       "client": {
-        "userId": 2,
+        "userId": "2",
         "name": "Jan",
         "surname": "Kowalski",
         "phoneNumber": "+48 555 222 333"
@@ -150,7 +139,7 @@
     {
       "id": "3",
       "client": {
-        "userId": 3,
+        "userId": "3",
         "name": "Maria",
         "surname": "Wiśniewska",
         "phoneNumber": "+48 555 333 444"
@@ -162,7 +151,7 @@
     {
       "id": "4",
       "client": {
-        "userId": 4,
+        "userId": "4",
         "name": "Piotr",
         "surname": "Dąbrowski",
         "phoneNumber": "+48 555 444 555"
@@ -174,7 +163,7 @@
     {
       "id": "5",
       "client": {
-        "userId": 5,
+        "userId": "5",
         "name": "Magdalena",
         "surname": "Lewandowska",
         "phoneNumber": "+48 555 555 666"
@@ -186,7 +175,7 @@
     {
       "id": "6",
       "client": {
-        "userId": 6,
+        "userId": "6",
         "name": "Krzysztof",
         "surname": "Wójcik",
         "phoneNumber": "+48 555 666 777"
@@ -198,7 +187,7 @@
     {
       "id": "7",
       "client": {
-        "userId": 7,
+        "userId": "7",
         "name": "Alicja",
         "surname": "Kamińska",
         "phoneNumber": "+48 555 777 888"
@@ -210,7 +199,7 @@
     {
       "id": "8",
       "client": {
-        "userId": 8,
+        "userId": "8",
         "name": "Bartosz",
         "surname": "Zieliński",
         "phoneNumber": "+48 555 888 999"
@@ -222,7 +211,7 @@
     {
       "id": "9",
       "client": {
-        "userId": 9,
+        "userId": "9",
         "name": "Monika",
         "surname": "Szymańska",
         "phoneNumber": "+48 555 999 000"
@@ -234,7 +223,7 @@
     {
       "id": "10",
       "client": {
-        "userId": 10,
+        "userId": "10",
         "name": "Michał",
         "surname": "Woźniak",
         "phoneNumber": "+48 555 000 111"
@@ -242,6 +231,18 @@
       "quantity": 1,
       "orderTitle": "Zamówienie 10",
       "orderContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+    },
+    {
+      "id": "1706178396036",
+      "client": {
+        "userId": "1706119366787",
+        "name": "lfc",
+        "surname": "lfc",
+        "phoneNumber": "+489090909090"
+      },
+      "quantity": 12,
+      "orderTitle": "Testowe zamówienie",
+      "orderContent": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker incl"
     }
   ]
 }
