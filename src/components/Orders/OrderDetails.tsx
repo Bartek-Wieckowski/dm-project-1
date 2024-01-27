@@ -1,9 +1,12 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { OrderData } from "../../types/Order.types";
-import { getSingleOrder } from "../../api/apiOrders";
-import Button from "../Button";
-import Loader from "../Loader";
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { OrderData } from '../../types/Order.types';
+import { getSingleOrder } from '../../api/apiOrders';
+import Button from '../Button';
+import Loader from '../Loader';
+import TableRow from '../Tables/TableRow';
+import TableTd from '../Tables/TableTd';
+import TableTh from '../Tables/TableTh';
 
 export default function OrderDetails() {
   const { id } = useParams();
@@ -20,7 +23,7 @@ export default function OrderDetails() {
         setOrderNotFound(false);
       }
     } catch (error) {
-      console.error("Błąd ładowania danych");
+      console.error('Błąd ładowania danych');
       setOrderNotFound(true);
     } finally {
       setIsLoading(false);
@@ -29,7 +32,7 @@ export default function OrderDetails() {
 
   useEffect(() => {
     fetchSingleOrderData().catch((error) => {
-      console.error("Błąd podczas fetchSingleClientData:", error);
+      console.error('Błąd podczas fetchSingleClientData:', error);
     });
   }, [id]);
 
@@ -38,7 +41,11 @@ export default function OrderDetails() {
   }
 
   if (orderNotFound) {
-    return <div className="text-stone-200 text-center text-5xl">Nie znaleziono zamówienia o ID: {id}</div>;
+    return (
+      <div className="text-center text-5xl text-stone-200">
+        Nie znaleziono zamówienia o ID: {id}
+      </div>
+    );
   }
 
   if (!selectedOrder) {
@@ -52,42 +59,49 @@ export default function OrderDetails() {
     orderTitle,
     orderContent,
   } = selectedOrder;
+
+  const fieldsTh = [{ label: 'Tytuł' }, { label: 'Treść' }, { label: 'Ilość' }];
+
   return (
     <div className="flex flex-col items-center">
-      <div className="p-3 flex flex-col items-center gap-4">
-        <h3 className="text-stone-200 text-center text-md sm:text-5xl">Klient: {`${name} ${surname}`} </h3>
+      <div className="flex flex-col items-center gap-4 p-3">
+        <h3 className="text-center text-stone-200 sm:text-5xl">
+          Klient: {`${name} ${surname}`}{' '}
+        </h3>
         <Button to={`/clients/${userId}`} btnStyles="btnEdit">
           Zobacz profil
         </Button>
       </div>
 
-      <div className="relative overflow-x-auto max-w-5xl mx-auto w-full">
-        <table className="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto mx-auto">
-          <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
-            <tr>
-              <th scope="col" className="w-1/3 py-4 px-6 text-center text-gray-600 font-bold uppercase">
-                Tytuł:
-              </th>
-              <th scope="col" className="w-1/3 py-4 px-6 text-center text-gray-600 font-bold uppercase">
-                Treść:
-              </th>
-              <th scope="col" className="w-1/3 py-4 px-6 text-center text-gray-600 font-bold uppercase">
-                Ilość:
-              </th>
-            </tr>
+      <div className="relative mx-auto w-full max-w-5xl overflow-x-auto">
+        <table className="mx-auto table-auto text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
+          <thead className="text-xs uppercase text-gray-900 dark:text-gray-400">
+            <TableRow>
+              {fieldsTh.map((fieldTh, index) => (
+                <TableTh
+                  key={index}
+                  scope="col"
+                  label={fieldTh.label}
+                  className="w-1/3 px-6 py-4 text-center font-bold uppercase text-gray-600"
+                />
+              ))}
+            </TableRow>
           </thead>
           <tbody>
-            <tr className="bg-gray-800">
-              <td className="px-3 py-6 font-medium border-b border-slate-500  text-white  text-center">
-                {orderTitle}
-              </td>
-              <td className="px-3 py-6 font-medium border-b border-slate-500  text-white  text-center">
-                {orderContent}
-              </td>
-              <td className="px-3 py-6 font-medium border-b border-slate-500  text-white  text-center">
-                {quantity}
-              </td>
-            </tr>
+            <TableRow className="bg-gray-800">
+              <TableTd
+                className="border-b border-slate-500 px-3 py-6 text-center  font-medium  text-white"
+                value={orderTitle}
+              />
+              <TableTd
+                className="border-b border-slate-500 px-3 py-6 text-center  font-medium  text-white"
+                value={orderContent}
+              />
+              <TableTd
+                className="border-b border-slate-500 px-3 py-6 text-center  font-medium  text-white"
+                value={quantity}
+              />
+            </TableRow>
           </tbody>
         </table>
       </div>
