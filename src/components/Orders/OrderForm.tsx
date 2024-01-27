@@ -1,17 +1,14 @@
-import * as yup from "yup";
-import { yupSchema } from "./orderFormYupSchema";
+import { OrderFormValues, orderYupSchema } from "../../validators/validators";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createOrder, getAllClientOrders } from "../../services/OrdersService";
+import { createOrder, getAllClientOrders } from "../../api/apiOrders";
 import { ClientProps } from "../../types/ClientProps.type";
 import Button from "../Button";
 
-type FormValues = yup.InferType<typeof yupSchema>;
-
 export default function OrderForm() {
   const navigate = useNavigate();
-  const formik = useFormik<FormValues>({
+  const formik = useFormik<OrderFormValues>({
     initialValues: {
       id: Math.floor(new Date().getTime() + Math.random()).toString(),
       client: {
@@ -24,28 +21,34 @@ export default function OrderForm() {
       orderTitle: "",
       orderContent: "",
     },
-    onSubmit: async (values: FormValues) => {
+    onSubmit: async (values: OrderFormValues) => {
       await createOrder(values);
       alert("Zamówienie złożone poprawnie!");
       navigate("/orders");
     },
-    validationSchema: yupSchema,
+    validationSchema: orderYupSchema,
   });
   const [clientOrders, setClientOrders] = useState<ClientProps[]>([]);
 
   useEffect(() => {
-    const fetchAllClient = async () => {
-      try {
-        const data: ClientProps[] = await getAllClientOrders();
-        setClientOrders(data);
-      } catch (error) {
-        console.error("Błąd ładowania danych");
-      }
-    };
     fetchAllClient().catch((error) => {
       console.error("Błąd podczas fetchAllClient:", error);
     });
   }, []);
+
+  const fetchAllClient = async () => {
+    try {
+      const data: ClientProps[] = await getAllClientOrders();
+      setClientOrders(data);
+    } catch (error) {
+      console.error("Błąd ładowania danych");
+    }
+  };
+
+  function handleClientChange(event: React.ChangeEvent<HTMLSelectElement>) {
+    const selectedClient = clientData.find((client) => client.phoneNumber === event.target.value);
+    formik.setFieldValue("client", selectedClient);
+  }
 
   const clientData =
     clientOrders.length > 0
@@ -59,6 +62,8 @@ export default function OrderForm() {
         })
       : [];
 
+  // console.log("formik errors", formik.errors); // TODO: to do kolejnego todo odnośnie walidacji selecta
+
   return (
     <form className="mx-auto grid max-w-sm grid-cols-1 " onSubmit={formik.handleSubmit}>
       <div className="mb-5">
@@ -68,10 +73,7 @@ export default function OrderForm() {
         <select
           id="client"
           name="client"
-          onChange={(event) => {
-            const selectedClient = clientData.find((client) => client.phoneNumber === event.target.value);
-            formik.setFieldValue("client", selectedClient);
-          }}
+          onChange={handleClientChange}
           onBlur={formik.handleBlur}
           value={formik.values.client?.phoneNumber || ""}
         >

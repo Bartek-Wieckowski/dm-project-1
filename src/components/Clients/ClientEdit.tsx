@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { getSingleClient } from "../../services/ClientsService";
+import { getSingleClient } from "../../api/apiClients";
 import { ClientProps } from "../../types/ClientProps.type";
 import ClientForm from "./ClientForm";
 import Loader from "../Loader";
@@ -18,19 +18,21 @@ export default function ClientEdit() {
   });
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchSingleClient = async () => {
-      try {
-        setIsLoading(true);
-        const clientData: ClientProps = await getSingleClient(String(id));
+  const fetchSingleClient = async () => {
+    try {
+      setIsLoading(true);
+      if (id) {
+        const clientData: ClientProps = await getSingleClient(id);
         setEditedClient(clientData);
-      } catch (error) {
-        console.error("Błąd pobierania danych klienta:", error);
-      } finally {
-        setIsLoading(false);
       }
-    };
+    } catch (error) {
+      console.error("Błąd pobierania danych klienta:", error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchSingleClient().catch((error) => {
       console.error("Błąd podczas fetchSingleClientData:", error);
     });

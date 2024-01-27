@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { OrderData } from "../../types/Order.types";
-import { getSingleOrder } from "../../services/OrdersService";
+import { getSingleOrder } from "../../api/apiOrders";
 import Button from "../Button";
 import Loader from "../Loader";
 
@@ -11,21 +11,23 @@ export default function OrderDetails() {
   const [isLoading, setIsLoading] = useState(false);
   const [orderNotFound, setOrderNotFound] = useState(false);
 
-  useEffect(() => {
-    const fetchSingleOrderData = async () => {
-      try {
-        setIsLoading(true);
-        const data: OrderData = await getSingleOrder(id ?? ""); //FIXME: id as string lepiej?
+  const fetchSingleOrderData = async () => {
+    try {
+      setIsLoading(true);
+      if (id) {
+        const data: OrderData = await getSingleOrder(id);
         setSelectedOrder(data);
         setOrderNotFound(false);
-      } catch (error) {
-        console.error("Błąd ładowania danych");
-        setOrderNotFound(true);
-      } finally {
-        setIsLoading(false);
       }
-    };
+    } catch (error) {
+      console.error("Błąd ładowania danych");
+      setOrderNotFound(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchSingleOrderData().catch((error) => {
       console.error("Błąd podczas fetchSingleClientData:", error);
     });
@@ -60,7 +62,7 @@ export default function OrderDetails() {
       </div>
 
       <div className="relative overflow-x-auto max-w-5xl mx-auto w-full">
-        <table className="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto">
+        <table className="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 table-auto mx-auto">
           <thead className="text-xs text-gray-900 uppercase dark:text-gray-400">
             <tr>
               <th scope="col" className="w-1/3 py-4 px-6 text-center text-gray-600 font-bold uppercase">

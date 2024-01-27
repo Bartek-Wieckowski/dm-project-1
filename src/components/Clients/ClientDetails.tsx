@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ClientProps } from "../../types/ClientProps.type";
 import Button from "../Button";
 import { useEffect, useState } from "react";
-import { deleteClient, getSingleClient } from "../../services/ClientsService";
+import { deleteClient, getSingleClient } from "../../api/apiClients";
 import Loader from "../Loader";
 
 export default function ClientDetails() {
@@ -12,21 +12,23 @@ export default function ClientDetails() {
   const [clientNotFound, setClientNotFound] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchSingleClientData = async () => {
-      try {
-        setIsLoading(true);
-        const data: ClientProps = await getSingleClient(id ?? "");
+  const fetchSingleClientData = async () => {
+    try {
+      setIsLoading(true);
+      if (id) {
+        const data: ClientProps = await getSingleClient(id);
         setClient(data);
         setClientNotFound(false);
-      } catch (error) {
-        console.error("Błąd ładowania danych");
-        setClientNotFound(true);
-      } finally {
-        setIsLoading(false);
       }
-    };
+    } catch (error) {
+      console.error("Błąd ładowania danych");
+      setClientNotFound(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
+  useEffect(() => {
     fetchSingleClientData().catch((error) => {
       console.error("Błąd podczas fetchSingleClientData:", error);
     });
@@ -50,7 +52,7 @@ export default function ClientDetails() {
     const confirmDelete = window.confirm("Czy na pewno chcesz usunąć tego klienta?");
 
     if (confirmDelete) {
-      deleteClient(clientId.toString()).catch((error) => {
+      deleteClient(clientId).catch((error) => {
         console.error("Błąd podczas usuwania klienta:", error);
       });
       navigate("/clients");

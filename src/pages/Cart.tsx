@@ -1,21 +1,21 @@
 import { useReducer } from "react";
 import Button from "../components/Button";
 
-interface IState {
+interface Product {
   productName: string;
   quantity: number;
 }
 
 type Action =
-  | { type: "ADD"; payload: IState }
-  | { type: "REMOVE"; payload: string }
-  | { type: "INC_QTY"; payload: { productName: string } }
-  | { type: "DEC_QTY"; payload: { productName: string } }
+  | { type: "ADD"; payload: Product }
+  | { type: "REMOVE"; payload: Product["productName"] }
+  | { type: "INC_QTY"; payload: { productName: Product["productName"] } }
+  | { type: "DEC_QTY"; payload: { productName: Product["productName"] } }
   | { type: "CLEAR" };
 
-const initialState: IState[] = [];
+const initialState: Product[] = [];
 
-function reducer(state: IState[], action: Action): IState[] {
+function reducer(state: Product[], action: Action): Product[] {
   switch (action.type) {
     case "ADD":
       return [...state, action.payload];
@@ -45,7 +45,7 @@ export default function Cart() {
   const [cart, dispatch] = useReducer(reducer, initialState);
 
   const addToCart = () => {
-    const newProduct: IState = {
+    const newProduct: Product = {
       productName: "iPad",
       quantity: 1,
     };

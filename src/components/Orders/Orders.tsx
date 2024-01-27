@@ -1,41 +1,27 @@
 import { useEffect, useState } from "react";
 import Button from "../Button";
 import { OrderData } from "../../types/Order.types";
-import { getAllOrders } from "../../services/OrdersService";
+import { getAllOrders } from "../../api/apiOrders";
 import Loader from "../Loader";
-
-// export interface ClientType {
-//   userId: number;
-//   name: string;
-//   surname: string;
-//   phoneNumber: string;
-// }
-
-// export interface OrderType {
-//   id: number;
-//   client: ClientType;
-//   quantity: number;
-//   orderContent: string;
-//   orderTitle: string;
-// }
 
 export default function Orders() {
   const [ordersData, setOrdersData] = useState<OrderData[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
+  const fetchAllOrders = async () => {
+    try {
+      setIsLoading(true);
+      const data: OrderData[] = await getAllOrders();
+      setOrdersData(data);
+    } catch (error) {
+      console.error("Błąd ładowania danych");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setIsLoading(true);
-        const data: OrderData[] = await getAllOrders();
-        setOrdersData(data);
-      } catch (error) {
-        console.error("Błąd ładowania danych");
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData().catch((error) => {
+    fetchAllOrders().catch((error) => {
       console.error("Error during fetchData:", error);
     });
   }, []);

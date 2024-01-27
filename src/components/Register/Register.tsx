@@ -1,28 +1,24 @@
-import * as yup from "yup";
 import { useFormik } from "formik";
-import { yupSchema } from "./registerFormYupSchema";
 import { useNavigate } from "react-router-dom";
+import { RegisterFormValues, registerAccountYupSchema } from "../../validators/validators";
 import Button from "../Button";
-
-type FormValues = yup.InferType<typeof yupSchema>;
 
 export default function Register() {
   const navigate = useNavigate();
-  const formik = useFormik<FormValues>({
+  const formik = useFormik<RegisterFormValues>({
     initialValues: {
-      id: Math.floor(new Date().getTime() + Math.random()),
       name: "",
       username: "",
       email: "",
       password: "",
       confirmPassword: "",
     },
-    onSubmit: (values: FormValues) => {
+    onSubmit: (values: RegisterFormValues) => {
       alert(JSON.stringify(values, null, 2));
       formik.resetForm();
       navigate("/");
     },
-    validationSchema: yupSchema,
+    validationSchema: registerAccountYupSchema,
   });
   return (
     <>
