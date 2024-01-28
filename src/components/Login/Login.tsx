@@ -31,8 +31,8 @@ export default function Login() {
           <div className="mb-5">
             <Input
               type="text"
-              label="Imię"
-              name="name"
+              label="Username"
+              name="username"
               value={formik.values.username}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
