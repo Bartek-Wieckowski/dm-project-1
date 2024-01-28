@@ -1,10 +1,13 @@
-import { OrderFormValues, orderYupSchema } from "../../validators/validators";
-import { useFormik } from "formik";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { createOrder, getAllClientOrders } from "../../api/apiOrders";
-import { ClientProps } from "../../types/ClientProps.type";
-import Button from "../Button";
+import { OrderFormValues, orderYupSchema } from '../../validators/validators';
+import { useFormik } from 'formik';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { createOrder, getAllClientOrders } from '../../api/apiOrders';
+import { ClientProps } from '../../types/ClientProps.type';
+import Button from '../Button';
+import Select from '../Form/Select';
+import Input from '../Form/Input';
+import Textarea from '../Form/Textarea';
 
 export default function OrderForm() {
   const navigate = useNavigate();
@@ -12,19 +15,19 @@ export default function OrderForm() {
     initialValues: {
       id: Math.floor(new Date().getTime() + Math.random()).toString(),
       client: {
-        userId: "",
-        name: "",
-        surname: "",
-        phoneNumber: "",
+        userId: '',
+        name: '',
+        surname: '',
+        phoneNumber: '',
       },
       quantity: 1,
-      orderTitle: "",
-      orderContent: "",
+      orderTitle: '',
+      orderContent: '',
     },
     onSubmit: async (values: OrderFormValues) => {
       await createOrder(values);
-      alert("Zamówienie złożone poprawnie!");
-      navigate("/orders");
+      alert('Zamówienie złożone poprawnie!');
+      navigate('/orders');
     },
     validationSchema: orderYupSchema,
   });
@@ -32,7 +35,7 @@ export default function OrderForm() {
 
   useEffect(() => {
     fetchAllClient().catch((error) => {
-      console.error("Błąd podczas fetchAllClient:", error);
+      console.error('Błąd podczas fetchAllClient:', error);
     });
   }, []);
 
@@ -41,13 +44,15 @@ export default function OrderForm() {
       const data: ClientProps[] = await getAllClientOrders();
       setClientOrders(data);
     } catch (error) {
-      console.error("Błąd ładowania danych");
+      console.error('Błąd ładowania danych');
     }
   };
 
   function handleClientChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const selectedClient = clientData.find((client) => client.phoneNumber === event.target.value);
-    formik.setFieldValue("client", selectedClient);
+    const selectedClient = clientData.find(
+      (client) => client.phoneNumber === event.target.value
+    );
+    formik.setFieldValue('client', selectedClient);
   }
 
   const clientData =
@@ -65,76 +70,58 @@ export default function OrderForm() {
   // console.log("formik errors", formik.errors); // TODO: to do kolejnego todo odnośnie walidacji selecta
 
   return (
-    <form className="mx-auto grid max-w-sm grid-cols-1 " onSubmit={formik.handleSubmit}>
+    <form
+      className="mx-auto grid max-w-sm grid-cols-1 "
+      onSubmit={formik.handleSubmit}
+    >
       <div className="mb-5">
-        <label htmlFor="client" className={`${labelClass}`}>
-          Imie i naziwsko
-        </label>
-        <select
-          id="client"
+        <Select
+          label="Imie i naziwsko"
           name="client"
+          value={formik.values.client?.phoneNumber || ''}
+          options={clientData}
           onChange={handleClientChange}
           onBlur={formik.handleBlur}
-          value={formik.values.client?.phoneNumber || ""}
-        >
-          <option value="" label="Wybierz klienta" />
-          {clientData.map((client) => (
-            <option key={client.phoneNumber} value={client.phoneNumber}>
-              {client.name} {client.surname}
-            </option>
-          ))}
-        </select>
+        />
         {/* TODO: poprawić walidacje selecta */}
         {formik.touched.client && formik.errors.client && (
           <p className={`${errorInfoClass}`}>Wybierz klienta</p>
         )}
       </div>
       <div className="mb-5">
-        <label htmlFor="quantity" className={`${labelClass}`}>
-          Ilość
-        </label>
-        <input
+        <Input
           type="number"
-          id="quantity"
+          label="Ilość"
           name="quantity"
-          className={`${inputClass}`}
+          value={formik.values.quantity}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.quantity}
         />
         {formik.touched.quantity && formik.errors.quantity && (
           <p className={`${errorInfoClass}`}>{formik.errors.quantity}</p>
         )}
       </div>
       <div className="mb-5">
-        <label htmlFor="orderTitle" className={`${labelClass}`}>
-          Tytuł zamówienia
-        </label>
-        <input
+        <Input
           type="text"
-          id="orderTitle"
+          label="Tytuł zamówienia"
           name="orderTitle"
-          className={`${inputClass}`}
+          value={formik.values.orderTitle}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.orderTitle}
         />
         {formik.touched.orderTitle && formik.errors.orderTitle && (
           <p className={`${errorInfoClass}`}>{formik.errors.orderTitle}</p>
         )}
       </div>
       <div className="mb-5">
-        <label htmlFor="orderContent" className={`${labelClass}`}>
-          Treść zamówienia
-        </label>
-        <textarea
-          id="orderContent"
+        <Textarea
+          label="Treść zamówienia"
           name="orderContent"
-          className={`${inputClass}`}
+          value={formik.values.orderContent}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          value={formik.values.orderContent}
-        ></textarea>
+        />
         {formik.touched.orderContent && formik.errors.orderContent && (
           <p className={`${errorInfoClass}`}>{formik.errors.orderContent}</p>
         )}
@@ -148,7 +135,4 @@ export default function OrderForm() {
   );
 }
 
-const inputClass =
-  "block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500";
-const labelClass = "mb-2 block text-sm font-medium text-gray-900 dark:text-white";
-const errorInfoClass = "text-rose-400 text-sm";
+const errorInfoClass = 'text-rose-400 text-sm';

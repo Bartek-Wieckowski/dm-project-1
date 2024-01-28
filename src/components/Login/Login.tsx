@@ -1,39 +1,41 @@
-import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
-import { LoginFormValues, loginAccountyupSchema } from "../../validators/validators";
-import Button from "../Button";
+import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import {
+  LoginFormValues,
+  loginAccountyupSchema,
+} from '../../validators/validators';
+import Button from '../Button';
+import Input from '../Form/Input';
 
 export default function Login() {
   const navigate = useNavigate();
   const formik = useFormik<LoginFormValues>({
     initialValues: {
-      username: "",
+      username: '',
     },
     onSubmit: (values: LoginFormValues) => {
       alert(JSON.stringify(values, null, 2));
       formik.resetForm();
-      navigate("/");
+      navigate('/');
     },
     validationSchema: loginAccountyupSchema,
   });
 
   return (
     <>
-      <h1 className="mb-5 pt-2 text-center text-5xl text-stone-200">Logowanie</h1>
+      <h1 className="mb-5 pt-2 text-center text-5xl text-stone-200">
+        Logowanie
+      </h1>
       <form onSubmit={formik.handleSubmit}>
         <div className="mx-auto grid max-w-sm grid-cols-1">
           <div className="mb-5">
-            <label htmlFor="username" className={`${labelClass}`}>
-              Username:
-            </label>
-            <input
+            <Input
               type="text"
-              id="username"
-              name="username"
-              className={`${inputClass}`}
+              label="Imię"
+              name="name"
+              value={formik.values.username}
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
-              value={formik.values.username}
             />
             {formik.touched.username && formik.errors.username && (
               <p className={`${errorInfoClass}`}>{formik.errors.username}</p>
@@ -50,7 +52,4 @@ export default function Login() {
   );
 }
 
-const inputClass =
-  "block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500";
-const labelClass = "mb-2 block text-sm font-medium text-gray-900 dark:text-white";
-const errorInfoClass = "text-rose-400 text-sm";
+const errorInfoClass = 'text-rose-400 text-sm';
