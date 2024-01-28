@@ -11,6 +11,8 @@
     "server": "json-server --watch database/db.json --port 8000"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.17.19",
+    "@tanstack/react-query-devtools": "^5.17.21",
     "@types/react-icons": "^3.0.0",
     "@types/react-router-dom": "^5.3.3",
     "formik": "^2.4.5",
