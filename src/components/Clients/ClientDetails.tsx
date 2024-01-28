@@ -1,41 +1,25 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import { ClientProps } from '../../types/ClientProps.type';
+import { useClientDetails } from './useClientDetails';
+import { useClientDelete } from './useClientDelete';
 import Button from '../Button';
-import { useEffect, useState } from 'react';
-import { deleteClient, getSingleClient } from '../../api/apiClients';
 import Loader from '../Loader';
 import TableRow from '../Tables/TableRow';
 import TableTh from '../Tables/TableTh';
 import TableTd from '../Tables/TableTd';
 
+type ParamsType = {
+  id?: string;
+};
+
 export default function ClientDetails() {
-  const { id } = useParams();
-  const [client, setClient] = useState<ClientProps | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [clientNotFound, setClientNotFound] = useState(false);
+  const { id } = useParams<ParamsType>();
   const navigate = useNavigate();
-
-  const fetchSingleClientData = async () => {
-    try {
-      setIsLoading(true);
-      if (id) {
-        const data: ClientProps = await getSingleClient(id);
-        setClient(data);
-        setClientNotFound(false);
-      }
-    } catch (error) {
-      console.error('Błąd ładowania danych');
-      setClientNotFound(true);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchSingleClientData().catch((error) => {
-      console.error('Błąd podczas fetchSingleClientData:', error);
-    });
-  }, [id]);
+  const {
+    isLoading,
+    clientDetails: client,
+    error: clientNotFound,
+  } = useClientDetails(id || '');
+  const { deleteClient } = useClientDelete();
 
   if (isLoading) {
     return <Loader />;
@@ -71,9 +55,7 @@ export default function ClientDetails() {
     );
 
     if (confirmDelete) {
-      deleteClient(clientId).catch((error) => {
-        console.error('Błąd podczas usuwania klienta:', error);
-      });
+      deleteClient(clientId);
       navigate('/clients');
     }
   };
