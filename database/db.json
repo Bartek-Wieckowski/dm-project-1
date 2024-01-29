@@ -3,7 +3,7 @@
     {
       "id": "1",
       "imgSrc": "https://images.unsplash.com/photo-1661869535393-872dea2d9f8d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1887&q=80",
-      "name": "Zbigniew",
+      "name": "Zibi",
       "surname": "Herbert",
       "street": "TestStreet",
       "postCode": "00-123",
@@ -45,26 +45,15 @@
       "phoneNumber": "+48 999 000 111"
     },
     {
-      "id": "f349",
-      "name": "Bart",
-      "surname": "Bartkowy",
-      "street": "testowa",
-      "postCode": "11-098",
-      "town": "liverpool",
-      "subRegion": "merseyside",
-      "imgSrc": "",
-      "phoneNumber": "+48 444 333 867"
-    },
-    {
       "id": "08cb",
-      "name": "henryk z polski",
+      "name": "John",
       "surname": "Bell",
       "street": "Sint qui nobis aut o",
       "postCode": "00-000",
       "town": "Dolorum dolor debiti",
       "subRegion": "00-000",
       "imgSrc": "Enim ipsa voluptate",
-      "phoneNumber": "+48 444 333 867"
+      "phoneNumber": "+48 444 333 868"
     }
   ],
   "orders": [
@@ -72,9 +61,9 @@
       "id": "1",
       "client": {
         "userId": "1",
-        "name": "Anna",
-        "surname": "Nowak",
-        "phoneNumber": "+48 555 111 222"
+        "name": "Zbigniew",
+        "surname": "Herbert",
+        "phoneNumber": "+48 123 456 789"
       },
       "quantity": 5,
       "orderTitle": "Zamówienie 1",
@@ -105,148 +94,16 @@
       "orderContent": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
     },
     {
-      "id": "4",
+      "id": "2313",
       "client": {
-        "userId": "4",
-        "name": "Piotr",
-        "surname": "Dąbrowski",
-        "phoneNumber": "+48 555 444 555"
+        "userId": "f349",
+        "name": "Bart",
+        "surname": "Bartkowy",
+        "phoneNumber": "+48 444 333 867"
       },
       "quantity": 10,
-      "orderTitle": "Zamówienie 4",
-      "orderContent": "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-    },
-    {
-      "id": "5",
-      "client": {
-        "userId": "5",
-        "name": "Magdalena",
-        "surname": "Lewandowska",
-        "phoneNumber": "+48 555 555 666"
-      },
-      "quantity": 6,
-      "orderTitle": "Zamówienie 5",
-      "orderContent": "Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-    },
-    {
-      "id": "6",
-      "client": {
-        "userId": "6",
-        "name": "Krzysztof",
-        "surname": "Wójcik",
-        "phoneNumber": "+48 555 666 777"
-      },
-      "quantity": 7,
-      "orderTitle": "Zamówienie 6",
-      "orderContent": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium."
-    },
-    {
-      "id": "7",
-      "client": {
-        "userId": "7",
-        "name": "Alicja",
-        "surname": "Kamińska",
-        "phoneNumber": "+48 555 777 888"
-      },
-      "quantity": 2,
-      "orderTitle": "Zamówienie 7",
-      "orderContent": "At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident."
-    },
-    {
-      "id": "8",
-      "client": {
-        "userId": "8",
-        "name": "Bartosz",
-        "surname": "Zieliński",
-        "phoneNumber": "+48 555 888 999"
-      },
-      "quantity": 4,
-      "orderTitle": "Zamówienie 8",
-      "orderContent": "Similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga."
-    },
-    {
-      "id": "9",
-      "client": {
-        "userId": "9",
-        "name": "Monika",
-        "surname": "Szymańska",
-        "phoneNumber": "+48 555 999 000"
-      },
-      "quantity": 9,
-      "orderTitle": "Zamówienie 9",
-      "orderContent": "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit."
-    },
-    {
-      "id": "10",
-      "client": {
-        "userId": "10",
-        "name": "Michał",
-        "surname": "Woźniak",
-        "phoneNumber": "+48 555 000 111"
-      },
-      "quantity": 1,
-      "orderTitle": "Zamówienie 10",
-      "orderContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-    },
-    {
-      "id": "1706178396036",
-      "client": {
-        "userId": "1706119366787",
-        "name": "lfc",
-        "surname": "lfc",
-        "phoneNumber": "+489090909090"
-      },
-      "quantity": 12,
-      "orderTitle": "Testowe zamówienie",
-      "orderContent": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker incl"
-    },
-    {
-      "id": "1706207102814",
-      "client": {
-        "userId": "3",
-        "name": "Maria",
-        "surname": "Wiśniewska",
-        "phoneNumber": "+48 111 222 333"
-      },
-      "quantity": 1,
-      "orderTitle": "afsdfdsgdgdergrger",
-      "orderContent": "ewgfrewgregregergrge"
-    },
-    {
-      "id": "1706349239869",
-      "client": {
-        "userId": "0ae9",
-        "name": "testowy",
-        "surname": "test",
-        "phoneNumber": "+48 444 333 867"
-      },
-      "quantity": 8,
-      "orderTitle": "Testowe zamowienie po zmianach",
-      "orderContent": "utor przenosi czytelnika w siedemnasty wiek, w czas powstania Chmielnickiego na Ukrainie, podczas którego Rzeczpospolita mierzyła się z Kozakami zaporoskimi i Tatarami. Na tle tego konfliktu rozgrywa się również dramat miłosny — przeżywają go rozdzieleni Jan Skrzetuski i Helena Kurcewiczówna, w której ponadto zakochany do szaleństwa jest Bohun. Bohaterowie zostali przedstawieni na zasadzie kontrastu — Polacy, z Onufrym Zagłobą, Longinusem Podbipiętą i Michałem Wołodyjowskim na czele ukazani są jako dzielni, waleczni, honorowi obrońcy Ojczyzny. Przedstawicieli obozu wroga Sienkiewicz przedstawił w znacznie gorszym świetle."
-    },
-    {
-      "id": "1706355747456",
-      "client": {
-        "userId": "4",
-        "name": "Piotrek",
-        "surname": "Dąbrowski",
-        "phoneNumber": "+48 444 555 666"
-      },
-      "quantity": 1,
-      "orderTitle": "poszlo test?",
-      "orderContent": "asdasdsadadasdadadasd"
-    },
-    {
-      "id": "1706422706450",
-      "quantity": 1,
-      "orderTitle": "231231233123",
-      "orderContent": "dsfsdfsfasdfsfgsgfsd",
-      "client": {
-        "userId": "0ae9",
-        "name": "testowy",
-        "surname": "test",
-        "phoneNumber": "+48 444 333 867"
-      }
+      "orderTitle": "ostatni test z add po tanstackquery",
+      "orderContent": "ostatni test z add po tanstackquery ostatni test z add po tanstackquery ostatni test z add po tanstackquery"
     }
   ]
 }
