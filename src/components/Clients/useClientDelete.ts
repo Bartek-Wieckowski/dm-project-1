@@ -6,8 +6,8 @@ export function useClientDelete() {
 
   const { mutate: deleteClient } = useMutation({
     mutationFn: deleteClientApi,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({
+    onSuccess: () => {
+      queryClient.invalidateQueries({
         queryKey: ["clientsAll"],
       });
     },
