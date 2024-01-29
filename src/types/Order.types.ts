@@ -5,10 +5,9 @@ export interface ClientDataInOrder {
   phoneNumber: string;
 }
 
-export interface OrderData {
-  id: string;
+export type OrderData = {
   client: ClientDataInOrder;
   quantity: number;
   orderTitle: string;
   orderContent: string;
-}
+} & { id: string };

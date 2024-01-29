@@ -1,58 +1,40 @@
-import { OrderFormValues, orderYupSchema } from '../../validators/validators';
-import { useFormik } from 'formik';
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { createOrder, getAllClientOrders } from '../../api/apiOrders';
-import { ClientProps } from '../../types/ClientProps.type';
-import Button from '../Button';
-import Select from '../Form/Select';
-import Input from '../Form/Input';
-import Textarea from '../Form/Textarea';
+import { OrderFormValues, orderYupSchema } from "../../validators/validators";
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { useClients } from "../Clients/useClients";
+import { useOrderCreate } from "./useOrderCreate";
+import Button from "../Button";
+import Select from "../Form/Select";
+import Input from "../Form/Input";
+import Textarea from "../Form/Textarea";
 
 export default function OrderForm() {
   const navigate = useNavigate();
+  const { clientsAll: clientOrders } = useClients();
+  const { createOrder } = useOrderCreate();
   const formik = useFormik<OrderFormValues>({
     initialValues: {
-      id: Math.floor(new Date().getTime() + Math.random()).toString(),
       client: {
-        userId: '',
-        name: '',
-        surname: '',
-        phoneNumber: '',
+        userId: "",
+        name: "",
+        surname: "",
+        phoneNumber: "",
       },
       quantity: 1,
-      orderTitle: '',
-      orderContent: '',
+      orderTitle: "",
+      orderContent: "",
     },
     onSubmit: async (values: OrderFormValues) => {
-      await createOrder(values);
-      alert('Zamówienie złożone poprawnie!');
-      navigate('/orders');
+      createOrder(values);
+      alert("Zamówienie złożone poprawnie!");
+      navigate("/orders");
     },
     validationSchema: orderYupSchema,
   });
-  const [clientOrders, setClientOrders] = useState<ClientProps[]>([]);
-
-  useEffect(() => {
-    fetchAllClient().catch((error) => {
-      console.error('Błąd podczas fetchAllClient:', error);
-    });
-  }, []);
-
-  const fetchAllClient = async () => {
-    try {
-      const data: ClientProps[] = await getAllClientOrders();
-      setClientOrders(data);
-    } catch (error) {
-      console.error('Błąd ładowania danych');
-    }
-  };
 
   function handleClientChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const selectedClient = clientData.find(
-      (client) => client.phoneNumber === event.target.value
-    );
-    formik.setFieldValue('client', selectedClient);
+    const selectedClient = clientData.find((client) => client.phoneNumber === event.target.value);
+    formik.setFieldValue("client", selectedClient);
   }
 
   const clientData =
@@ -67,23 +49,17 @@ export default function OrderForm() {
         })
       : [];
 
-  // console.log("formik errors", formik.errors); // TODO: to do kolejnego todo odnośnie walidacji selecta
-
   return (
-    <form
-      className="mx-auto grid max-w-sm grid-cols-1 "
-      onSubmit={formik.handleSubmit}
-    >
+    <form className="mx-auto grid max-w-sm grid-cols-1 " onSubmit={formik.handleSubmit}>
       <div className="mb-5">
         <Select
           label="Imie i naziwsko"
           name="client"
-          value={formik.values.client?.phoneNumber || ''}
+          value={formik.values.client?.phoneNumber || ""}
           options={clientData}
           onChange={handleClientChange}
           onBlur={formik.handleBlur}
         />
-        {/* TODO: poprawić walidacje selecta */}
         {formik.touched.client && formik.errors.client && (
           <p className={`${errorInfoClass}`}>Wybierz klienta</p>
         )}
@@ -135,4 +111,4 @@ export default function OrderForm() {
   );
 }
 
-const errorInfoClass = 'text-rose-400 text-sm';
+const errorInfoClass = "text-rose-400 text-sm";

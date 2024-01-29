@@ -1,43 +1,22 @@
-import { useEffect, useState } from 'react';
-import Button from '../Button';
-import { OrderData } from '../../types/Order.types';
-import { getAllOrders } from '../../api/apiOrders';
-import Loader from '../Loader';
-import TableRow from '../Tables/TableRow';
-import TableTh from '../Tables/TableTh';
-import TableTd from '../Tables/TableTd';
+import { useOrders } from "./useOrders";
+import Button from "../Button";
+import Loader from "../Loader";
+import TableRow from "../Tables/TableRow";
+import TableTh from "../Tables/TableTh";
+import TableTd from "../Tables/TableTd";
 
 export default function Orders() {
-  const [ordersData, setOrdersData] = useState<OrderData[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-
-  const fetchAllOrders = async () => {
-    try {
-      setIsLoading(true);
-      const data: OrderData[] = await getAllOrders();
-      setOrdersData(data);
-    } catch (error) {
-      console.error('Błąd ładowania danych');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchAllOrders().catch((error) => {
-      console.error('Error during fetchData:', error);
-    });
-  }, []);
+  const { isLoading, ordersAll: ordersData } = useOrders();
 
   if (isLoading) {
     return <Loader />;
   }
 
   const fieldsTh = [
-    { label: 'Numer telefonu' },
-    { label: 'Tytuł' },
-    { label: 'Ilość' },
-    { label: 'Szczegóły' },
+    { label: "Numer telefonu" },
+    { label: "Tytuł" },
+    { label: "Ilość" },
+    { label: "Szczegóły" },
   ];
 
   return (
