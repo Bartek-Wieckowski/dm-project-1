@@ -34,28 +34,6 @@
       "phoneNumber": "+48 444 555 666"
     },
     {
-      "id": "5",
-      "imgSrc": "https://via.placeholder.com/150",
-      "name": "Hanna",
-      "surname": "Mocna",
-      "street": "TestStreet5",
-      "postCode": "00-111",
-      "town": "Countryside",
-      "subRegion": "Region",
-      "phoneNumber": "+48 777 888 999"
-    },
-    {
-      "id": "7",
-      "imgSrc": "https://images.unsplash.com/photo-1494959764136-6be9eb3c261e?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
-      "name": "Alicja",
-      "surname": "Kamińska",
-      "street": "TestStreet7",
-      "postCode": "00-333",
-      "town": "Island",
-      "subRegion": "Region",
-      "phoneNumber": "+48 555 111 222"
-    },
-    {
       "id": "9",
       "imgSrc": "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHBlcnNvbnxlbnwwfHwwfHx8MA%3D%3D",
       "name": "Monika",

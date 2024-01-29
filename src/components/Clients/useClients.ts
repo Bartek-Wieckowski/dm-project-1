@@ -1,17 +1,17 @@
-import { useQuery } from '@tanstack/react-query';
-import { getAllClients } from '../../api/apiClients';
-import { ClientProps } from '../../types/ClientProps.type';
+import { useQuery } from "@tanstack/react-query";
+import { getAllClients } from "../../api/apiClients";
+import { ClientProps } from "../../types/ClientProps.type";
 
 export function useClients() {
   const {
     isLoading,
-    data: allClients,
+    data: clientsAll,
     error,
   } = useQuery<ClientProps[]>({
-    queryKey: ['allClients'],
+    queryKey: ["clientsAll"],
     queryFn: getAllClients,
     initialData: [],
   });
 
-  return { isLoading, allClients, error };
+  return { isLoading, clientsAll, error };
 }

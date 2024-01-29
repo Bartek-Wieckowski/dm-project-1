@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteClient as deleteClientApi } from '../../api/apiClients';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { deleteClient as deleteClientApi } from "../../api/apiClients";
 
 export function useClientDelete() {
   const queryClient = useQueryClient();
@@ -8,11 +8,11 @@ export function useClientDelete() {
     mutationFn: deleteClientApi,
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: ['allClients'],
+        queryKey: ["clientsAll"],
       });
     },
     onError: () => {
-      console.log('Coś poszło nie tak');
+      console.log("Coś poszło nie tak");
     },
   });
 
