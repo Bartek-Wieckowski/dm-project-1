@@ -1,5 +1,5 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addClient as addClientApi } from "../../api/apiClients";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { addClient as addClientApi } from '../../api/apiClients';
 
 export function useClientAdd() {
   const queryClient = useQueryClient();
@@ -9,11 +9,11 @@ export function useClientAdd() {
     error,
   } = useMutation({
     mutationFn: addClientApi,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["clientsAll"] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['clientsAll'] });
     },
     onError: () => {
-      console.log("Coś poszło nie tak");
+      console.log('Coś poszło nie tak');
     },
   });
 

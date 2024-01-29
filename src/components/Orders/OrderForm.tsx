@@ -1,12 +1,12 @@
-import { OrderFormValues, orderYupSchema } from "../../validators/validators";
-import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
-import { useClients } from "../Clients/useClients";
-import { useOrderCreate } from "./useOrderCreate";
-import Button from "../Button";
-import Select from "../Form/Select";
-import Input from "../Form/Input";
-import Textarea from "../Form/Textarea";
+import { OrderFormValues, orderYupSchema } from '../../validators/validators';
+import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { useClients } from '../Clients/useClients';
+import { useOrderCreate } from './useOrderCreate';
+import Button from '../Button';
+import Select from '../Form/Select';
+import Input from '../Form/Input';
+import Textarea from '../Form/Textarea';
 
 export default function OrderForm() {
   const navigate = useNavigate();
@@ -15,26 +15,30 @@ export default function OrderForm() {
   const formik = useFormik<OrderFormValues>({
     initialValues: {
       client: {
-        userId: "",
-        name: "",
-        surname: "",
-        phoneNumber: "",
+        userId: '',
+        name: '',
+        surname: '',
+        phoneNumber: '',
       },
       quantity: 1,
-      orderTitle: "",
-      orderContent: "",
+      orderTitle: '',
+      orderContent: '',
     },
-    onSubmit: async (values: OrderFormValues) => {
+    onSubmit: (values: OrderFormValues) => {
       createOrder(values);
-      alert("Zamówienie złożone poprawnie!");
-      navigate("/orders");
+      alert('Zamówienie złożone poprawnie!');
+      navigate('/orders');
     },
     validationSchema: orderYupSchema,
   });
 
   function handleClientChange(event: React.ChangeEvent<HTMLSelectElement>) {
-    const selectedClient = clientData.find((client) => client.phoneNumber === event.target.value);
-    formik.setFieldValue("client", selectedClient);
+    const selectedClient = clientData.find(
+      (client) => client.phoneNumber === event.target.value
+    );
+    formik.setFieldValue('client', selectedClient).catch((error) => {
+      console.error('Błąd podczas wybierania klienta:', error);
+    });
   }
 
   const clientData =
@@ -50,12 +54,15 @@ export default function OrderForm() {
       : [];
 
   return (
-    <form className="mx-auto grid max-w-sm grid-cols-1 " onSubmit={formik.handleSubmit}>
+    <form
+      className="mx-auto grid max-w-sm grid-cols-1 "
+      onSubmit={formik.handleSubmit}
+    >
       <div className="mb-5">
         <Select
           label="Imie i naziwsko"
           name="client"
-          value={formik.values.client?.phoneNumber || ""}
+          value={formik.values.client?.phoneNumber || ''}
           options={clientData}
           onChange={handleClientChange}
           onBlur={formik.handleBlur}
@@ -111,4 +118,4 @@ export default function OrderForm() {
   );
 }
 
-const errorInfoClass = "text-rose-400 text-sm";
+const errorInfoClass = 'text-rose-400 text-sm';
