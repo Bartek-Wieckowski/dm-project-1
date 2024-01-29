@@ -41,7 +41,7 @@ export type ClientFormValues = yup.InferType<typeof clientYupSchema>;
 
 // orderFormValidator
 export const orderYupSchema = yup.object().shape({
-  id: yup.string().required(),
+  id: yup.string(),
   client: yup.object().shape({
     userId: yup.string().required("Pole wymagane"),
     name: yup.string().required("Pole wymagane"),
