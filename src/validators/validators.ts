@@ -79,6 +79,7 @@ export const registerAccountYupSchema = yup.object({
 });
 
 export type RegisterFormValues = yup.InferType<typeof registerAccountYupSchema>;
+export type UserAccount = RegisterFormValues & { avatar?: string };
 
 // login account
 export const loginAccountyupSchema = yup.object({
