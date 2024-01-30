@@ -117,5 +117,24 @@
       "orderTitle": "34r5t35gt356356",
       "orderContent": "erbertbetybetybtyb"
     }
+  ],
+  "usersAccount": [
+    {
+      "id": "89e2",
+      "name": "Bart",
+      "username": "theBart",
+      "email": "admin@example.com",
+      "password": "smieszne",
+      "confirmPassword": "smieszne"
+    },
+    {
+      "id": "6804",
+      "name": "Test",
+      "username": "testowyUser",
+      "email": "test2@test.test",
+      "password": "testowetestowe",
+      "confirmPassword": "testowetestowe",
+      "avatar": "https://w7.pngwing.com/pngs/574/369/png-transparent-avatar-computer-icons-user-random-icons-purple-blue-heroes.png"
+    }
   ]
 }
