@@ -18,6 +18,7 @@ import OrderDetails from "./components/Orders/OrderDetails";
 import OrderAdd from "./components/Orders/OrderAdd";
 import Invoicespage from "./pages/Invoicespage";
 import Registerpage from "./pages/Registerpage";
+import { UserProvider } from "./contexts/UserContext";
 
 const router = createBrowserRouter([
   {
@@ -104,7 +105,9 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       {import.meta.env.MODE === "development" && <ReactQueryDevtools initialIsOpen={false} />}
-      <RouterProvider router={router} />
+      <UserProvider>
+        <RouterProvider router={router} />
+      </UserProvider>
     </QueryClientProvider>
   );
 }
