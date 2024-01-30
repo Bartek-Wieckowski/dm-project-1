@@ -1,31 +1,31 @@
-import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
-import {
-  LoginFormValues,
-  loginAccountyupSchema,
-} from '../../validators/validators';
-import Button from '../Button';
-import Input from '../Form/Input';
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { LoginFormValues, loginAccountyupSchema } from "../../validators/validators";
+import { useUser } from "../../contexts/UserContext";
+import Button from "../Button";
+import Input from "../Form/Input";
 
 export default function Login() {
   const navigate = useNavigate();
+  const {
+    logIn,
+    userData: { isLoginError },
+  } = useUser();
   const formik = useFormik<LoginFormValues>({
     initialValues: {
-      username: '',
+      username: "",
     },
-    onSubmit: (values: LoginFormValues) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: async (values: LoginFormValues) => {
+      await logIn(values.username);
       formik.resetForm();
-      navigate('/');
+      navigate("/");
     },
     validationSchema: loginAccountyupSchema,
   });
 
   return (
     <>
-      <h1 className="mb-5 pt-2 text-center text-5xl text-stone-200">
-        Logowanie
-      </h1>
+      <h1 className="mb-5 pt-2 text-center text-5xl text-stone-200">Logowanie</h1>
       <form onSubmit={formik.handleSubmit}>
         <div className="mx-auto grid max-w-sm grid-cols-1">
           <div className="mb-5">
@@ -40,6 +40,7 @@ export default function Login() {
             {formik.touched.username && formik.errors.username && (
               <p className={`${errorInfoClass}`}>{formik.errors.username}</p>
             )}
+            {isLoginError ? <p className={`${errorInfoClass}`}>Taki username nie istnieje...</p> : ""}
           </div>
         </div>
         <div className="mx-auto mt-3 flex justify-center gap-4 p-3">
@@ -52,4 +53,4 @@ export default function Login() {
   );
 }
 
-const errorInfoClass = 'text-rose-400 text-sm';
+const errorInfoClass = "text-rose-400 text-sm";

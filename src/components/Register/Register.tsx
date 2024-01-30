@@ -1,35 +1,35 @@
-import { useFormik } from 'formik';
-import { useNavigate } from 'react-router-dom';
-import {
-  RegisterFormValues,
-  registerAccountYupSchema,
-} from '../../validators/validators';
-import Button from '../Button';
-import Input from '../Form/Input';
+import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
+import { UserAccount, registerAccountYupSchema } from "../../validators/validators";
+import Button from "../Button";
+import Input from "../Form/Input";
+import { useRegisterUser } from "../Auth/useRegisterUser";
+import { RANDOM_IMG_URL } from "../../constants/appConst";
 
 export default function Register() {
+  const { addNewUser } = useRegisterUser();
   const navigate = useNavigate();
-  const formik = useFormik<RegisterFormValues>({
+  const formik = useFormik<UserAccount>({
     initialValues: {
-      name: '',
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+      avatar: RANDOM_IMG_URL,
     },
-    onSubmit: (values: RegisterFormValues) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: (values: UserAccount) => {
+      alert("Konto utworone poprawnie!");
+      addNewUser(values);
       formik.resetForm();
-      navigate('/');
+      navigate("/");
     },
     validationSchema: registerAccountYupSchema,
   });
 
   return (
     <>
-      <h1 className="mb-5 pt-2 text-center text-5xl text-stone-200">
-        Rejestracja
-      </h1>
+      <h1 className="mb-5 pt-2 text-center text-5xl text-stone-200">Rejestracja</h1>
       <form onSubmit={formik.handleSubmit}>
         <div className="mx-auto grid max-w-lg grid-cols-1 sm:grid-cols-2 sm:gap-10">
           <div className="mb-5">
@@ -93,12 +93,9 @@ export default function Register() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
-            {formik.touched.confirmPassword &&
-              formik.errors.confirmPassword && (
-                <p className={`${errorInfoClass}`}>
-                  {formik.errors.confirmPassword}
-                </p>
-              )}
+            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
+              <p className={`${errorInfoClass}`}>{formik.errors.confirmPassword}</p>
+            )}
           </div>
         </div>
         <div className="mx-auto mt-3 flex justify-center gap-4 p-3">
@@ -111,4 +108,4 @@ export default function Register() {
   );
 }
 
-const errorInfoClass = 'text-rose-400 text-sm';
+const errorInfoClass = "text-rose-400 text-sm";
