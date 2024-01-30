@@ -19,6 +19,7 @@ import OrderAdd from "./components/Orders/OrderAdd";
 import Invoicespage from "./pages/Invoicespage";
 import Registerpage from "./pages/Registerpage";
 import { UserProvider } from "./contexts/UserContext";
+import ProtectedWrapper from "./components/ProtectedWrapper";
 
 const router = createBrowserRouter([
   {
@@ -62,7 +63,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/invoices",
-        element: <Invoicespage />,
+        element: (
+          <ProtectedWrapper>
+            <Invoicespage />,
+          </ProtectedWrapper>
+        ),
       },
       {
         path: "/comments",
