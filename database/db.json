@@ -54,6 +54,17 @@
       "subRegion": "Ut sed doloribus sol",
       "imgSrc": "",
       "phoneNumber": "+1 682 946 979"
+    },
+    {
+      "id": "d1da",
+      "name": "admin",
+      "surname": "admin",
+      "street": "testowa",
+      "postCode": "11-345",
+      "town": "testowe",
+      "subRegion": "Alaska",
+      "imgSrc": "",
+      "phoneNumber": "+48 999 213 781"
     }
   ],
   "orders": [
