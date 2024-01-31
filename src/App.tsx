@@ -1,107 +1,184 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import AppLayout from "./pages/AppLayout";
-import Homepage from "./pages/Homepage";
-import Postspage from "./pages/Postspage";
-import Commentspage from "./pages/Commentspage";
-import NotFound from "./pages/NotFound";
-import Example from "./pages/Example";
-import Example2 from "./pages/Example2";
-import Cart from "./pages/Cart";
-import ClientAdd from "./components/Clients/ClientAdd";
-import ClientDetails from "./components/Clients/ClientDetails";
-import ClientEdit from "./components/Clients/ClientEdit";
-import Clientspage from "./pages/Clientspage";
-import Orderspage from "./pages/Orderspage";
-import OrderDetails from "./components/Orders/OrderDetails";
-import OrderAdd from "./components/Orders/OrderAdd";
-import Invoicespage from "./pages/Invoicespage";
-import Registerpage from "./pages/Registerpage";
-import { UserProvider } from "./contexts/UserContext";
-import ProtectedWrapper from "./components/ProtectedWrapper";
+import { lazy, Suspense } from 'react';
+import {
+  RouterProvider,
+  createBrowserRouter,
+  useRouteError,
+} from 'react-router-dom';
+import {
+  QueryCache,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { UserProvider } from './contexts/UserContext';
+
+import AppLayout from './pages/AppLayout';
+import NotFound from './pages/NotFound';
+import ProtectedWrapper from './components/ProtectedWrapper';
+import Loader from './components/Loader';
+
+const Homepage = lazy(() => import('./pages/Homepage'));
+const Postspage = lazy(() => import('./pages/Postspage'));
+const Commentspage = lazy(() => import('./pages/Commentspage'));
+const Example = lazy(() => import('./pages/Example'));
+const Example2 = lazy(() => import('./pages/Example2'));
+const Cart = lazy(() => import('./pages/Cart'));
+const ClientAdd = lazy(() => import('./components/Clients/ClientAdd'));
+const ClientDetails = lazy(() => import('./components/Clients/ClientDetails'));
+const ClientEdit = lazy(() => import('./components/Clients/ClientEdit'));
+const Clientspage = lazy(() => import('./pages/Clientspage'));
+const Orderspage = lazy(() => import('./pages/Orderspage'));
+const OrderDetails = lazy(() => import('./components/Orders/OrderDetails'));
+const OrderAdd = lazy(() => import('./components/Orders/OrderAdd'));
+const Invoicespage = lazy(() => import('./pages/Invoicespage'));
+const Registerpage = lazy(() => import('./pages/Registerpage'));
+
+function ErrorBoundary() {
+  const error = useRouteError();
+  console.error(error);
+  return <div>Boom!</div>;
+}
 
 const router = createBrowserRouter([
   {
+    errorElement: <ErrorBoundary />,
     element: <AppLayout />,
     children: [
       {
-        path: "*",
+        path: '*',
         element: <NotFound />,
       },
       {
-        path: "/",
-        element: <Homepage />,
-      },
-      {
-        path: "/clients",
-        element: <Clientspage />,
-      },
-      {
-        path: "/clients/add",
-        element: <ClientAdd />,
-      },
-      {
-        path: "/clients/:id",
-        element: <ClientDetails />,
-      },
-      {
-        path: "/clients/:id/edit",
-        element: <ClientEdit />,
-      },
-      {
-        path: "/orders",
-        element: <Orderspage />,
-      },
-      {
-        path: "/orders/add",
-        element: <OrderAdd />,
-      },
-      {
-        path: "/orders/:id",
-        element: <OrderDetails />,
-      },
-      {
-        path: "/invoices",
+        path: '/',
         element: (
-          <ProtectedWrapper>
-            <Invoicespage />,
-          </ProtectedWrapper>
+          <Suspense fallback={<Loader />}>
+            <Homepage />
+          </Suspense>
         ),
       },
       {
-        path: "/comments",
-        element: <Commentspage />,
+        path: '/clients',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Clientspage />
+          </Suspense>
+        ),
       },
       {
-        path: "/posts",
-        element: <Postspage />,
+        path: '/clients/add',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <ClientAdd />
+          </Suspense>
+        ),
       },
       {
-        path: "/modals-example",
-        element: <Example />,
+        path: '/clients/:id',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <ClientDetails />
+          </Suspense>
+        ),
       },
       {
-        path: "/table-examplee",
-        element: <Example2 />,
+        path: '/clients/:id/edit',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <ClientEdit />
+          </Suspense>
+        ),
       },
       {
-        path: "/cart",
-        element: <Cart />,
+        path: '/orders',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Orderspage />
+          </Suspense>
+        ),
       },
       {
-        path: "/register",
-        element: <Registerpage />,
+        path: '/orders/add',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <OrderAdd />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/orders/:id',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <OrderDetails />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/invoices',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <ProtectedWrapper>
+              <Invoicespage />
+            </ProtectedWrapper>
+          </Suspense>
+        ),
+      },
+      {
+        path: '/comments',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Commentspage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/posts',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Postspage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/modals-example',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Example />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/table-examplee',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Example2 />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/cart',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Cart />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/register',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <Registerpage />
+          </Suspense>
+        ),
       },
     ],
   },
 ]);
+
 const queryClient = new QueryClient({
   queryCache: new QueryCache(),
   defaultOptions: {
     queries: {
       gcTime: 60_000,
-      // staleTime: 0,
     },
   },
 });
@@ -109,7 +186,9 @@ const queryClient = new QueryClient({
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      {import.meta.env.MODE === "development" && <ReactQueryDevtools initialIsOpen={false} />}
+      {import.meta.env.MODE === 'development' && (
+        <ReactQueryDevtools initialIsOpen={false} />
+      )}
       <UserProvider>
         <RouterProvider router={router} />
       </UserProvider>
