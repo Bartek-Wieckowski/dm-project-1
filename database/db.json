@@ -146,6 +146,15 @@
       "password": "testowetestowe",
       "confirmPassword": "testowetestowe",
       "avatar": "https://w7.pngwing.com/pngs/574/369/png-transparent-avatar-computer-icons-user-random-icons-purple-blue-heroes.png"
+    },
+    {
+      "id": "80a9",
+      "name": "Selma Elliott",
+      "username": "lagugu",
+      "email": "kura@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "confirmPassword": "Pa$$w0rd!",
+      "avatar": "https://w7.pngwing.com/pngs/574/369/png-transparent-avatar-computer-icons-user-random-icons-purple-blue-heroes.png"
     }
   ]
 }

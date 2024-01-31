@@ -1,5 +1,6 @@
 import { createContext, useContext, useReducer } from "react";
 import { loginUser } from "../api/apiUsers";
+import { useNotification } from "./NotificationContext";
 
 type UserContextType = {
   userData: UserState;
@@ -59,6 +60,7 @@ function reducer(state: UserState, action: UserAction): UserState {
 }
 
 function UserProvider({ children }: { children: React.ReactNode }) {
+  const { showNotification } = useNotification();
   const [{ user, isAuth, isLoginError }, dispatch] = useReducer(reducer, initialState);
 
   async function logIn(username: string) {
@@ -72,8 +74,10 @@ function UserProvider({ children }: { children: React.ReactNode }) {
             avatar: userData?.avatar,
           },
         });
+        showNotification("Logowanie poprawne!", "success");
       } else {
         dispatch({ type: "LOGIN_ERROR" });
+        showNotification("Logowanie niepoprawne!", "error");
       }
     } catch (error) {
       console.error("Wystąpił błąd podczas logowania:", error);

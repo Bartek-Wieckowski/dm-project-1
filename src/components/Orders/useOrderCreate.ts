@@ -1,7 +1,9 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createOrder as createOrderApi } from '../../api/apiOrders';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { createOrder as createOrderApi } from "../../api/apiOrders";
+import { useNotification } from "../../contexts/NotificationContext";
 
 export function useOrderCreate() {
+  const { showNotification } = useNotification();
   const queryClient = useQueryClient();
   const {
     isPending,
@@ -10,10 +12,11 @@ export function useOrderCreate() {
   } = useMutation({
     mutationFn: createOrderApi,
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['ordersAll'] });
+      await queryClient.invalidateQueries({ queryKey: ["ordersAll"] });
+      showNotification("Zamówienie dodane poprawnie", "success");
     },
     onError: () => {
-      console.log('Coś poszło nie tak');
+      showNotification("Coś poszło nie tak...", "error");
     },
   });
   return { isPending, createOrder, error };
