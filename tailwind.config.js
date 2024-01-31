@@ -16,4 +16,5 @@ export default {
     "border-blue-400",
     "text-blue-700",
   ],
+  darkMode: "class",
 };

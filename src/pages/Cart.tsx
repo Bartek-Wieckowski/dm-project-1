@@ -70,7 +70,7 @@ export default function Cart() {
   };
 
   return (
-    <div className="grid grid-cols-[200px_1fr] items-center px-10 text-stone-200">
+    <div className="grid grid-cols-[200px_1fr] items-center px-10 text-slate-900 dark:text-stone-200">
       <div>
         <p>iPad</p>
         <Button type="button" onClick={addToCart} disabled={isProductInCart("iPad")} btnStyles="btnAdd">

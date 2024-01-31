@@ -18,13 +18,13 @@ export default function AppLayout() {
         <div className="relative">
           <div className="absolute right-2 top-4 flex items-center gap-4">
             <Avatar />
-            <button onClick={() => logOut()} className="text-stone-200">
+            <button onClick={() => logOut()} className="dark:text-stone-200 text-slate-900">
               <BsBoxArrowRight />
             </button>
           </div>
         </div>
       )}
-      <main className="grid min-h-screen grid-cols-[100px_1fr] place-items-center bg-slate-900">
+      <main className="grid min-h-screen grid-cols-[100px_1fr] place-items-center bg-stone-200 dark:bg-slate-900">
         <AsideMenu />
         <div className="w-full px-2 py-4">
           <Outlet />

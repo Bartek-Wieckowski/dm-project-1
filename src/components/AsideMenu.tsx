@@ -1,5 +1,4 @@
-// FIXME: DO OMÓWIENIA import menuData from "../assets/dummy-data/menu-data";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import {
   BsFillPeopleFill,
   BsFillBagCheckFill,
@@ -10,66 +9,67 @@ import {
   BsListColumns,
   BsThreeDotsVertical,
   BsCart,
-} from 'react-icons/bs';
-import { MenuItem } from '../types/MenuItem.type';
-import { useState } from 'react';
+  BsFillSunFill,
+  BsMoonFill,
+} from "react-icons/bs";
+import { MenuItem } from "../types/MenuItem.type";
+import { useState } from "react";
+import { useDarkMode } from "../contexts/DarkModeContext";
 
 const menuData: MenuItem[] = [
   {
-    linkName: 'Clients',
-    link: '/clients',
+    linkName: "Clients",
+    link: "/clients",
     icon: <BsFillPeopleFill />,
   },
   {
-    linkName: 'Orders',
-    link: '/orders',
+    linkName: "Orders",
+    link: "/orders",
     icon: <BsFillBagCheckFill />,
   },
   {
-    linkName: 'Facture',
-    link: '/invoices',
+    linkName: "Facture",
+    link: "/invoices",
     icon: <BsFillFileEarmarkRuledFill />,
   },
   {
-    linkName: 'Comments',
-    link: '/comments',
+    linkName: "Comments",
+    link: "/comments",
     icon: <BsTextWrap />,
   },
   {
-    linkName: 'Posts',
-    link: '/posts',
+    linkName: "Posts",
+    link: "/posts",
     icon: <BsFillHddRackFill />,
   },
   {
-    linkName: 'Cart',
-    link: '/cart',
+    linkName: "Cart",
+    link: "/cart",
     icon: <BsCart />,
   },
 ];
 
 export default function AsideMenu() {
   const [isOpen, setIsOpen] = useState(true);
+  const { toggleDarkMode, isDarkMode } = useDarkMode();
   function handleClickMenu() {
     setIsOpen(!isOpen);
   }
 
   return (
     <aside
-      className={`row-span-2 size-full bg-slate-400 transition-all ${
-        !isOpen ? 'translate-x-[-65px]' : ''
-      }`}
+      className={`row-span-2 size-full bg-slate-400 transition-all ${!isOpen ? "translate-x-[-65px]" : ""}`}
     >
       <div className="sticky top-8">
-        <div
-          className="ml-auto size-[16px] cursor-pointer pr-6"
-          onClick={handleClickMenu}
-        >
+        <div className="ml-auto mb-5 size-[16px] cursor-pointer pr-6" onClick={toggleDarkMode}>
+          {!isDarkMode && <BsMoonFill />}
+          {isDarkMode && <BsFillSunFill />}
+        </div>
+        <div className="ml-auto size-[16px] cursor-pointer pr-6" onClick={handleClickMenu}>
           {!isOpen && <BsListColumns />}
           {isOpen && <BsThreeDotsVertical />}
         </div>
-        <div
-          className={`${isOpen ? 'mx-auto' : 'ml-auto mr-2 size-[16px]'} my-4`}
-        >
+        <div className={`${isOpen ? "mx-auto" : "ml-auto mr-2 size-[16px]"} my-4`}>
           <Link to="/">
             <BsAmd className="block w-full cursor-pointer" />
           </Link>
@@ -77,14 +77,9 @@ export default function AsideMenu() {
         <ul className="flex flex-col gap-4 p-2">
           {menuData.map((menuItem) => (
             <li key={menuItem.linkName}>
-              <Link
-                to={menuItem.link}
-                className="transition-all hover:text-stone-200"
-              >
+              <Link to={menuItem.link} className="transition-all hover:text-stone-200">
                 <div className="group grid grid-cols-[1fr_16px] items-center gap-1">
-                  <p className="group-[:nth-of-type(4)_&]:text-[10px]">
-                    {menuItem.linkName}
-                  </p>
+                  <p className="group-[:nth-of-type(4)_&]:text-[10px]">{menuItem.linkName}</p>
                   {menuItem.icon}
                 </div>
               </Link>
