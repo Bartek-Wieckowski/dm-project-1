@@ -1,37 +1,30 @@
-import { lazy, Suspense } from 'react';
-import {
-  RouterProvider,
-  createBrowserRouter,
-  useRouteError,
-} from 'react-router-dom';
-import {
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { UserProvider } from './contexts/UserContext';
+import { lazy, Suspense } from "react";
+import { RouterProvider, createBrowserRouter, useRouteError } from "react-router-dom";
+import { QueryCache, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { UserProvider } from "./contexts/UserContext";
 
-import AppLayout from './pages/AppLayout';
-import NotFound from './pages/NotFound';
-import ProtectedWrapper from './components/ProtectedWrapper';
-import Loader from './components/Loader';
+import AppLayout from "./pages/AppLayout";
+import NotFound from "./pages/NotFound";
+import ProtectedWrapper from "./components/ProtectedWrapper";
+import Loader from "./components/Loader";
+import { NotificationProvider } from "./contexts/NotificationContext";
 
-const Homepage = lazy(() => import('./pages/Homepage'));
-const Postspage = lazy(() => import('./pages/Postspage'));
-const Commentspage = lazy(() => import('./pages/Commentspage'));
-const Example = lazy(() => import('./pages/Example'));
-const Example2 = lazy(() => import('./pages/Example2'));
-const Cart = lazy(() => import('./pages/Cart'));
-const ClientAdd = lazy(() => import('./components/Clients/ClientAdd'));
-const ClientDetails = lazy(() => import('./components/Clients/ClientDetails'));
-const ClientEdit = lazy(() => import('./components/Clients/ClientEdit'));
-const Clientspage = lazy(() => import('./pages/Clientspage'));
-const Orderspage = lazy(() => import('./pages/Orderspage'));
-const OrderDetails = lazy(() => import('./components/Orders/OrderDetails'));
-const OrderAdd = lazy(() => import('./components/Orders/OrderAdd'));
-const Invoicespage = lazy(() => import('./pages/Invoicespage'));
-const Registerpage = lazy(() => import('./pages/Registerpage'));
+const Homepage = lazy(() => import("./pages/Homepage"));
+const Postspage = lazy(() => import("./pages/Postspage"));
+const Commentspage = lazy(() => import("./pages/Commentspage"));
+const Example = lazy(() => import("./pages/Example"));
+const Example2 = lazy(() => import("./pages/Example2"));
+const Cart = lazy(() => import("./pages/Cart"));
+const ClientAdd = lazy(() => import("./components/Clients/ClientAdd"));
+const ClientDetails = lazy(() => import("./components/Clients/ClientDetails"));
+const ClientEdit = lazy(() => import("./components/Clients/ClientEdit"));
+const Clientspage = lazy(() => import("./pages/Clientspage"));
+const Orderspage = lazy(() => import("./pages/Orderspage"));
+const OrderDetails = lazy(() => import("./components/Orders/OrderDetails"));
+const OrderAdd = lazy(() => import("./components/Orders/OrderAdd"));
+const Invoicespage = lazy(() => import("./pages/Invoicespage"));
+const Registerpage = lazy(() => import("./pages/Registerpage"));
 
 function ErrorBoundary() {
   const error = useRouteError();
@@ -45,11 +38,11 @@ const router = createBrowserRouter([
     element: <AppLayout />,
     children: [
       {
-        path: '*',
+        path: "*",
         element: <NotFound />,
       },
       {
-        path: '/',
+        path: "/",
         element: (
           <Suspense fallback={<Loader />}>
             <Homepage />
@@ -57,7 +50,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/clients',
+        path: "/clients",
         element: (
           <Suspense fallback={<Loader />}>
             <Clientspage />
@@ -65,7 +58,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/clients/add',
+        path: "/clients/add",
         element: (
           <Suspense fallback={<Loader />}>
             <ClientAdd />
@@ -73,7 +66,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/clients/:id',
+        path: "/clients/:id",
         element: (
           <Suspense fallback={<Loader />}>
             <ClientDetails />
@@ -81,7 +74,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/clients/:id/edit',
+        path: "/clients/:id/edit",
         element: (
           <Suspense fallback={<Loader />}>
             <ClientEdit />
@@ -89,7 +82,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/orders',
+        path: "/orders",
         element: (
           <Suspense fallback={<Loader />}>
             <Orderspage />
@@ -97,7 +90,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/orders/add',
+        path: "/orders/add",
         element: (
           <Suspense fallback={<Loader />}>
             <OrderAdd />
@@ -105,7 +98,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/orders/:id',
+        path: "/orders/:id",
         element: (
           <Suspense fallback={<Loader />}>
             <OrderDetails />
@@ -113,7 +106,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/invoices',
+        path: "/invoices",
         element: (
           <Suspense fallback={<Loader />}>
             <ProtectedWrapper>
@@ -123,7 +116,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/comments',
+        path: "/comments",
         element: (
           <Suspense fallback={<Loader />}>
             <Commentspage />
@@ -131,7 +124,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/posts',
+        path: "/posts",
         element: (
           <Suspense fallback={<Loader />}>
             <Postspage />
@@ -139,7 +132,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/modals-example',
+        path: "/modals-example",
         element: (
           <Suspense fallback={<Loader />}>
             <Example />
@@ -147,7 +140,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/table-examplee',
+        path: "/table-examplee",
         element: (
           <Suspense fallback={<Loader />}>
             <Example2 />
@@ -155,7 +148,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/cart',
+        path: "/cart",
         element: (
           <Suspense fallback={<Loader />}>
             <Cart />
@@ -163,7 +156,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/register',
+        path: "/register",
         element: (
           <Suspense fallback={<Loader />}>
             <Registerpage />
@@ -186,12 +179,12 @@ const queryClient = new QueryClient({
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      {import.meta.env.MODE === 'development' && (
-        <ReactQueryDevtools initialIsOpen={false} />
-      )}
-      <UserProvider>
-        <RouterProvider router={router} />
-      </UserProvider>
+      {import.meta.env.MODE === "development" && <ReactQueryDevtools initialIsOpen={false} />}
+      <NotificationProvider>
+        <UserProvider>
+          <RouterProvider router={router} />
+        </UserProvider>
+      </NotificationProvider>
     </QueryClientProvider>
   );
 }
