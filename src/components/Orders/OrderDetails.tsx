@@ -1,12 +1,12 @@
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import { OrderData } from '../../types/Order.types';
-import { getSingleOrder } from '../../api/apiOrders';
-import Button from '../Button';
-import Loader from '../Loader';
-import TableRow from '../Tables/TableRow';
-import TableTd from '../Tables/TableTd';
-import TableTh from '../Tables/TableTh';
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { OrderData } from "../../types/Order.types";
+import { getSingleOrder } from "../../api/apiOrders";
+import Button from "../Button";
+import Loader from "../Loader";
+import TableRow from "../Tables/TableRow";
+import TableTd from "../Tables/TableTd";
+import TableTh from "../Tables/TableTh";
 
 export default function OrderDetails() {
   const { id } = useParams();
@@ -23,7 +23,7 @@ export default function OrderDetails() {
         setOrderNotFound(false);
       }
     } catch (error) {
-      console.error('Błąd ładowania danych');
+      console.error("Błąd ładowania danych");
       setOrderNotFound(true);
     } finally {
       setIsLoading(false);
@@ -32,7 +32,7 @@ export default function OrderDetails() {
 
   useEffect(() => {
     fetchSingleOrderData().catch((error) => {
-      console.error('Błąd podczas fetchSingleClientData:', error);
+      console.error("Błąd podczas fetchSingleClientData:", error);
     });
   }, [id]);
 
@@ -42,7 +42,7 @@ export default function OrderDetails() {
 
   if (orderNotFound) {
     return (
-      <div className="text-center text-5xl text-stone-200">
+      <div className="text-center text-5xl text-slate-900 dark:text-stone-200">
         Nie znaleziono zamówienia o ID: {id}
       </div>
     );
@@ -60,13 +60,13 @@ export default function OrderDetails() {
     orderContent,
   } = selectedOrder;
 
-  const fieldsTh = [{ label: 'Tytuł' }, { label: 'Treść' }, { label: 'Ilość' }];
+  const fieldsTh = [{ label: "Tytuł" }, { label: "Treść" }, { label: "Ilość" }];
 
   return (
     <div className="flex flex-col items-center">
       <div className="flex flex-col items-center gap-4 p-3">
-        <h3 className="text-center text-stone-200 sm:text-5xl">
-          Klient: {`${name} ${surname}`}{' '}
+        <h3 className="text-center text-slate-900 dark:text-stone-200 sm:text-5xl">
+          Klient: {`${name} ${surname}`}{" "}
         </h3>
         <Button to={`/clients/${userId}`} btnStyles="btnEdit">
           Zobacz profil

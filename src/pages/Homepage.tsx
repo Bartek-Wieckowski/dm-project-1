@@ -10,7 +10,7 @@ export default function Homepage() {
       {!isAuth && <Login />}
       {isAuth && (
         <div className="flex items-center gap-4 justify-center">
-          <h1 className="text-stone-200 text-center text-5xl">Witaj {user?.username}</h1>
+          <h1 className="text-slate-900 dark:text-stone-200 text-center text-5xl">Witaj {user?.username}</h1>
         </div>
       )}
     </>

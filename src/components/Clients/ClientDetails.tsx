@@ -23,7 +23,11 @@ export default function ClientDetails() {
   }
 
   if (clientNotFound) {
-    return <div className="text-center text-5xl text-stone-200">Nie znaleziono klienta o ID: {id}</div>;
+    return (
+      <div className="text-center text-5xl text-slate-900 dark:text-stone-200">
+        Nie znaleziono klienta o ID: {id}
+      </div>
+    );
   }
 
   if (!client) {
@@ -51,7 +55,7 @@ export default function ClientDetails() {
   return (
     <div className="flex flex-col items-center">
       <div className="p-3">
-        <h3 className="text-center text-5xl text-stone-200">Klient: {clientId} </h3>
+        <h3 className="text-center text-5xl text-slate-900 dark:text-stone-200">Klient: {clientId} </h3>
       </div>
       <div className="flex gap-4 p-3">
         <Modal>

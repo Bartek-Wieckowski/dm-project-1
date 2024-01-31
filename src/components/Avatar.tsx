@@ -12,7 +12,7 @@ export default function Avatar() {
         src={user?.avatar ? user.avatar : RANDOM_IMG_URL}
         alt="Bordered avatar"
       />
-      <small className="text-stone-200">{user?.username}</small>
+      <small className="text-slate-900 dark:text-stone-200">{user?.username}</small>
     </div>
   );
 }

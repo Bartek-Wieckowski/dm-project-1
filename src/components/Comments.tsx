@@ -12,7 +12,7 @@ export default function Comments({ comments }: CommentsProps): React.ReactElemen
     }));
   };
   return (
-    <div className="w-full space-y-4 text-stone-200 sm:pl-8">
+    <div className="w-full space-y-4 text-slate-900 dark:text-stone-200 sm:pl-8">
       {comments.map((comment: Comment) => (
         <div key={comment.username} className="rounded border p-4 shadow-md">
           <div className="flex items-center gap-4">
