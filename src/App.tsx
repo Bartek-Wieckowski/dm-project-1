@@ -9,6 +9,7 @@ import NotFound from "./pages/NotFound";
 import ProtectedWrapper from "./components/ProtectedWrapper";
 import Loader from "./components/Loader";
 import { NotificationProvider } from "./contexts/NotificationContext";
+import { DarkModeProvider } from "./contexts/DarkModeContext";
 
 const Homepage = lazy(() => import("./pages/Homepage"));
 const Postspage = lazy(() => import("./pages/Postspage"));
@@ -178,13 +179,15 @@ const queryClient = new QueryClient({
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      {import.meta.env.MODE === "development" && <ReactQueryDevtools initialIsOpen={false} />}
-      <NotificationProvider>
-        <UserProvider>
-          <RouterProvider router={router} />
-        </UserProvider>
-      </NotificationProvider>
-    </QueryClientProvider>
+    <DarkModeProvider>
+      <QueryClientProvider client={queryClient}>
+        {import.meta.env.MODE === "development" && <ReactQueryDevtools initialIsOpen={false} />}
+        <NotificationProvider>
+          <UserProvider>
+            <RouterProvider router={router} />
+          </UserProvider>
+        </NotificationProvider>
+      </QueryClientProvider>
+    </DarkModeProvider>
   );
 }
