@@ -1,12 +1,17 @@
 import { useOrders } from "./useOrders";
+import { useNavigate } from "react-router-dom";
+import { useOrderDelete } from "./useOrderDelete";
 import Button from "../Button";
 import Loader from "../Loader";
 import TableRow from "../Tables/TableRow";
 import TableTh from "../Tables/TableTh";
 import TableTd from "../Tables/TableTd";
+import Modal from "../../contexts/ModalContext";
 
 export default function Orders() {
+  const navigate = useNavigate();
   const { isLoading, ordersAll: ordersData } = useOrders();
+  const { deleteOrder } = useOrderDelete();
 
   if (isLoading) {
     return <Loader />;
@@ -50,9 +55,26 @@ export default function Orders() {
                 value={order.quantity}
               />
               <TableTd className="border-b border-slate-500 px-3 py-6 text-center  font-medium  text-white">
-                <Button to={`${order.id}`} btnStyles="btnSimple">
+                <Button to={`${order.id}`} btnStyles="btnUpdate">
                   Zobacz
                 </Button>
+                <Modal>
+                  <Modal.Open opensWindowName="deleteConfirmation">
+                    <Button type="button" btnStyles="btnDelete">
+                      Usuń
+                    </Button>
+                  </Modal.Open>
+                  <Modal.Window
+                    name="deleteConfirmation"
+                    clickOk={() => {
+                      deleteOrder(order.id);
+                      navigate("/orders");
+                    }}
+                    showButtonOk={true}
+                  >
+                    <div className="text-center">Czy na pewno chcesz usunąć to zamówienie?</div>
+                  </Modal.Window>
+                </Modal>
               </TableTd>
             </TableRow>
           ))}
