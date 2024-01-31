@@ -1,8 +1,12 @@
-import { useNavigate } from "react-router-dom";
-import { useUser } from "../contexts/UserContext";
-import { useEffect } from "react";
+import { useNavigate } from 'react-router-dom';
+import { useUser } from '../contexts/UserContext';
+import { useEffect } from 'react';
 
-export default function ProtectedWrapper({ children }: { children: React.ReactNode }) {
+export default function ProtectedWrapper({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const navigate = useNavigate();
   const {
     userData: { isAuth },
@@ -10,8 +14,8 @@ export default function ProtectedWrapper({ children }: { children: React.ReactNo
 
   useEffect(() => {
     if (!isAuth) {
-      navigate("/");
+      navigate('/');
     }
-  }, [isAuth]);
+  }, [isAuth, navigate]);
   if (isAuth) return children;
 }
