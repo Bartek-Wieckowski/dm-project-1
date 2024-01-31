@@ -54,6 +54,17 @@
       "subRegion": "Ut sed doloribus sol",
       "imgSrc": "",
       "phoneNumber": "+1 682 946 979"
+    },
+    {
+      "id": "d1da",
+      "name": "admin",
+      "surname": "admin",
+      "street": "testowa",
+      "postCode": "11-345",
+      "town": "testowe",
+      "subRegion": "Alaska",
+      "imgSrc": "",
+      "phoneNumber": "+48 999 213 781"
     }
   ],
   "orders": [
@@ -134,6 +145,15 @@
       "email": "test2@test.test",
       "password": "testowetestowe",
       "confirmPassword": "testowetestowe",
+      "avatar": "https://w7.pngwing.com/pngs/574/369/png-transparent-avatar-computer-icons-user-random-icons-purple-blue-heroes.png"
+    },
+    {
+      "id": "80a9",
+      "name": "Selma Elliott",
+      "username": "lagugu",
+      "email": "kura@mailinator.com",
+      "password": "Pa$$w0rd!",
+      "confirmPassword": "Pa$$w0rd!",
       "avatar": "https://w7.pngwing.com/pngs/574/369/png-transparent-avatar-computer-icons-user-random-icons-purple-blue-heroes.png"
     }
   ]

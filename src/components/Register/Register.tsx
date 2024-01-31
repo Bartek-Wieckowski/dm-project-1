@@ -19,7 +19,6 @@ export default function Register() {
       avatar: RANDOM_IMG_URL,
     },
     onSubmit: (values: UserAccount) => {
-      alert("Konto utworone poprawnie!");
       addNewUser(values);
       formik.resetForm();
       navigate("/");
