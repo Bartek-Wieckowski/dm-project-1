@@ -42,3 +42,12 @@ export async function createOrder(newOrder: OrderFormValues): Promise<OrderData>
   const data = (await res.json()) as OrderData;
   return data;
 }
+
+export async function deleteOrder(orderId: string): Promise<void> {
+  const res = await fetch(`${API_URL}/orders/${orderId}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) {
+    throw new Error("Błąd podczas usuwania...");
+  }
+}
