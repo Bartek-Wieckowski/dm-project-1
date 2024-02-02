@@ -1,6 +1,6 @@
-import { createContext, useContext, useReducer } from "react";
-import { loginUser } from "../api/apiUsers";
-import { useNotification } from "./NotificationContext";
+import { createContext, useReducer } from 'react';
+import { loginUser } from '../api/apiUsers';
+import { useNotification } from './NotificationContext';
 
 type UserContextType = {
   userData: UserState;
@@ -19,9 +19,9 @@ type UserState = {
 };
 
 type UserAction =
-  | { type: "LOGIN"; payload: { username: string; avatar: string } }
-  | { type: "LOGIN_ERROR" }
-  | { type: "LOGOUT" };
+  | { type: 'LOGIN'; payload: { username: string; avatar: string } }
+  | { type: 'LOGIN_ERROR' }
+  | { type: 'LOGOUT' };
 
 const initialState: UserState = {
   user: null,
@@ -29,11 +29,11 @@ const initialState: UserState = {
   isLoginError: false,
 };
 
-const UserContext = createContext<UserContextType | null>(null);
+export const UserContext = createContext<UserContextType | null>(null);
 
 function reducer(state: UserState, action: UserAction): UserState {
   switch (action.type) {
-    case "LOGIN":
+    case 'LOGIN':
       return {
         user: {
           username: action.payload.username,
@@ -42,13 +42,13 @@ function reducer(state: UserState, action: UserAction): UserState {
         isAuth: true,
         isLoginError: false,
       };
-    case "LOGIN_ERROR":
+    case 'LOGIN_ERROR':
       return {
         user: null,
         isAuth: false,
         isLoginError: true,
       };
-    case "LOGOUT":
+    case 'LOGOUT':
       return {
         user: null,
         isAuth: false,
@@ -61,44 +61,48 @@ function reducer(state: UserState, action: UserAction): UserState {
 
 function UserProvider({ children }: { children: React.ReactNode }) {
   const { showNotification } = useNotification();
-  const [{ user, isAuth, isLoginError }, dispatch] = useReducer(reducer, initialState);
+  const [{ user, isAuth, isLoginError }, dispatch] = useReducer(
+    reducer,
+    initialState
+  );
 
   async function logIn(username: string) {
     try {
       const userData = await loginUser(username);
       if (userData) {
         dispatch({
-          type: "LOGIN",
+          type: 'LOGIN',
           payload: {
             username: userData.username,
-            avatar: userData?.avatar,
+            avatar: userData?.avatar || '',
           },
         });
-        showNotification("Logowanie poprawne!", "success");
+        showNotification('Logowanie poprawne!', 'success');
       } else {
-        dispatch({ type: "LOGIN_ERROR" });
-        showNotification("Logowanie niepoprawne!", "error");
+        dispatch({ type: 'LOGIN_ERROR' });
+        showNotification('Logowanie niepoprawne!', 'error');
       }
     } catch (error) {
-      console.error("Wystąpił błąd podczas logowania:", error);
+      console.error('Wystąpił błąd podczas logowania:', error);
     }
   }
 
   function logOut() {
-    dispatch({ type: "LOGOUT" });
+    dispatch({ type: 'LOGOUT' });
   }
 
   return (
-    <UserContext.Provider value={{ dispatch, logIn, logOut, userData: { user, isAuth, isLoginError } }}>
+    <UserContext.Provider
+      value={{
+        dispatch,
+        logIn,
+        logOut,
+        userData: { user, isAuth, isLoginError },
+      }}
+    >
       {children}
     </UserContext.Provider>
   );
 }
 
-function useUser() {
-  const context = useContext(UserContext);
-  if (context === undefined || context === null) throw new Error("UserContext was used outside UserProvider");
-  return context as UserContextType;
-}
-
-export { UserProvider, useUser };
+export { UserProvider };

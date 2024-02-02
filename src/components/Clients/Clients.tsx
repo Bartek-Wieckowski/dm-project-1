@@ -1,6 +1,6 @@
 import CardList from "../Cards/CardList";
 import Loader from "../Loader";
-import { useClients } from "./useClients";
+import { useClients } from "../../api/queries/clients/useClients";
 
 export default function Clients() {
   const { isLoading, clientsAll } = useClients();

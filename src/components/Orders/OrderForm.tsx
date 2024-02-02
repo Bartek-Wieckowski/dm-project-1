@@ -1,8 +1,8 @@
 import { OrderFormValues, orderYupSchema } from "../../validators/validators";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { useClients } from "../Clients/useClients";
-import { useOrderCreate } from "./useOrderCreate";
+import { useOrderCreate } from "../../api/mutations/orders/useOrderCreate";
+import { useClients } from "../../api/queries/clients/useClients";
 import Button from "../Button";
 import Select from "../Form/Select";
 import Input from "../Form/Input";

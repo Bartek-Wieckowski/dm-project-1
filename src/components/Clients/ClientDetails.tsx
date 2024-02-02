@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { useClientDetails } from "./useClientDetails";
-import { useClientDelete } from "./useClientDelete";
+import { useClientDetails } from "../../api/queries/clients/useClientDetails";
+import { useClientDelete } from "../../api/mutations/clients/useClientDelete";
 import Button from "../Button";
 import Loader from "../Loader";
 import TableRow from "../Tables/TableRow";

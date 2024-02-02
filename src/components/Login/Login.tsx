@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { LoginFormValues, loginAccountyupSchema } from "../../validators/validators";
-import { useUser } from "../../contexts/UserContext";
+import { useUser } from "../../contexts/useUser";
 import Button from "../Button";
 import Input from "../Form/Input";
 

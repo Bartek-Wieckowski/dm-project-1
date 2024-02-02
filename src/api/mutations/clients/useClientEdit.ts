@@ -1,7 +1,8 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateClientById as updateClientByIdApi } from "../../api/apiClients";
-import { ClientFormValues } from "../../validators/validators";
-import { useNotification } from "../../contexts/NotificationContext";
+import { updateClientById as updateClientByIdApi } from "../../apiClients";
+import { ClientFormValues } from "../../../validators/validators";
+import { useNotification } from "../../../contexts/NotificationContext";
+import { QUERY_KEYS } from "../../constants";
 
 type mutationFnTypes = {
   updateClientData: ClientFormValues;
@@ -18,8 +19,8 @@ export function useClientEdit() {
   } = useMutation({
     mutationFn: ({ updateClientData, clientId }: mutationFnTypes) =>
       updateClientByIdApi(updateClientData, clientId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["clientDetails"] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.clientDetails] });
       showNotification("Aktualizacja danych wykonana poprawnie", "success");
     },
     onError: () => {

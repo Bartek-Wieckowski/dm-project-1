@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserAccount, registerAccountYupSchema } from "../../validators/validators";
 import Button from "../Button";
 import Input from "../Form/Input";
-import { useRegisterUser } from "../Auth/useRegisterUser";
+import { useRegisterUser } from "../../api/mutations/users/useRegisterUser";
 import { RANDOM_IMG_URL } from "../../constants/appConst";
 
 export default function Register() {

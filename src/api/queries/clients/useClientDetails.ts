@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { getSingleClient } from '../../api/apiClients';
-import { ClientProps } from '../../types/ClientProps.type';
+import { getSingleClient } from '../../apiClients';
+import { ClientProps } from '../../../types/ClientProps.type';
+import { QUERY_KEYS } from '../../constants';
 
 export function useClientDetails(clientId: string) {
   const {
@@ -8,7 +9,7 @@ export function useClientDetails(clientId: string) {
     data: clientDetails,
     error,
   } = useQuery<ClientProps>({
-    queryKey: ['clientDetails', clientId],
+    queryKey: [QUERY_KEYS.clientDetails, clientId],
     queryFn: () => getSingleClient(clientId),
   });
 

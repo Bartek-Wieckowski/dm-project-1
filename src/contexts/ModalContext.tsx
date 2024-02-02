@@ -47,11 +47,7 @@ function Open({ children, opensWindowName }: OpenProps) {
 }
 
 function Window({ children, name, clickOk, showButtonOk }: WindowProps) {
-  const modalContext = useContext(ModalContext);
-
-  if (!modalContext) {
-    return null;
-  }
+  const modalContext = useContext(ModalContext)!;
 
   const { openName, close } = modalContext;
   const ref = useClickOutside(close);

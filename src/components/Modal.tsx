@@ -5,7 +5,7 @@ type ModalProps = {
 };
 
 export default function Modal({ onClose }: ModalProps) {
-  const ref = useClickOutside(onClose) as React.RefObject<HTMLDivElement>;
+  const ref = useClickOutside(onClose);
 
   return (
     <div

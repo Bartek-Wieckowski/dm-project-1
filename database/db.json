@@ -46,7 +46,7 @@
     },
     {
       "id": "c76b",
-      "name": "Hillary Baker",
+      "name": "Hillary",
       "surname": "Montgomery",
       "street": "In consequatur dolo",
       "postCode": "00-000",
@@ -92,18 +92,6 @@
       "quantity": 3,
       "orderTitle": "Zamówienie 3",
       "orderContent": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
-    },
-    {
-      "id": "2313",
-      "client": {
-        "userId": "f349",
-        "name": "Bart",
-        "surname": "Bartkowy",
-        "phoneNumber": "+48 444 333 867"
-      },
-      "quantity": 10,
-      "orderTitle": "ostatni test z add po tanstackquery",
-      "orderContent": "ostatni test z add po tanstackquery ostatni test z add po tanstackquery ostatni test z add po tanstackquery"
     }
   ],
   "usersAccount": [

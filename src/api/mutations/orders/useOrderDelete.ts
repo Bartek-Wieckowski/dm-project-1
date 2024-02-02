@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteOrder as deleteOrderApi } from "../../api/apiOrders";
-import { useNotification } from "../../contexts/NotificationContext";
+import { deleteOrder as deleteOrderApi } from "../../apiOrders";
+import { useNotification } from "../../../contexts/NotificationContext";
+import { QUERY_KEYS } from "../../constants";
 
 export function useOrderDelete() {
   const { showNotification } = useNotification();
@@ -10,7 +11,7 @@ export function useOrderDelete() {
     mutationFn: deleteOrderApi,
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: ["ordersAll"],
+        queryKey: [QUERY_KEYS.ordersAll],
       });
       showNotification("Zamówienie usunięto poprawnie", "success");
     },

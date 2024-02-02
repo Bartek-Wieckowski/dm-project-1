@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { registerUser as registerUserApi } from "../../api/apiUsers";
-import { useNotification } from "../../contexts/NotificationContext";
+import { registerUser as registerUserApi } from "../../apiUsers";
+import { useNotification } from "../../../contexts/NotificationContext";
+import { QUERY_KEYS } from "../../constants";
 
 export function useRegisterUser() {
   const { showNotification } = useNotification();
@@ -12,7 +13,7 @@ export function useRegisterUser() {
   } = useMutation({
     mutationFn: registerUserApi,
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["usersAll"] });
+      await queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.usersAll] });
       showNotification("Konto utworzone poprawnie!", "success");
     },
     onError: () => {
