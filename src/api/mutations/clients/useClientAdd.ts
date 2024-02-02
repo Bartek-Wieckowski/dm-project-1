@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addClient as addClientApi } from "../../api/apiClients";
-import { useNotification } from "../../contexts/NotificationContext";
+import { addClient as addClientApi } from "../../apiClients";
+import { useNotification } from "../../../contexts/NotificationContext";
+import { QUERY_KEYS } from "../../constants";
 
 export function useClientAdd() {
   const { showNotification } = useNotification();
@@ -12,7 +13,7 @@ export function useClientAdd() {
   } = useMutation({
     mutationFn: addClientApi,
     onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ["clientsAll"] });
+      await queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.clientsAll] });
       showNotification("Klient dodany poprawnie", "success");
     },
     onError: () => {

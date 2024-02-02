@@ -5,7 +5,7 @@ type UseLocalStorageType<T> = [T, Dispatch<SetStateAction<T>>];
 export function useLocalStorage<T>(initialState: T, key: string): UseLocalStorageType<T> {
   const [value, setValue] = useState<T>(() => {
     const storedValue = localStorage.getItem(key);
-    return storedValue ? JSON.parse(storedValue) : initialState;
+    return storedValue ? (JSON.parse(storedValue) as T) : initialState;
   });
 
   useEffect(() => {

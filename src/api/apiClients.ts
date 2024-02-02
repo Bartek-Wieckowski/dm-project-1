@@ -11,7 +11,7 @@ export async function getAllClients(): Promise<ClientProps[]> {
   return data;
 }
 
-export async function getSingleClient(clientId: string) {
+export async function getSingleClient(clientId: string): Promise<ClientProps> {
   const res = await fetch(`${API_URL}/clients/${clientId}`);
   if (!res.ok) {
     throw new Error('Błąd ładowania danych...');

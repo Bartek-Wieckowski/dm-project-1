@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { getAllClients } from "../../api/apiClients";
-import { ClientProps } from "../../types/ClientProps.type";
+import { getAllClients } from "../../apiClients";
+import { ClientProps } from "../../../types/ClientProps.type";
+import { QUERY_KEYS } from "../../constants";
 
 export function useClients() {
   const {
@@ -8,7 +9,7 @@ export function useClients() {
     data: clientsAll,
     error,
   } = useQuery<ClientProps[]>({
-    queryKey: ["clientsAll"],
+    queryKey: [QUERY_KEYS.clientsAll],
     queryFn: getAllClients,
     initialData: [],
   });

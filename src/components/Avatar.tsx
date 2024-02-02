@@ -1,6 +1,5 @@
 import { RANDOM_IMG_URL } from "../constants/appConst";
-import { useUser } from "../contexts/UserContext";
-
+import { useUser } from "../contexts/useUser";
 export default function Avatar() {
   const {
     userData: { user },
@@ -8,7 +7,7 @@ export default function Avatar() {
   return (
     <div className="flex flex-col items-center justify-center gap-3">
       <img
-        className="w-10 h-10 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+        className="size-10 rounded-full p-1 ring-2 ring-gray-300 dark:ring-gray-500"
         src={user?.avatar ? user.avatar : RANDOM_IMG_URL}
         alt="Bordered avatar"
       />

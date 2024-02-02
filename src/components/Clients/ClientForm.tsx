@@ -2,10 +2,10 @@ import { ClientFormValues, clientYupSchema } from "../../validators/validators";
 import { useFormik } from "formik";
 import { useNavigate, useParams } from "react-router-dom";
 import { LabelMapType, labelMap } from "./clientFormLabels";
-import { useClientAdd } from "./useClientAdd";
-import Button from "../Button";
+import { useClientEdit } from "../../api/mutations/clients/useClientEdit";
+import { useClientAdd } from "../../api/mutations/clients/useClientAdd";
 import Input from "../Form/Input";
-import { useClientEdit } from "./useClientEdit";
+import Button from "../Button";
 
 interface ClientFormProps {
   editForm: boolean;

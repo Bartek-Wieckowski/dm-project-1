@@ -1,11 +1,11 @@
 import { Outlet } from "react-router";
 import { footerData } from "../assets/dummy-data/footer-data";
 import { BsBoxArrowRight } from "react-icons/bs";
-import { useUser } from "../contexts/UserContext";
 import AsideMenu from "../components/AsideMenu";
 import Footer from "../components/Footer";
 import Wrapper from "../components/Wrapper";
 import Avatar from "../components/Avatar";
+import { useUser } from "../contexts/useUser";
 
 export default function AppLayout() {
   const {
@@ -18,7 +18,7 @@ export default function AppLayout() {
         <div className="relative">
           <div className="absolute right-2 top-4 flex items-center gap-4">
             <Avatar />
-            <button onClick={() => logOut()} className="dark:text-stone-200 text-slate-900">
+            <button onClick={() => logOut()} className="text-slate-900 dark:text-stone-200">
               <BsBoxArrowRight />
             </button>
           </div>

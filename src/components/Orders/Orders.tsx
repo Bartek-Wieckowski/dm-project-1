@@ -1,6 +1,6 @@
-import { useOrders } from "./useOrders";
+import { useOrders } from "../../api/queries/orders/useOrders";
 import { useNavigate } from "react-router-dom";
-import { useOrderDelete } from "./useOrderDelete";
+import { useOrderDelete } from "../../api/mutations/orders/useOrderDelete";
 import Button from "../Button";
 import Loader from "../Loader";
 import TableRow from "../Tables/TableRow";
@@ -26,7 +26,7 @@ export default function Orders() {
 
   return (
     <div className="relative mx-auto max-w-7xl overflow-x-auto">
-      <table className="w-full text-left text-sm text-gray-500 rtl:text-right dark:text-gray-400">
+      <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400 rtl:text-right">
         <thead className="text-xs uppercase text-gray-900 dark:text-gray-400">
           <TableRow>
             {fieldsTh.map((fieldTh, index) => (
