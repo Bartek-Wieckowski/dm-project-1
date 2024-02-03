@@ -1,14 +1,13 @@
 import { API_URL } from "../constants/appConst";
-import { ClientProps } from "../types/ClientProps.type";
 import { OrderData } from "../types/Order.types";
 import { OrderFormValues } from "../validators/validators";
 
-export async function getAllClientOrders(): Promise<ClientProps[]> {
-  const res = await fetch(`${API_URL}/clients`);
+export async function getAllOrdersByClient(clientId: string): Promise<OrderData[]> {
+  const res = await fetch(`${API_URL}/orders?client.userId=${clientId}`);
   if (!res.ok) {
-    throw new Error("Błąd ładowania danych...");
+    throw new Error('Błąd ładowania danych...');
   }
-  const data = (await res.json()) as ClientProps[];
+  const data = (await res.json()) as OrderData[];
   return data;
 }
 

@@ -10,4 +10,5 @@ export type OrderData = {
   quantity: number;
   orderTitle: string;
   orderContent: string;
+  paid:boolean;
 } & { id: string };

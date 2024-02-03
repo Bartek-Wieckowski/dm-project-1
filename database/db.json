@@ -15,7 +15,7 @@
       "id": "3",
       "imgSrc": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fHww",
       "name": "Maria",
-      "surname": "Wiśniewskasda",
+      "surname": "Wiśniewska",
       "street": "TestStreet3",
       "postCode": "08-210",
       "town": "Village",
@@ -67,7 +67,8 @@
       },
       "quantity": 5,
       "orderTitle": "Zamówienie 1",
-      "orderContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+      "orderContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+      "paid": true
     },
     {
       "id": "2",
@@ -79,7 +80,8 @@
       },
       "quantity": 8,
       "orderTitle": "Zamówienie 2",
-      "orderContent": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas."
+      "orderContent": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.",
+      "paid": true
     },
     {
       "id": "3",
@@ -91,7 +93,34 @@
       },
       "quantity": 3,
       "orderTitle": "Zamówienie 3",
-      "orderContent": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+      "orderContent": "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+      "paid": false
+    },
+    {
+      "id": "705b",
+      "client": {
+        "userId": "3",
+        "name": "Maria",
+        "surname": "Wiśniewskasda",
+        "phoneNumber": "+48 111 222 333"
+      },
+      "quantity": 1,
+      "orderTitle": "r54365456",
+      "orderContent": "b45tb4ybtrbtbr",
+      "paid": true
+    },
+    {
+      "id": "a67c",
+      "client": {
+        "userId": "1",
+        "name": "Zbigniew",
+        "surname": "Herbert",
+        "phoneNumber": "+48 123 456 789"
+      },
+      "quantity": 1,
+      "orderTitle": "tes tes tes ",
+      "orderContent": "test test test test",
+      "paid": true
     }
   ],
   "usersAccount": [
@@ -120,6 +149,89 @@
       "password": "Pa$$w0rd!",
       "confirmPassword": "Pa$$w0rd!",
       "avatar": "https://w7.pngwing.com/pngs/574/369/png-transparent-avatar-computer-icons-user-random-icons-purple-blue-heroes.png"
+    }
+  ],
+  "invoices": [
+    {
+      "id": "c302",
+      "selectedClient": {
+        "userId": "3",
+        "name": "Maria",
+        "surname": "Wiśniewska",
+        "phoneNumber": "+48 111 222 333"
+      },
+      "selectedOrders": [
+        {
+          "id": "705b",
+          "client": {
+            "userId": "3",
+            "name": "Maria",
+            "surname": "Wiśniewskasda",
+            "phoneNumber": "+48 111 222 333"
+          },
+          "quantity": 1,
+          "orderTitle": "r54365456",
+          "orderContent": "b45tb4ybtrbtbr",
+          "paid": true
+        }
+      ],
+      "price": 151900,
+      "dateOfIssue": "12/12/2022",
+      "accountingMonth": "12"
+    },
+    {
+      "id": "8533",
+      "selectedClient": {
+        "userId": "1",
+        "name": "Zbigniew",
+        "surname": "Herbert",
+        "phoneNumber": "+48 123 456 789"
+      },
+      "selectedOrders": [
+        {
+          "id": "a67c",
+          "client": {
+            "userId": "1",
+            "name": "Zbigniew",
+            "surname": "Herbert",
+            "phoneNumber": "+48 123 456 789"
+          },
+          "quantity": 1,
+          "orderTitle": "tes tes tes ",
+          "orderContent": "test test test test",
+          "paid": true
+        }
+      ],
+      "price": 100034,
+      "dateOfIssue": "04/06/1990",
+      "accountingMonth": "06"
+    },
+    {
+      "id": "c499",
+      "selectedClient": {
+        "userId": "1",
+        "name": "Zbigniew",
+        "surname": "Herbert",
+        "phoneNumber": "+48 123 456 789"
+      },
+      "selectedOrders": [
+        {
+          "id": "1",
+          "client": {
+            "userId": "1",
+            "name": "Zbigniew",
+            "surname": "Herbert",
+            "phoneNumber": "+48 123 456 789"
+          },
+          "quantity": 5,
+          "orderTitle": "Zamówienie 1",
+          "orderContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "paid": true
+        }
+      ],
+      "price": 546,
+      "dateOfIssue": "12/12/2022",
+      "accountingMonth": "12"
     }
   ]
 }

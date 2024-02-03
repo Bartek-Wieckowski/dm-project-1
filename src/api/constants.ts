@@ -3,4 +3,6 @@ export const QUERY_KEYS = {
   clientDetails: 'clientDetails',
   ordersAll: 'ordersAll',
   usersAll: 'usersAll',
+  ordersAllByClient: 'ordersAllByClient',
+  invoicesAll: 'invoicesAll',
 };
