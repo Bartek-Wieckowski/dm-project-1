@@ -1,10 +1,8 @@
+// options 1
+import { Outlet } from 'react-router-dom';
 import { useUser } from '../contexts/useUser';
 
-export default function ProtectedWrapper({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function ProtectedWrapper() {
   const {
     userData: { isAuth },
   } = useUser();
@@ -12,11 +10,33 @@ export default function ProtectedWrapper({
   if (!isAuth) {
     window.location.href = '/';
   } else {
-    return children;
+    return <Outlet />;
   }
-
-  // if (isAuth) return children;
 }
+
+// options 2
+
+// import { useUser } from '../contexts/useUser';
+
+// export default function ProtectedWrapper({
+//   children,
+// }: {
+//   children: React.ReactNode;
+// }) {
+//   const {
+//     userData: { isAuth },
+//   } = useUser();
+
+//   if (!isAuth) {
+//     window.location.href = '/';
+//   } else {
+//     return children;
+//   }
+
+//   // if (isAuth) return children;
+// }
+
+// options 3
 
 // import { useNavigate } from 'react-router-dom';
 // import { useUser } from '../contexts/useUser';

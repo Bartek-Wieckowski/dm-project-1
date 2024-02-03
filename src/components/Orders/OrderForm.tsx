@@ -23,6 +23,7 @@ export default function OrderForm() {
       quantity: 1,
       orderTitle: "",
       orderContent: "",
+      paid:false
     },
     onSubmit: (values: OrderFormValues) => {
       createOrder(values);

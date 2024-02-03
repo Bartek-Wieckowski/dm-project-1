@@ -15,6 +15,7 @@ import Loader from './components/Loader';
 import { NotificationProvider } from './contexts/NotificationContext';
 import { DarkModeProvider } from './contexts/DarkModeContext';
 import ErrorFallback from './components/ErrorFallback';
+import InvoiceAdd from './components/Invoices/InvoiceAdd';
 
 const Homepage = lazy(() => import('./pages/Homepage'));
 const Postspage = lazy(() => import('./pages/Postspage'));
@@ -108,14 +109,25 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: '/invoices',
-        element: (
-          <Suspense fallback={<Loader />}>
-            <ProtectedWrapper>
-              <Invoicespage />
-            </ProtectedWrapper>
-          </Suspense>
-        ),
+        element: <ProtectedWrapper />,
+        children: [
+          {
+            path: '/invoices',
+            element: (
+              <Suspense fallback={<Loader />}>
+                <Invoicespage />
+              </Suspense>
+            ),
+          },
+          {
+            path: '/invoices/add',
+            element: (
+              <Suspense fallback={<Loader />}>
+                <InvoiceAdd />
+              </Suspense>
+            ),
+          },
+        ],
       },
       {
         path: '/comments',
