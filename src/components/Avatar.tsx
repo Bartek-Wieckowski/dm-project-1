@@ -8,8 +8,8 @@ export default function Avatar() {
     userData: { user },
   } = useUser();
 
-  const money = useAppSelector((state)=> state.money.initialValue)
-  
+  const money = useAppSelector((state) => state.money.initialValue);
+
   return (
     <div className="flex flex-col items-center justify-center gap-3">
       <img
@@ -20,8 +20,8 @@ export default function Avatar() {
       <small className="text-slate-900 dark:text-stone-200">
         {user?.username}
       </small>
-      <Link to={"/"}>
-      <small className="text-slate-900 dark:text-stone-200">{money} $</small>
+      <Link to="/money">
+        <small className="text-slate-900 dark:text-stone-200">{money} $</small>
       </Link>
     </div>
   );

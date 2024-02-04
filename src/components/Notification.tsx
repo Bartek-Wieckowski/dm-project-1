@@ -22,11 +22,11 @@ export default function Notification({ message, type, hideNotification }: Notifi
   return (
     <div className={notificationClasses} role="alert">
       <strong className="mr-2 block font-bold sm:inline-block">
-        {type === "success" ? "Success" : type === "error" ? "Error" : "Info"}
+        {type === 'success' ? 'Success' : type === 'error' ? 'Error' : 'Info'}
       </strong>
       <span className="block sm:inline-block ">{message}</span>
       <span
-        className={`text- absolute inset-y-0 right-0 px-2 py-3${iconColor}-500`}
+        className={`absolute inset-y-0 right-0 px-2 py-3 text-${iconColor}-500`}
         onClick={hideNotification}
       >
         <svg
