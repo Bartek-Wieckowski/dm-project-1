@@ -115,3 +115,14 @@ export const invociesYupSchema = yup.object({
 });
 
 export type InvoicesFormValues = yup.InferType<typeof invociesYupSchema>;
+
+// money
+
+export const moneyYupSchema = yup.object({
+  value: yup
+    .number()
+    .required('Wartość wymagana')
+    .min(0, 'Wartość musi być wieksza niż 0')
+});
+
+export type MoneyFormValues = yup.InferType<typeof moneyYupSchema>;
