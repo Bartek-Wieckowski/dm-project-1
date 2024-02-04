@@ -1,6 +1,6 @@
-import { API_URL } from '../../constants/appConst';
-import { InvoiceData } from '../../types/Invoice.types';
-import { InvoicesFormValues } from '../../validators/validators';
+import { API_URL } from '../constants/appConst';
+import { InvoiceData } from '../types/Invoice.types';
+import { InvoicesFormValues } from '../validators/validators';
 
 export async function getAllInvoices(): Promise<InvoiceData[]> {
   const res = await fetch(`${API_URL}/invoices`);

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '../../constants';
-import { getAllInvoices } from '../apiInvoices';
+import { getAllInvoices } from '../../apiInvoices';
 import { InvoiceData } from '../../../types/Invoice.types';
 
 export function useInvoices() {

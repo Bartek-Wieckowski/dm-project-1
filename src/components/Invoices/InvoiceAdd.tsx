@@ -10,7 +10,7 @@ import {
   invociesYupSchema,
 } from '../../validators/validators';
 import { OrderData } from '../../types/Order.types';
-import { addInvoice } from '../../api/queries/apiInvoices';
+import { addInvoice } from '../../api/apiInvoices';
 import { useNavigate } from 'react-router-dom';
 
 const INITIAL_DATA: InvoicesFormValues = {

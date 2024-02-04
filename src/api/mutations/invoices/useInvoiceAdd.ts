@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNotification } from '../../../contexts/NotificationContext';
 import { QUERY_KEYS } from '../../constants';
-import { addInvoice as addInvoiceApi } from '../../queries/apiInvoices';
+import { addInvoice as addInvoiceApi } from '../../apiInvoices';
 
 export function useInvoiceAdd() {
   const { showNotification } = useNotification();
