@@ -7,6 +7,7 @@ interface InputProps {
   value: string | number;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
+  min?: number;
 }
 
 export default function Input({
@@ -16,6 +17,7 @@ export default function Input({
   value,
   onChange,
   onBlur,
+  min,
 }: InputProps) {
   return (
     <>
@@ -30,6 +32,7 @@ export default function Input({
         onChange={onChange}
         onBlur={onBlur}
         className={`${inputClass}`}
+        min={min}
       />
     </>
   );
