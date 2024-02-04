@@ -7,15 +7,14 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { UserProvider } from './contexts/UserContext';
+import { NotificationProvider } from './contexts/NotificationContext';
+import { DarkModeProvider } from './contexts/DarkModeContext';
 
 import AppLayout from './pages/AppLayout';
 import NotFound from './pages/NotFound';
 import ProtectedWrapper from './components/ProtectedWrapper';
 import Loader from './components/Loader';
-import { NotificationProvider } from './contexts/NotificationContext';
-import { DarkModeProvider } from './contexts/DarkModeContext';
 import ErrorFallback from './components/ErrorFallback';
-import InvoiceAdd from './components/Invoices/InvoiceAdd';
 
 const Homepage = lazy(() => import('./pages/Homepage'));
 const Postspage = lazy(() => import('./pages/Postspage'));
@@ -30,8 +29,10 @@ const Clientspage = lazy(() => import('./pages/Clientspage'));
 const Orderspage = lazy(() => import('./pages/Orderspage'));
 const OrderDetails = lazy(() => import('./components/Orders/OrderDetails'));
 const OrderAdd = lazy(() => import('./components/Orders/OrderAdd'));
-const Invoicespage = lazy(() => import('./pages/Invoicespage'));
 const Registerpage = lazy(() => import('./pages/Registerpage'));
+const Invoicespage = lazy(() => import('./pages/Invoicespage'));
+const InvoiceAdd = lazy(() => import('./components/Invoices/InvoiceAdd'));
+const MoneyActionForm = lazy(() => import('./components/Money/MoneyActionForm'));
 
 const router = createBrowserRouter([
   {
@@ -124,6 +125,14 @@ const router = createBrowserRouter([
             element: (
               <Suspense fallback={<Loader />}>
                 <InvoiceAdd />
+              </Suspense>
+            ),
+          },
+          {
+            path: '/money',
+            element: (
+              <Suspense fallback={<Loader />}>
+                <MoneyActionForm />
               </Suspense>
             ),
           },
