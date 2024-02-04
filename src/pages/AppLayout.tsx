@@ -16,7 +16,7 @@ export default function AppLayout() {
     <>
       {isAuth && (
         <div className="relative">
-          <div className="absolute right-2 top-4 flex items-center gap-4">
+          <div className="absolute right-2 top-4 z-10 flex items-center gap-4">
             <Avatar />
             <button onClick={() => logOut()} className="text-slate-900 dark:text-stone-200">
               <BsBoxArrowRight />
