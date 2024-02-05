@@ -1,6 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+type MoneyState = {
+  initialValue: number;
+};
+const initialState: MoneyState = {
   initialValue: 0,
 };
 
@@ -8,10 +11,10 @@ const moneySlice = createSlice({
   name: 'money',
   initialState,
   reducers: {
-    withdraw(state, action) {
+    withdraw(state, action: PayloadAction<number>) {
       state.initialValue -= action.payload;
     },
-    deposit(state, action) {
+    deposit(state, action: PayloadAction<number>) {
       state.initialValue += action.payload;
     },
   },
