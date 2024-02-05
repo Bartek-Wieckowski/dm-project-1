@@ -32,7 +32,10 @@ const OrderAdd = lazy(() => import('./components/Orders/OrderAdd'));
 const Registerpage = lazy(() => import('./pages/Registerpage'));
 const Invoicespage = lazy(() => import('./pages/Invoicespage'));
 const InvoiceAdd = lazy(() => import('./components/Invoices/InvoiceAdd'));
-const MoneyActionForm = lazy(() => import('./components/Money/MoneyActionForm'));
+const MoneyActionForm = lazy(
+  () => import('./components/Money/MoneyActionForm')
+);
+const OrdersCartpage = lazy(() => import('./pages/OrdersCartpage'));
 
 const router = createBrowserRouter([
   {
@@ -106,6 +109,14 @@ const router = createBrowserRouter([
         element: (
           <Suspense fallback={<Loader />}>
             <OrderDetails />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/orders/cart',
+        element: (
+          <Suspense fallback={<Loader />}>
+            <OrdersCartpage />
           </Suspense>
         ),
       },
