@@ -1,13 +1,8 @@
-import { FormikProps } from 'formik';
-import { InvoicesFormValues } from '../../validators/validators';
 import { OrderData } from '../../types/Order.types';
+import { InvoiceFormikProps } from '../../types/Invoice.types';
 import Input from '../Form/Input';
 
-type Step3FormProps = {
-  formik: FormikProps<InvoicesFormValues>;
-};
-
-export default function Step3Form({ formik }: Step3FormProps) {
+export default function Step3Form({ formik }: InvoiceFormikProps) {
   const clientDetails = formik.values.selectedClient;
   const ordersDetails = formik.values.selectedOrders as OrderData[];
   return (
@@ -37,7 +32,7 @@ export default function Step3Form({ formik }: Step3FormProps) {
         </div>
         <div className="">
           {ordersDetails?.map((order) => (
-            <div key={order.id}>
+            <div key={order.id} className="mb-3">
               <h2 className="mb-4 text-xl text-slate-900 dark:text-stone-200">
                 Płaci za: {order.orderTitle}
               </h2>
