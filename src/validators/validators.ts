@@ -117,7 +117,6 @@ export const invociesYupSchema = yup.object({
 export type InvoicesFormValues = yup.InferType<typeof invociesYupSchema>;
 
 // money
-
 export const moneyYupSchema = yup.object({
   value: yup
     .number()

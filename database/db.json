@@ -232,6 +232,100 @@
       "price": 546,
       "dateOfIssue": "12/12/2022",
       "accountingMonth": "12"
+    },
+    {
+      "id": "f3e8",
+      "selectedClient": {
+        "userId": "1",
+        "name": "Zbigniew",
+        "surname": "Herbert",
+        "phoneNumber": "+48 123 456 789"
+      },
+      "selectedOrders": [
+        {
+          "id": "1",
+          "client": {
+            "userId": "1",
+            "name": "Zbigniew",
+            "surname": "Herbert",
+            "phoneNumber": "+48 123 456 789"
+          },
+          "quantity": 5,
+          "orderTitle": "Zamówienie 1",
+          "orderContent": "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+          "paid": true
+        },
+        {
+          "id": "a67c",
+          "client": {
+            "userId": "1",
+            "name": "Zbigniew",
+            "surname": "Herbert",
+            "phoneNumber": "+48 123 456 789"
+          },
+          "quantity": 1,
+          "orderTitle": "tes tes tes ",
+          "orderContent": "test test test test",
+          "paid": true
+        }
+      ],
+      "price": 2454,
+      "dateOfIssue": "12/12/2022",
+      "accountingMonth": "12"
+    },
+    {
+      "id": "ea68",
+      "selectedClient": {
+        "userId": "3",
+        "name": "Maria",
+        "surname": "Wiśniewska",
+        "phoneNumber": "+48 111 222 333"
+      },
+      "selectedOrders": [
+        {
+          "id": "705b",
+          "client": {
+            "userId": "3",
+            "name": "Maria",
+            "surname": "Wiśniewskasda",
+            "phoneNumber": "+48 111 222 333"
+          },
+          "quantity": 1,
+          "orderTitle": "r54365456",
+          "orderContent": "b45tb4ybtrbtbr",
+          "paid": true
+        }
+      ],
+      "price": 4,
+      "dateOfIssue": "04/06/1990",
+      "accountingMonth": "06"
+    },
+    {
+      "id": "3105",
+      "selectedClient": {
+        "userId": "3",
+        "name": "Maria",
+        "surname": "Wiśniewska",
+        "phoneNumber": "+48 111 222 333"
+      },
+      "selectedOrders": [
+        {
+          "id": "705b",
+          "client": {
+            "userId": "3",
+            "name": "Maria",
+            "surname": "Wiśniewskasda",
+            "phoneNumber": "+48 111 222 333"
+          },
+          "quantity": 1,
+          "orderTitle": "r54365456",
+          "orderContent": "b45tb4ybtrbtbr",
+          "paid": true
+        }
+      ],
+      "price": 7000,
+      "dateOfIssue": "03/02/1867",
+      "accountingMonth": "02"
     }
   ]
 }
