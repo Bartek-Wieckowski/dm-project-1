@@ -16,7 +16,7 @@ export function useInvoiceAdd() {
       await queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.invoicesAll],
       });
-      showNotification('Faktura dodany poprawnie', 'success');
+      showNotification('Faktura dodana poprawnie', 'success');
     },
     onError: () => {
       showNotification('Coś poszło nie tak...', 'error');
