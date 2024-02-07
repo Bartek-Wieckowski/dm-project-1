@@ -1,15 +1,10 @@
 // Importy
-import { FormikProps } from 'formik';
-import { InvoicesFormValues } from '../../validators/validators';
 import { useOrdersAllByClient } from '../../api/queries/orders/useOrdersAllByClient';
-import Button from '../Button';
 import { OrderData } from '../../types/Order.types';
+import { InvoiceFormikProps } from '../../types/Invoice.types';
+import Button from '../Button';
 
-type Step2FormProps = {
-  formik: FormikProps<InvoicesFormValues>;
-};
-
-export default function Step2Form({ formik }: Step2FormProps) {
+export default function Step2Form({ formik }: InvoiceFormikProps) {
   const clientId = formik.values.selectedClient?.userId;
   const clientFullName = `${formik.values.selectedClient?.name} ${formik.values.selectedClient?.surname}`;
 
@@ -24,27 +19,24 @@ export default function Step2Form({ formik }: Step2FormProps) {
       );
 
       if (isAlreadySelected) {
-        const updatedSelectedOrders = (
-          formik.values.selectedOrders || []
-        ).filter((selected: OrderData) => selected.id !== orderId);
-
         formik
-          .setFieldValue('selectedOrders', updatedSelectedOrders)
+          .setFieldValue(
+            'selectedOrders',
+            (formik.values.selectedOrders || []).filter(
+              (selected: OrderData) => selected.id !== orderId
+            )
+          )
           .catch((error) => {
-            console.error('Błąd podczas wybierania klienta:', error);
+            console.error('Błąd podczas odznaczania zamówienia:', error);
           });
       } else {
-        const updatedSelectedOrders = (
-          formik.values.selectedOrders || []
-        ).concat(selectedOrder);
-
         formik
-          .setFieldValue('selectedOrders', updatedSelectedOrders)
+          .setFieldValue('selectedOrders', [selectedOrder])
           .catch((error) => {
-            console.error('Błąd podczas wybierania klienta:', error);
+            console.error('Błąd podczas zaznaczania zamówienia:', error);
           });
       }
-    } 
+    }
   }
 
   return (
@@ -67,7 +59,7 @@ export default function Step2Form({ formik }: Step2FormProps) {
               <p className="text-slate-900 dark:text-stone-200">
                 Status: {order.paid ? 'Opłacone' : 'Brak zapłaty'}
               </p>
-            
+
               <Button
                 type="button"
                 btnStyles="btnQty"

@@ -10,8 +10,8 @@ import {
   invociesYupSchema,
 } from '../../validators/validators';
 import { OrderData } from '../../types/Order.types';
-import { addInvoice } from '../../api/apiInvoices';
 import { useNavigate } from 'react-router-dom';
+import { useInvoiceAdd } from '../../api/mutations/invoices/useInvoiceAdd';
 
 const INITIAL_DATA: InvoicesFormValues = {
   selectedClient: {
@@ -28,11 +28,12 @@ const INITIAL_DATA: InvoicesFormValues = {
 
 export default function InvoiceAdd() {
   const navigate = useNavigate();
+  const { addInvoice } = useInvoiceAdd();
   const formik = useFormik<InvoicesFormValues>({
     initialValues: INITIAL_DATA,
     validationSchema: invociesYupSchema,
-    onSubmit: async (values: InvoicesFormValues) => {
-      await addInvoice(values);
+    onSubmit: (values: InvoicesFormValues) => {
+      addInvoice(values);
       navigate('/invoices');
       //   alert(JSON.stringify(values, null, 2));
       //   console.log(JSON.stringify(values, null, 2));
@@ -53,6 +54,16 @@ export default function InvoiceAdd() {
     <Step3Form formik={formik} />,
   ]);
 
+  let disabled = false;
+
+  if (currentStepIndex === 0) {
+    disabled = !formik.dirty || !formik.values.selectedClient;
+  }
+
+  if (currentStepIndex === 1) {
+    disabled = formik.values.selectedOrders?.length === 0;
+  }
+
   return (
     <>
       <form onSubmit={formik.handleSubmit}>
@@ -71,9 +82,7 @@ export default function InvoiceAdd() {
                 type="button"
                 onClick={nextStep}
                 btnStyles="btnAdd"
-                disabled={
-                  formik.values.selectedClient?.phoneNumber === undefined
-                }
+                disabled={disabled}
               >
                 Dalej
               </Button>

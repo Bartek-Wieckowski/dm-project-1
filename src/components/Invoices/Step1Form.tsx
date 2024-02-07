@@ -1,15 +1,9 @@
 // Step1Form.tsx
-import React from 'react';
 import { useClients } from '../../api/queries/clients/useClients';
-import { InvoicesFormValues } from '../../validators/validators';
-import { FormikProps } from 'formik';
+import { InvoiceFormikProps } from '../../types/Invoice.types';
 import Select from '../Form/Select';
 
-type Step1FormProps = {
-  formik: FormikProps<InvoicesFormValues>;
-};
-
-export default function Step1Form({ formik }: Step1FormProps) {
+export default function Step1Form({ formik }: InvoiceFormikProps) {
   const { clientsAll: clientOrders } = useClients();
 
   function handleClientChange(event: React.ChangeEvent<HTMLSelectElement>) {
