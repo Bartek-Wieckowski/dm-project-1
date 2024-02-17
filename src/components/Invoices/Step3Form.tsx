@@ -39,7 +39,7 @@ export default function Step3Form({ formik }: InvoiceFormikProps) {
               <Input
                 label="Cena"
                 name="price"
-                type="number"
+                type="text"
                 value={formik.values.price}
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}

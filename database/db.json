@@ -326,6 +326,33 @@
       "price": 7000,
       "dateOfIssue": "03/02/1867",
       "accountingMonth": "02"
+    },
+    {
+      "id": "7e64",
+      "selectedClient": {
+        "userId": "1",
+        "name": "Zbigniew",
+        "surname": "Herbert",
+        "phoneNumber": "+48 123 456 789"
+      },
+      "selectedOrders": [
+        {
+          "id": "a67c",
+          "client": {
+            "userId": "1",
+            "name": "Zbigniew",
+            "surname": "Herbert",
+            "phoneNumber": "+48 123 456 789"
+          },
+          "quantity": 1,
+          "orderTitle": "tes tes tes ",
+          "orderContent": "test test test test",
+          "paid": true
+        }
+      ],
+      "price": 12332,
+      "dateOfIssue": "11/11/2023",
+      "accountingMonth": "11"
     }
   ]
 }

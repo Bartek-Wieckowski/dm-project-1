@@ -1,7 +1,7 @@
 import { useOrders } from '../../api/queries/orders/useOrders';
 import { useNavigate } from 'react-router-dom';
 import { useOrderDelete } from '../../api/mutations/orders/useOrderDelete';
-import { useAppDispatch } from '../../redux/hooks/hooks';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 import { addOrder, removeOrder } from '../../redux/order/orderSlice';
 import Button from '../Button';
 import Loader from '../Loader';
@@ -15,6 +15,8 @@ export default function Orders() {
   const dispatch = useAppDispatch();
   const { isLoading, ordersAll: ordersData } = useOrders();
   const { deleteOrder } = useOrderDelete();
+  const ordersState = useAppSelector((state) => state.order.orders);
+  const orderIdsInOrdersState = ordersState.map((orderId) => orderId.id);
 
   const handleCheckboxChange = (
     isChecked: boolean,
@@ -106,6 +108,7 @@ export default function Orders() {
                   type="checkbox"
                   name={order.id}
                   id={order.id}
+                  checked={orderIdsInOrdersState.includes(order.id)}
                   onChange={(e) =>
                     handleCheckboxChange(
                       e.target.checked,
