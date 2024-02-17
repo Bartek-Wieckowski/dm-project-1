@@ -11,9 +11,11 @@ export default function Step1Form({ formik }: InvoiceFormikProps) {
     const selectedClient = clientData.find(
       (client) => client.phoneNumber === event.target.value
     );
-    formik.setFieldValue('selectedClient', selectedClient).catch((error) => {
-      console.error('Błąd podczas wybierania klienta:', error);
-    });
+    if(selectedClient){
+      formik.setFieldValue('selectedClient', selectedClient).catch((error) => {
+        console.error('Błąd podczas wybierania klienta:', error);
+      });
+    }
   }
 
   const clientData =

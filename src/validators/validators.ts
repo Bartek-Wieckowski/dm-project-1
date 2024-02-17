@@ -100,7 +100,7 @@ export type LoginFormValues = yup.InferType<typeof loginAccountyupSchema>;
 export const invociesYupSchema = yup.object({
   selectedClient: clientOrderValidator,
   selectedOrders: yup.array().min(1, 'Wybierz co najmniej jedno zamówienie'),
-  price: yup.number().required('Wymagane').min(0, 'Wprowadź poprawną cenę'),
+  price: yup.string().required('Wymagane').matches(/^[0-9]+$/, 'Wprowadź poprawną cenę, używając tylko cyfr'),
   dateOfIssue: yup
     .string()
     .required('Wymagane')
