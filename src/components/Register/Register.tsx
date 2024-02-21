@@ -6,14 +6,12 @@ import Input from '../Form/Input';
 import { useRegisterUser } from '../../api/mutations/users/useRegisterUser';
 import { RANDOM_IMG_URL } from '../../constants/appConst';
 import { Tables } from '../../../types/supabase';
-import { useNotification } from '../../contexts/NotificationContext';
 import { errorInfoClass } from '../../utils/helpers';
 
 type FormValuesFromSupabase = Omit<Tables<'dm-project-1-users'>, 'id'>;
 
 export default function Register() {
   const { addNewUser } = useRegisterUser();
-  const { showNotification } = useNotification();
   const navigate = useNavigate();
   const formik = useFormik<FormValuesFromSupabase>({
     initialValues: {
@@ -26,9 +24,8 @@ export default function Register() {
         addNewUser(values);
         formik.resetForm();
         navigate('/');
-        showNotification('Konto utworzone poprawnie!', 'success'); //FIXME: przenesienie notifikacje z useRegisterUser.ts
       } catch (error) {
-        showNotification('Coś poszło nie tak...', 'error'); //FIXME: przenesienie notifikacje z useRegisterUser.ts
+        // showNotification('Coś poszło nie tak...', 'error'); //FIXME: przenesienie notifikacje z useRegisterUser.ts
       }
     },
     validationSchema: registerAccountYupSchema,

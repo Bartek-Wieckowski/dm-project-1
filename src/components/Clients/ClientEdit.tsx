@@ -5,15 +5,18 @@ import { ClientProps } from '../../types/ClientProps.type';
 import ClientForm from './ClientForm';
 import Loader from '../Loader';
 
+type editedClientType = Omit<ClientProps, 'id'>;
+
 export default function ClientEdit() {
   const { id } = useParams();
-  const [editedClient, setEditedClient] = useState<ClientProps>({
-    id: '',
+  const [editedClient, setEditedClient] = useState<editedClientType>({
     name: '',
     surname: '',
     street: '',
-    postCode: '',
-    town: '',
+    code: '',
+    city: '',
+    region: '',
+    imageUrl: '',
     phoneNumber: '',
   });
   const [isLoading, setIsLoading] = useState(false);
@@ -22,7 +25,7 @@ export default function ClientEdit() {
     try {
       setIsLoading(true);
       if (id) {
-        const clientData: ClientProps = await getSingleClient(id);
+        const clientData: ClientProps = await getSingleClient(Number(id));
         setEditedClient(clientData);
       }
     } catch (error) {

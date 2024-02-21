@@ -5,6 +5,21 @@ import { UserSupabaseAccount } from '../types/UserSupabase.type';
 export async function registerUser(
   newUser: Omit<Tables<'dm-project-1-users'>, 'id'>
 ) {
+  const newUserUsername: string = newUser.username ?? '';
+  const { data: existingUsers, error: errorExistingUsers } = await supabase
+    .from('dm-project-1-users')
+    .select('id')
+    .eq('username', newUserUsername);
+
+  // TODO: pytanie o throw new error i try catche
+  if (errorExistingUsers) {
+    throw new Error('Błąd podczas sprawdzania istnienia użytkownika.');
+  }
+
+  if (existingUsers.length > 0) {
+    throw new Error('Coś poszło nie tak...');
+  }
+
   const { data, error } = await supabase
     .from('dm-project-1-users')
     .insert(newUser);
@@ -13,8 +28,6 @@ export async function registerUser(
   }
   if (data) {
     return data;
-  } else {
-    throw new Error('Nie udało się zarejestrować użytkownika.');
   }
 }
 
@@ -38,10 +51,7 @@ export async function loginUser(
   }
 }
 
-export const uploadAndGenerateFileLink = async (
-  fileName: string,
-  file: File
-) => {
+export async function uploadAndGenerateFileLink(fileName: string, file: File) {
   try {
     const uploadData = await supabase.storage
       .from('dm-project-1')
@@ -62,12 +72,12 @@ export const uploadAndGenerateFileLink = async (
     console.error('Błąd:', error);
     return null;
   }
-};
+}
 
-export const updateUserData = async (
+export async function updateUserData(
   userId: number,
   userData: Omit<UserSupabaseAccount, 'id'>
-) => {
+) {
   try {
     const { error } = await supabase
       .from('dm-project-1-users')
@@ -93,7 +103,9 @@ export const updateUserData = async (
     }
 
     if (!updatedData) {
-      throw new Error(`Nie znaleziono zaktualizowanych danych użytkownika o ID: ${userId}`);
+      throw new Error(
+        `Nie znaleziono zaktualizowanych danych użytkownika o ID: ${userId}`
+      );
     }
 
     // console.log('Zaktualizowane dane użytkownika:', updatedData);
@@ -102,5 +114,4 @@ export const updateUserData = async (
     console.error('Błąd podczas aktualizacji danych użytkownika:', error);
     throw error;
   }
-};
-
+}

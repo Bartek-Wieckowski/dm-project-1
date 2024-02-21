@@ -3,7 +3,7 @@ import { getSingleClient } from '../../apiClients';
 import { ClientProps } from '../../../types/ClientProps.type';
 import { QUERY_KEYS } from '../../constants';
 
-export function useClientDetails(clientId: string) {
+export function useClientDetails(clientId: number) {
   const {
     isLoading,
     data: clientDetails,

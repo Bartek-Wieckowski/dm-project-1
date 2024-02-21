@@ -15,7 +15,6 @@ export const clientOrderValidator = yup.object().shape({
 
 // clientFormValidator
 export const clientYupSchema = yup.object({
-  id: yup.string(),
   name: yup
     .string()
     .required('Pole "Imię" jest wymagane')
@@ -28,15 +27,15 @@ export const clientYupSchema = yup.object({
     .string()
     .required('Pole "Ulica" jest wymagane')
     .min(5, 'Pole "Ulica" musi mieć co najmniej 5 liter'),
-  postCode: postValidator,
-  town: yup
+  code: postValidator,
+  city: yup
     .string()
     .required('Pole "Miasto" jest wymagane')
     .min(3, 'Pole "Miasto" musi mieć co najmniej 3 litery'),
-  subRegion: yup
+  region: yup
     .string()
     .min(3, 'Pole "Region" musi mieć co najmniej 3 litery'),
-  imgSrc: yup.string(),
+  imageUrl: yup.string().nullable(),
   phoneNumber: yup
     .string()
     .required('Pole "Numer telefonu" jest wymagane')
