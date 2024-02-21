@@ -1,7 +1,7 @@
-import { cloneElement, createContext, useContext, useState } from "react";
-import { createPortal } from "react-dom";
-import useClickOutside from "../hooks/useClickOutside";
-import Button from "../components/Button";
+import { cloneElement, createContext, useContext, useState } from 'react';
+import { createPortal } from 'react-dom';
+import useClickOutside from '../hooks/useClickOutside';
+import Button from '../components/Button';
 
 type ModalContextProps = {
   openName: string;
@@ -28,16 +28,20 @@ type WindowProps = {
 const ModalContext = createContext<ModalContextProps | null>(null);
 
 function Modal({ children }: ModalProps) {
-  const [openName, setOpenName] = useState<string>("");
+  const [openName, setOpenName] = useState<string>('');
 
   function close() {
-    setOpenName("");
+    setOpenName('');
   }
   function open(name: string) {
     setOpenName(name);
   }
 
-  return <ModalContext.Provider value={{ openName, close, open }}>{children}</ModalContext.Provider>;
+  return (
+    <ModalContext.Provider value={{ openName, close, open }}>
+      {children}
+    </ModalContext.Provider>
+  );
 }
 
 function Open({ children, opensWindowName }: OpenProps) {
@@ -85,6 +89,6 @@ Modal.Window = Window;
 export default Modal;
 
 const styledModal =
-  "fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 rounded-lg shadow-lg p-8 transition-all duration-500 text-center";
+  'fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-100 rounded-lg shadow-lg p-8 transition-all duration-500 text-center';
 const styledOverlay =
-  "fixed top-0 left-0 w-full h-screen bg-backdrop-color backdrop-filter backdrop-blur-sm z-1000 transition-all duration-500";
+  'fixed top-0 left-0 w-full h-screen bg-backdrop-color backdrop-filter backdrop-blur-sm z-1000 transition-all duration-500';

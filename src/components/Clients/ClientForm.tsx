@@ -4,6 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { LabelMapType, labelMap } from "./clientFormLabels";
 import { useClientEdit } from "../../api/mutations/clients/useClientEdit";
 import { useClientAdd } from "../../api/mutations/clients/useClientAdd";
+import { errorInfoClass } from "../../utils/helpers";
 import Input from "../Form/Input";
 import Button from "../Button";
 
@@ -101,4 +102,3 @@ export default function ClientForm({ editForm, editValues }: ClientFormProps) {
   );
 }
 
-const errorInfoClass = "text-rose-400 text-sm";

@@ -74,16 +74,6 @@ export type OrderFormValues = yup.InferType<typeof orderYupSchema>;
 export const registerAccountYupSchema = yup.object({
   name: yup.string().required('Pole wymagane'),
   username: yup.string().required('Pole wymagane'),
-  email: yup.string().email('Email musi posiadać @').required('Pole wymagane'),
-  password: yup
-    .string()
-    .required('Pole hasło jest wymagane')
-    .min(6, 'Hasło musi mieć co najmniej 6 znaków'),
-  confirmPassword: yup
-    .string()
-    .required('Pole powtórz hasło jest wymagane')
-    .min(6, 'Powtórzone hasło musi mieć co najmniej 6 znaków')
-    .oneOf([yup.ref('password')], 'Hasła muszą być identyczne'),
 });
 
 export type RegisterFormValues = yup.InferType<typeof registerAccountYupSchema>;
@@ -96,11 +86,24 @@ export const loginAccountyupSchema = yup.object({
 
 export type LoginFormValues = yup.InferType<typeof loginAccountyupSchema>;
 
+// update user data
+export const updateUserDataYupSchema = yup.object({
+  name: yup.string().required('Pole wymagane'),
+  username: yup.string().required('Pole wymagane'),
+});
+
+export type UpdateUserDataForm = yup.InferType<
+  typeof updateUserDataYupSchema
+> & { avatar?: File | null };
+
 // invoices
 export const invociesYupSchema = yup.object({
   selectedClient: clientOrderValidator,
   selectedOrders: yup.array().min(1, 'Wybierz co najmniej jedno zamówienie'),
-  price: yup.string().required('Wymagane').matches(/^[0-9]+$/, 'Wprowadź poprawną cenę, używając tylko cyfr'),
+  price: yup
+    .string()
+    .required('Wymagane')
+    .matches(/^[0-9]+$/, 'Wprowadź poprawną cenę, używając tylko cyfr'),
   dateOfIssue: yup
     .string()
     .required('Wymagane')
@@ -121,7 +124,7 @@ export const moneyYupSchema = yup.object({
   value: yup
     .number()
     .required('Wartość wymagana')
-    .min(0, 'Wartość musi być wieksza niż 0')
+    .min(0, 'Wartość musi być wieksza niż 0'),
 });
 
 export type MoneyFormValues = yup.InferType<typeof moneyYupSchema>;

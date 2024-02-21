@@ -1,6 +1,7 @@
 // Step1Form.tsx
 import { useClients } from '../../api/queries/clients/useClients';
 import { InvoiceFormikProps } from '../../types/Invoice.types';
+import { errorInfoClass } from '../../utils/helpers';
 import Select from '../Form/Select';
 
 export default function Step1Form({ formik }: InvoiceFormikProps) {
@@ -69,5 +70,3 @@ export default function Step1Form({ formik }: InvoiceFormikProps) {
     </>
   );
 }
-
-const errorInfoClass = 'text-rose-400 text-sm';

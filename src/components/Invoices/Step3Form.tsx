@@ -1,5 +1,6 @@
 import { OrderData } from '../../types/Order.types';
 import { InvoiceFormikProps } from '../../types/Invoice.types';
+import { errorInfoClass } from '../../utils/helpers';
 import Input from '../Form/Input';
 
 export default function Step3Form({ formik }: InvoiceFormikProps) {
@@ -90,5 +91,3 @@ export default function Step3Form({ formik }: InvoiceFormikProps) {
     </>
   );
 }
-
-const errorInfoClass = 'text-rose-400 text-sm';

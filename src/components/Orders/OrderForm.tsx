@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { useOrderCreate } from "../../api/mutations/orders/useOrderCreate";
 import { useClients } from "../../api/queries/clients/useClients";
+import { errorInfoClass } from "../../utils/helpers";
 import Button from "../Button";
 import Select from "../Form/Select";
 import Input from "../Form/Input";
@@ -112,5 +113,3 @@ export default function OrderForm() {
     </form>
   );
 }
-
-const errorInfoClass = "text-rose-400 text-sm";

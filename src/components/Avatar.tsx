@@ -7,16 +7,18 @@ export default function Avatar() {
   const {
     userData: { user },
   } = useUser();
-
   const money = useAppSelector((state) => state.money.initialValue);
 
   return (
     <div className="flex flex-col items-center justify-center gap-3">
-      <img
-        className="size-10 rounded-full p-1 ring-2 ring-gray-300 dark:ring-gray-500"
-        src={user?.avatar ? user.avatar : RANDOM_IMG_URL}
-        alt="Bordered avatar"
-      />
+      <Link to="/me">
+        <img
+          className="size-10 cursor-pointer rounded-full p-1 ring-2 ring-gray-300 dark:ring-gray-500"
+          src={user?.avatar ? user.avatar : RANDOM_IMG_URL}
+          alt="Bordered avatar"
+        />
+      </Link>
+
       <small className="text-slate-900 dark:text-stone-200">
         {user?.username}
       </small>

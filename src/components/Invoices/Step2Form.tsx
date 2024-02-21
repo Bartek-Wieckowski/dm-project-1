@@ -2,6 +2,7 @@
 import { useOrdersAllByClient } from '../../api/queries/orders/useOrdersAllByClient';
 import { OrderData } from '../../types/Order.types';
 import { InvoiceFormikProps } from '../../types/Invoice.types';
+import { errorInfoClass } from '../../utils/helpers';
 import Button from '../Button';
 
 export default function Step2Form({ formik }: InvoiceFormikProps) {
@@ -83,4 +84,3 @@ export default function Step2Form({ formik }: InvoiceFormikProps) {
   );
 }
 
-const errorInfoClass = 'text-rose-400 text-sm';
