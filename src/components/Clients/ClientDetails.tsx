@@ -20,7 +20,7 @@ export default function ClientDetails() {
     isLoading,
     clientDetails: client,
     error: clientNotFound,
-  } = useClientDetails(id || '');
+  } = useClientDetails(Number(id));
   const { deleteClient } = useClientDelete();
 
   if (isLoading) {
@@ -77,7 +77,7 @@ export default function ClientDetails() {
     <div className="flex flex-col items-center">
       <div className="p-3">
         <h3 className="text-center text-5xl text-slate-900 dark:text-stone-200">
-          Klient: {clientId}{' '}
+          Klient: {clientId}
         </h3>
       </div>
       <div className="flex gap-4 p-3">
@@ -90,7 +90,7 @@ export default function ClientDetails() {
           <Modal.Window
             name="deleteConfirmation"
             clickOk={() => {
-              deleteClient(clientId.toString());
+              deleteClient(clientId);
               navigate('/clients');
             }}
             showButtonOk={true}

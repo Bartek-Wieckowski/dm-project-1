@@ -28,7 +28,7 @@ export async function getSingleClient(clientId: number): Promise<ClientProps> {
 
 export async function addClient(
   newClient: Omit<ClientProps, 'id'>
-): Promise<ClientProps | undefined> {
+): Promise<ClientProps | null> {
   try {
     const { data, error } = await supabase
       .from('dm-project-1-clients')
@@ -36,7 +36,7 @@ export async function addClient(
 
     if (error) {
       console.error(error);
-      throw new Error('Błąd ładowania danych...');
+      throw new Error('Błąd dodawania danych...');
     }
 
     if (data) {
@@ -44,10 +44,10 @@ export async function addClient(
     }
   } catch (error) {
     console.error(error);
-    throw new Error('Błąd ładowania danych...');
+    throw new Error('Błąd dodawania danych...');
   }
 
-  return undefined;
+  return null;
 }
 
 export async function updateClientById(

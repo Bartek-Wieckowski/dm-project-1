@@ -63,7 +63,7 @@ export default function Orders() {
             <TableRow className="bg-gray-800  pb-2" key={order.id}>
               <TableTd
                 className="border-b border-slate-500 px-3 py-6 text-center  font-medium  text-white"
-                value={order.client.phoneNumber}
+                value={order.phoneNumber}
               />
               <TableTd
                 className="border-b border-slate-500 px-3 py-6 text-center  font-medium  text-white"
@@ -106,14 +106,14 @@ export default function Orders() {
               <TableTd className="border-b border-slate-500 px-3 py-6 text-center  font-medium  text-white">
                 <input
                   type="checkbox"
-                  name={order.id}
-                  id={order.id}
-                  checked={orderIdsInOrdersState.includes(order.id)}
+                  name={order.id.toString()}
+                  id={order.id.toString()}
+                  checked={orderIdsInOrdersState.includes(order.id.toString())}
                   onChange={(e) =>
                     handleCheckboxChange(
                       e.target.checked,
-                      order.id,
-                      order.orderTitle
+                      order.id.toString(),
+                      order.orderTitle || ''
                     )
                   }
                 />

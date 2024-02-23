@@ -1,3 +1,5 @@
+import { useNavigate } from 'react-router-dom';
+import { useInvoiceDelete } from '../api/mutations/invoices/useInvoiceDelete';
 import { useInvoices } from '../api/queries/invoices/useInvoices';
 import Button from '../components/Button';
 import TableRow from '../components/Tables/TableRow';
@@ -7,13 +9,15 @@ import Modal from '../contexts/ModalContext';
 
 export default function Invoicespage() {
   const { invoicesAll: invoicesData } = useInvoices();
+  const { deleteClient } = useInvoiceDelete();
+  const navigate = useNavigate();
 
-      const fieldsTh = [
-        { label: 'ID' },
-        { label: 'Cena' },
-        { label: 'Data wystawienia' },
-        { label: 'Szczegóły' },
-      ];
+  const fieldsTh = [
+    { label: 'ID' },
+    { label: 'Cena' },
+    { label: 'Data wystawienia' },
+    { label: 'Szczegóły' },
+  ];
   return (
     <div className="text-slate-900 dark:text-stone-200">
       <div className="flex flex-col items-center justify-center gap-4">
@@ -45,11 +49,11 @@ export default function Invoicespage() {
                 />
                 <TableTd
                   className="border-b border-slate-500 px-3 py-6 text-center  font-medium  text-white"
-                  value={invoice.price}
+                  value={invoice.invoiceCost}
                 />
                 <TableTd
                   className="border-b border-slate-500 px-3 py-6 text-center  font-medium  text-white"
-                  value={invoice.dateOfIssue}
+                  value={invoice.startDate}
                 />
                 <TableTd className="border-b border-slate-500 px-3 py-6 text-center  font-medium  text-white">
                   <Button to={`${invoice.id}`} btnStyles="btnUpdate">
@@ -63,10 +67,10 @@ export default function Invoicespage() {
                     </Modal.Open>
                     <Modal.Window
                       name="deleteConfirmation"
-                      // clickOk={() => {
-                      //   deleteInvoice(invoice.id);
-                      //   navigate('/invoices');
-                      // }}
+                      clickOk={() => {
+                        deleteClient(invoice.id);
+                        navigate('/invoices');
+                      }}
                       showButtonOk={true}
                     >
                       <div className="text-center">

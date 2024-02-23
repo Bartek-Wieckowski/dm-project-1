@@ -1,52 +1,88 @@
-import { API_URL } from "../constants/appConst";
-import { OrderData } from "../types/Order.types";
-import { OrderFormValues } from "../validators/validators";
+import { supabase } from '../supabase/supabaseConfig';
+import { OrderData } from '../types/Order.types';
 
-export async function getAllOrdersByClient(clientId: string): Promise<OrderData[]> {
-  const res = await fetch(`${API_URL}/orders?client.userId=${clientId}`);
-  if (!res.ok) {
-    throw new Error('Błąd ładowania danych...');
+export async function getAllOrdersByClient(clientPhoneNumber: string) {
+  const { data: clientData, error } = await supabase
+    .from('dm-project-1-clients')
+    .select()
+    .eq('phoneNumber', clientPhoneNumber)
+    .single();
+
+  if (error || !clientData) {
+    console.error(error);
+    throw new Error('Błąd podczas pobierania danych zamówienia');
   }
-  const data = (await res.json()) as OrderData[];
+
+  const { data: orderData, error: orderError } = await supabase
+    .from('dm-project-1-orders')
+    .select()
+    .eq('phoneNumber', clientData.phoneNumber);
+
+  if (orderError || !orderData) {
+    console.error(error);
+    throw new Error('Błąd podczas pobierania danych klienta');
+  }
+
+  return orderData;
+}
+
+export async function getAllOrders() {
+  const { data, error } = await supabase.from('dm-project-1-orders').select();
+
+  if (error) {
+    console.error(error);
+    throw new Error('Błąd podczas ładowania danych...');
+  }
+
   return data;
 }
 
-export async function getAllOrders(): Promise<OrderData[]> {
-  const res = await fetch(`${API_URL}/orders`);
-  if (!res.ok) {
-    throw new Error("Błąd ładowania danych...");
+export async function getSingleOrder(orderId: number) {
+  const { data: orderData, error } = await supabase
+    .from('dm-project-1-orders')
+    .select()
+    .eq('id', orderId)
+    .single();
+
+  if (error || !orderData) {
+    console.error(error);
+    throw new Error('Błąd podczas pobierania danych zamówienia');
   }
-  const data = (await res.json()) as OrderData[];
+
+  const { data: clientData, error: clientError } = await supabase
+    .from('dm-project-1-clients')
+    .select('id, name, surname, phoneNumber')
+    .eq('phoneNumber', orderData.phoneNumber)
+    .single();
+
+  if (clientError || !clientData) {
+    console.error(error);
+    throw new Error('Błąd podczas pobierania danych klienta');
+  }
+
+  return { ...orderData, client: clientData };
+}
+
+export async function createOrder(newOrder: Omit<OrderData, 'id'>) {
+  const { data, error } = await supabase
+    .from('dm-project-1-orders')
+    .insert(newOrder);
+  if (error) {
+    console.error(error);
+    throw new Error('Błąd podczas dodawania danych...');
+  }
+
   return data;
 }
 
-export async function getSingleOrder(orderId: string): Promise<OrderData> {
-  const res = await fetch(`${API_URL}/orders/${orderId}`);
-  if (!res.ok) {
-    throw new Error("Błąd ładowania danych...");
-  }
-  const data = (await res.json()) as OrderData;
-  return data;
-}
+export async function deleteOrder(orderId: number) {
+  const { error } = await supabase
+    .from('dm-project-1-orders')
+    .delete()
+    .eq('id', orderId);
 
-export async function createOrder(newOrder: OrderFormValues): Promise<OrderData> {
-  const res = await fetch(`${API_URL}/orders`, {
-    method: "POST",
-    headers: { "Content-type": "application/json" },
-    body: JSON.stringify(newOrder),
-  });
-  if (!res.ok) {
-    throw new Error("Błąd podczas dodawania...");
-  }
-  const data = (await res.json()) as OrderData;
-  return data;
-}
-
-export async function deleteOrder(orderId: string): Promise<void> {
-  const res = await fetch(`${API_URL}/orders/${orderId}`, {
-    method: "DELETE",
-  });
-  if (!res.ok) {
-    throw new Error("Błąd podczas usuwania...");
+  if (error) {
+    console.error(error);
+    throw new Error('Błąd podczas usuwania...');
   }
 }

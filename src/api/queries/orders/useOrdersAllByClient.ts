@@ -3,14 +3,14 @@ import { QUERY_KEYS } from '../../constants';
 import { getAllOrdersByClient } from '../../apiOrders';
 import { OrderData } from '../../../types/Order.types';
 
-export function useOrdersAllByClient(clientId: string) {
+export function useOrdersAllByClient(clientPhoneNumber: string) {
   const {
     isLoading,
     data: ordersByClient,
     error,
   } = useQuery<OrderData[]>({
-    queryKey: [QUERY_KEYS.ordersAllByClient, clientId],
-    queryFn: () => getAllOrdersByClient(clientId),
+    queryKey: [QUERY_KEYS.ordersAllByClient, clientPhoneNumber],
+    queryFn: () => getAllOrdersByClient(clientPhoneNumber),
   });
 
   return { isLoading, ordersByClient, error };

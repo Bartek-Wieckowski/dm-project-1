@@ -32,7 +32,7 @@ export default function Select({
       >
         <option value="" label={`Wybierz ${label.toLowerCase()}`} />
         {options.map((client) => (
-          <option key={client.userId} value={client.phoneNumber}>
+          <option key={client.id} value={client.phoneNumber}>
             {client.name} {client.surname}
           </option>
         ))}

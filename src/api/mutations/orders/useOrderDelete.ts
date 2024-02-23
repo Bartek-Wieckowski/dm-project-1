@@ -1,7 +1,7 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteOrder as deleteOrderApi } from "../../apiOrders";
-import { useNotification } from "../../../contexts/NotificationContext";
-import { QUERY_KEYS } from "../../constants";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { deleteOrder as deleteOrderApi } from '../../apiOrders';
+import { useNotification } from '../../../contexts/NotificationContext';
+import { QUERY_KEYS } from '../../constants';
 
 export function useOrderDelete() {
   const { showNotification } = useNotification();
@@ -13,10 +13,10 @@ export function useOrderDelete() {
       await queryClient.invalidateQueries({
         queryKey: [QUERY_KEYS.ordersAll],
       });
-      showNotification("Zamówienie usunięto poprawnie", "success");
+      showNotification('Zamówienie usunięto poprawnie', 'success');
     },
     onError: () => {
-      showNotification("Coś poszło nie tak...", "error");
+      showNotification('Coś poszło nie tak...', 'error');
     },
   });
 

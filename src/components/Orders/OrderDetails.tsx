@@ -1,40 +1,22 @@
 import { useParams } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
-import { OrderData } from '../../types/Order.types';
-import { getSingleOrder } from '../../api/apiOrders';
+import { useOrderDetails } from '../../api/queries/orders/useOrderDetails';
 import Button from '../Button';
 import Loader from '../Loader';
 import TableRow from '../Tables/TableRow';
 import TableTd from '../Tables/TableTd';
 import TableTh from '../Tables/TableTh';
 
-export default function OrderDetails() {
-  const { id } = useParams();
-  const [selectedOrder, setSelectedOrder] = useState<OrderData | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const [orderNotFound, setOrderNotFound] = useState(false);
+type ParamsType = {
+  id?: string;
+};
 
-  const fetchSingleOrderData = useCallback(async () => {
-    try {
-      setIsLoading(true);
-      if (id) {
-        const data: OrderData = await getSingleOrder(id);
-        setSelectedOrder(data);
-        setOrderNotFound(false);
-      }
-    } catch (error) {
-      console.error('Błąd ładowania danych');
-      setOrderNotFound(true);
-    } finally {
-      setIsLoading(false);
-    }
-  }, [id]);
-  
-  useEffect(() => {
-    fetchSingleOrderData().catch((error) => {
-      console.error('Błąd podczas fetchSingleClientData:', error);
-    });
-  }, [fetchSingleOrderData]);
+export default function OrderDetails() {
+  const { id } = useParams<ParamsType>();
+  const {
+    isLoading,
+    orderDetails: selectedOrder,
+    error: orderNotFound,
+  } = useOrderDetails(Number(id));
 
   if (isLoading) {
     return <Loader />;
@@ -54,7 +36,7 @@ export default function OrderDetails() {
 
   const {
     id: orderId,
-    client: { userId, name, surname, phoneNumber },
+    client: { id: userId, name, surname, phoneNumber },
     quantity,
     orderTitle,
     orderContent,
@@ -66,7 +48,7 @@ export default function OrderDetails() {
     <div className="flex flex-col items-center">
       <div className="flex flex-col items-center gap-4 p-3">
         <h3 className="text-center text-slate-900 dark:text-stone-200 sm:text-5xl">
-          Klient: {`${name} ${surname}`}{' '}
+          Klient: {`${name || ''} ${surname || ''}`}{' '}
         </h3>
         <Button to={`/clients/${userId}`} btnStyles="btnEdit">
           Zobacz profil

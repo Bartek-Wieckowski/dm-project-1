@@ -12,15 +12,9 @@ export function useRegisterUser() {
     error,
   } = useMutation({
     mutationFn: registerUserApi,
-    onSuccess: () => {
-      queryClient
-        .invalidateQueries({ queryKey: [QUERY_KEYS.usersAll] })
-        .then(() => {
-          showNotification('Konto utworzone poprawnie!', 'success');
-        })
-        .catch((error) => {
-          console.error('Error invalidating queries:', error);
-        });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.usersAll] });
+      showNotification('Konto utworzone poprawnie!', 'success');
     },
     onError: (error) => {
       console.error(error);
