@@ -2,6 +2,7 @@ import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import { LoginFormValues, loginAccountyupSchema } from "../../validators/validators";
 import { useUser } from "../../contexts/useUser";
+import { errorInfoClass } from "../../utils/helpers";
 import Button from "../Button";
 import Input from "../Form/Input";
 
@@ -52,5 +53,3 @@ export default function Login() {
     </>
   );
 }
-
-const errorInfoClass = "text-rose-400 text-sm";

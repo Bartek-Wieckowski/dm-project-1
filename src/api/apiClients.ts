@@ -1,61 +1,80 @@
-import { ClientFormValues } from '../validators/validators';
 import { ClientProps } from '../types/ClientProps.type';
-import { API_URL } from '../constants/appConst';
+import { supabase } from '../supabase/supabaseConfig';
+import { ClientFormValuesFromSupabase } from '../components/Clients/ClientForm';
 
 export async function getAllClients(): Promise<ClientProps[]> {
-  const res = await fetch(`${API_URL}/clients`);
-  if (!res.ok) {
+  const { data, error } = await supabase.from('dm-project-1-clients').select();
+
+  if (error) {
+    console.error(error);
     throw new Error('Błąd ładowania danych...');
   }
-  const data = (await res.json()) as ClientProps[];
   return data;
 }
 
-export async function getSingleClient(clientId: string): Promise<ClientProps> {
-  const res = await fetch(`${API_URL}/clients/${clientId}`);
-  if (!res.ok) {
+export async function getSingleClient(clientId: number): Promise<ClientProps> {
+  const { data, error } = await supabase
+    .from('dm-project-1-clients')
+    .select()
+    .eq('id', clientId)
+    .single();
+
+  if (error) {
+    console.error(error);
     throw new Error('Błąd ładowania danych...');
   }
-  const data = (await res.json()) as ClientProps;
   return data;
 }
 
 export async function addClient(
-  newClient: ClientFormValues
-): Promise<ClientProps> {
-  const res = await fetch(`${API_URL}/clients`, {
-    method: 'POST',
-    headers: { 'Content-type': 'application/json' },
-    body: JSON.stringify(newClient),
-  });
-  if (!res.ok) {
-    throw new Error('Błąd podczas dodawania...');
+  newClient: Omit<ClientProps, 'id'>
+): Promise<ClientProps | null> {
+  try {
+    const { data, error } = await supabase
+      .from('dm-project-1-clients')
+      .insert(newClient);
+
+    if (error) {
+      console.error(error);
+      throw new Error('Błąd dodawania danych...');
+    }
+
+    if (data) {
+      return data;
+    }
+  } catch (error) {
+    console.error(error);
+    throw new Error('Błąd dodawania danych...');
   }
-  const data = (await res.json()) as ClientProps;
-  return data;
+
+  return null;
 }
 
 export async function updateClientById(
-  updateClientData: ClientFormValues,
+  updateClientData: ClientFormValuesFromSupabase,
   clientId: ClientProps['id']
 ): Promise<ClientProps> {
-  const res = await fetch(`${API_URL}/clients/${clientId}`, {
-    method: 'PATCH',
-    headers: { 'Content-type': 'application/json' },
-    body: JSON.stringify(updateClientData),
-  });
-  if (!res.ok) {
+  const { data, error } = await supabase
+    .from('dm-project-1-clients')
+    .update(updateClientData)
+    .eq('id', clientId)
+    .single();
+
+  if (error) {
+    console.error(error);
     throw new Error('Błąd podczas aktualizacji...');
   }
-  const data = (await res.json()) as ClientProps;
   return data;
 }
 
-export async function deleteClient(clientId: string): Promise<void> {
-  const res = await fetch(`${API_URL}/clients/${clientId}`, {
-    method: 'DELETE',
-  });
-  if (!res.ok) {
+export async function deleteClient(clientId: number): Promise<void> {
+  const { error } = await supabase
+    .from('dm-project-1-clients')
+    .delete()
+    .eq('id', clientId);
+
+  if (error) {
+    console.error(error);
     throw new Error('Błąd podczas usuwania...');
   }
 }

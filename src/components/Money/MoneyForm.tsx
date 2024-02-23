@@ -5,6 +5,7 @@ import { LabelMapType } from './moneyFormLabels';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks/hooks';
 import { deposit, withdraw } from '../../redux/money/moneySlice';
 import { useNotification } from '../../contexts/NotificationContext';
+import { errorInfoClass } from '../../utils/helpers';
 import Input from '../Form/Input';
 import Button from '../Button';
 
@@ -82,5 +83,3 @@ export default function MoneyForm({ depositForm }: MoneyFormProps) {
     </>
   );
 }
-
-const errorInfoClass = 'text-rose-400 text-sm';

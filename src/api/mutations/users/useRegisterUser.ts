@@ -1,7 +1,7 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { registerUser as registerUserApi } from "../../apiUsers";
-import { useNotification } from "../../../contexts/NotificationContext";
-import { QUERY_KEYS } from "../../constants";
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { registerUser as registerUserApi } from '../../apiUsers';
+import { QUERY_KEYS } from '../../constants';
+import { useNotification } from '../../../contexts/NotificationContext';
 
 export function useRegisterUser() {
   const { showNotification } = useNotification();
@@ -14,10 +14,11 @@ export function useRegisterUser() {
     mutationFn: registerUserApi,
     onSuccess: async () => {
       await queryClient.invalidateQueries({ queryKey: [QUERY_KEYS.usersAll] });
-      showNotification("Konto utworzone poprawnie!", "success");
+      showNotification('Konto utworzone poprawnie!', 'success');
     },
-    onError: () => {
-      showNotification("Coś poszło nie tak...", "error");
+    onError: (error) => {
+      console.error(error);
+      showNotification('Coś poszło nie tak...', 'error');
     },
   });
 

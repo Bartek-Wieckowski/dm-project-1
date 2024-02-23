@@ -5,40 +5,53 @@ import Step1Form from './Step1Form';
 import Step2Form from './Step2Form';
 import Step3Form from './Step3Form';
 import StepperForm from './StepperForm';
-import {
-  InvoicesFormValues,
-  invociesYupSchema,
-} from '../../validators/validators';
-import { OrderData } from '../../types/Order.types';
+import { invociesYupSchema } from '../../validators/validators';
 import { useNavigate } from 'react-router-dom';
 import { useInvoiceAdd } from '../../api/mutations/invoices/useInvoiceAdd';
-
-const INITIAL_DATA: InvoicesFormValues = {
-  selectedClient: {
-    userId: '',
-    name: '',
-    surname: '',
-    phoneNumber: '',
-  },
-  selectedOrders: [] as OrderData[],
-  price: 0,
-  dateOfIssue: '',
-  accountingMonth: '',
-};
+import {
+  InvoiceData,
+  selectedClientInInvoiceType,
+  selectedOrderInInvoiceType,
+} from '../../types/Invoice.types';
+import { useState } from 'react';
 
 export default function InvoiceAdd() {
   const navigate = useNavigate();
   const { addInvoice } = useInvoiceAdd();
-  const formik = useFormik<InvoicesFormValues>({
-    initialValues: INITIAL_DATA,
-    validationSchema: invociesYupSchema,
-    onSubmit: (values: InvoicesFormValues) => {
+  const formik = useFormik<Omit<InvoiceData, 'id'>>({
+    initialValues: {
+      invoiceCost: 0,
+      orderId: 0,
+      startDate: '',
+      endDate: '',
+      phoneNumber: '',
+    },
+    onSubmit: (values: Omit<InvoiceData, 'id'>) => {
       addInvoice(values);
       navigate('/invoices');
-      //   alert(JSON.stringify(values, null, 2));
-      //   console.log(JSON.stringify(values, null, 2));
     },
+    validationSchema: invociesYupSchema,
   });
+  const [selectedClient, setSelectedClient] =
+    useState<selectedClientInInvoiceType | null>(null);
+
+  const [selectedOrder, setSelectedOrder] =
+    useState<selectedOrderInInvoiceType | null>(null);
+
+  function chosenClient(values: selectedClientInInvoiceType) {
+    setSelectedClient((prevData) => ({
+      ...prevData,
+      ...values,
+    }));
+  }
+  function chosenOrder(values: selectedOrderInInvoiceType) {
+    setSelectedOrder((prevData) => ({
+      ...prevData,
+      ...values,
+    }));
+  }
+
+  console.log();
 
   const {
     steps,
@@ -49,19 +62,32 @@ export default function InvoiceAdd() {
     backStep,
     nextStep,
   } = useMultistepsForm([
-    <Step1Form formik={formik} />,
-    <Step2Form formik={formik} />,
-    <Step3Form formik={formik} />,
+    <Step1Form
+      formik={formik}
+      chosenClient={chosenClient}
+      selectedClient={selectedClient!}
+    />,
+    <Step2Form
+      formik={formik}
+      selectedClient={selectedClient!}
+      chosenOrder={chosenOrder}
+      selectedOrder={selectedOrder!}
+    />,
+    <Step3Form
+      formik={formik}
+      selectedClient={selectedClient!}
+      selectedOrder={selectedOrder!}
+    />,
   ]);
 
   let disabled = false;
 
   if (currentStepIndex === 0) {
-    disabled = !formik.dirty || !formik.values.selectedClient;
+    disabled = !formik.dirty || !formik.values.phoneNumber;
   }
 
   if (currentStepIndex === 1) {
-    disabled = formik.values.selectedOrders?.length === 0;
+    disabled = !selectedOrder;
   }
 
   return (

@@ -1,27 +1,37 @@
-import { API_URL } from '../constants/appConst';
+import { supabase } from '../supabase/supabaseConfig';
 import { InvoiceData } from '../types/Invoice.types';
-import { InvoicesFormValues } from '../validators/validators';
 
-export async function getAllInvoices(): Promise<InvoiceData[]> {
-  const res = await fetch(`${API_URL}/invoices`);
-  if (!res.ok) {
-    throw new Error('Błąd ładowania danych...');
+export async function getAllInvoices() {
+  const { data, error } = await supabase.from('dm-project-1-invoice').select();
+
+  if (error) {
+    console.error(error);
+    throw new Error('Błąd podczas ładowania danych...');
   }
-  const data = (await res.json()) as InvoiceData[];
+
   return data;
 }
 
-export async function addInvoice(
-  newInvoice: InvoicesFormValues
-): Promise<InvoiceData> {
-  const res = await fetch(`${API_URL}/invoices`, {
-    method: 'POST',
-    headers: { 'Content-type': 'application/json' },
-    body: JSON.stringify(newInvoice),
-  });
-  if (!res.ok) {
-    throw new Error('Błąd podczas dodawania...');
+export async function addInvoice(newInvoice: Omit<InvoiceData, 'id'>) {
+  const { data, error } = await supabase
+    .from('dm-project-1-invoice')
+    .insert(newInvoice);
+  if (error) {
+    console.error(error);
+    throw new Error('Błąd podczas dodawania danych...');
   }
-  const data = (await res.json()) as InvoiceData;
+
   return data;
+}
+
+export async function deleteInvoice(invoiceId: number): Promise<void> {
+  const { error } = await supabase
+    .from('dm-project-1-invoice')
+    .delete()
+    .eq('id', invoiceId);
+
+  if (error) {
+    console.error(error);
+    throw new Error('Błąd podczas usuwania...');
+  }
 }

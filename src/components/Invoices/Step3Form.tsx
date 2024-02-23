@@ -1,10 +1,14 @@
-import { OrderData } from '../../types/Order.types';
-import { InvoiceFormikProps } from '../../types/Invoice.types';
+import { step3FormProps } from '../../types/Invoice.types';
+import { errorInfoClass } from '../../utils/helpers';
 import Input from '../Form/Input';
 
-export default function Step3Form({ formik }: InvoiceFormikProps) {
-  const clientDetails = formik.values.selectedClient;
-  const ordersDetails = formik.values.selectedOrders as OrderData[];
+export default function Step3Form({
+  formik,
+  selectedClient,
+  selectedOrder,
+}: step3FormProps) {
+  const clientDetails = selectedClient;
+  const ordersDetails = selectedOrder;
   return (
     <>
       <div>
@@ -18,7 +22,7 @@ export default function Step3Form({ formik }: InvoiceFormikProps) {
         </h2>
         <div className="mb-6 flex flex-col gap-3">
           <p className=" text-slate-900 dark:text-stone-200">
-            ID: {clientDetails.userId}
+            ID: {clientDetails.id}
           </p>
           <p className=" text-slate-900 dark:text-stone-200">
             Imię: {clientDetails.name}
@@ -31,64 +35,61 @@ export default function Step3Form({ formik }: InvoiceFormikProps) {
           </p>
         </div>
         <div className="">
-          {ordersDetails?.map((order) => (
-            <div key={order.id} className="mb-3">
-              <h2 className="mb-4 text-xl text-slate-900 dark:text-stone-200">
-                Płaci za: {order.orderTitle}
-              </h2>
-              <Input
-                label="Cena"
-                name="price"
-                type="text"
-                value={formik.values.price}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-              />
-              {formik.touched.price && formik.errors.price && (
-                <p className={`${errorInfoClass}`}>{formik.errors.price}</p>
-              )}
-              <h2 className="mb-4 text-xl text-slate-900 dark:text-stone-200">
-                Daty:
-              </h2>
-              <div className="flex items-center justify-center gap-4">
-                <div>
-                  <Input
-                    label="Data"
-                    name="dateOfIssue"
-                    type="text"
-                    value={formik.values.dateOfIssue}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                  {formik.touched.dateOfIssue && formik.errors.dateOfIssue && (
-                    <p className={`${errorInfoClass}`}>
-                      {formik.errors.dateOfIssue}
-                    </p>
-                  )}
-                </div>
-                <div>
-                  <Input
-                    label="Data"
-                    name="accountingMonth"
-                    type="text"
-                    value={formik.values.accountingMonth}
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                  />
-                  {formik.touched.accountingMonth &&
-                    formik.errors.accountingMonth && (
-                      <p className={`${errorInfoClass}`}>
-                        {formik.errors.accountingMonth}
-                      </p>
-                    )}
-                </div>
+          <div key={ordersDetails.id} className="mb-3">
+            <h2 className="mb-4 text-xl text-slate-900 dark:text-stone-200">
+              Płaci za: {ordersDetails.orderTitle}
+            </h2>
+            <Input
+              label="Cena"
+              name="invoiceCost"
+              type="text"
+              value={formik.values.invoiceCost || ''}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+            />
+            {formik.touched.invoiceCost && formik.errors.invoiceCost && (
+              <p className={`${errorInfoClass}`}>{formik.errors.invoiceCost}</p>
+            )}
+            <h2 className="mb-4 text-xl text-slate-900 dark:text-stone-200">
+              Daty:
+            </h2>
+            <div className="flex items-center justify-center gap-4">
+              <div>
+                <Input
+                  label="Data"
+                  name="startDate"
+                  type="text"
+                  value={formik.values.startDate || ''}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.startDate && formik.errors.startDate && (
+                  <p className={`${errorInfoClass}`}>
+                    {formik.errors.startDate}
+                  </p>
+                )}
               </div>
+              <div>
+                <Input
+                  label="Data"
+                  name="endDate"
+                  type="text"
+                  value={formik.values.endDate || ''}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.endDate && formik.errors.endDate && (
+                  <p className={`${errorInfoClass}`}>{formik.errors.endDate}</p>
+                )}
+              </div>
+              <input
+                type="hidden"
+                value={(formik.values.orderId = ordersDetails.id)}
+              />
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </>
   );
 }
-
-const errorInfoClass = 'text-rose-400 text-sm';

@@ -36,6 +36,7 @@ const MoneyActionForm = lazy(
   () => import('./components/Money/MoneyActionForm')
 );
 const OrdersCartpage = lazy(() => import('./pages/OrdersCartpage'));
+const UserChangeDatapage = lazy(() => import('./pages/UserChangeDatapage'));
 
 const router = createBrowserRouter([
   {
@@ -144,6 +145,14 @@ const router = createBrowserRouter([
             element: (
               <Suspense fallback={<Loader />}>
                 <MoneyActionForm />
+              </Suspense>
+            ),
+          },
+          {
+            path: '/me',
+            element: (
+              <Suspense fallback={<Loader />}>
+                <UserChangeDatapage />
               </Suspense>
             ),
           },

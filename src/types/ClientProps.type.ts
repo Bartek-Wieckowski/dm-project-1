@@ -1,3 +1,3 @@
-import { ClientFormValues } from "../validators/validators";
+import { Tables } from '../../types/supabase';
 
-export type ClientProps = ClientFormValues & { id: string };
+export type ClientProps = Tables<'dm-project-1-clients'>;

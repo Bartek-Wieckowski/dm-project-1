@@ -1,0 +1,1 @@
+export const errorInfoClass = 'text-rose-400 text-sm';

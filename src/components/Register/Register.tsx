@@ -1,34 +1,41 @@
-import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
-import { UserAccount, registerAccountYupSchema } from "../../validators/validators";
-import Button from "../Button";
-import Input from "../Form/Input";
-import { useRegisterUser } from "../../api/mutations/users/useRegisterUser";
-import { RANDOM_IMG_URL } from "../../constants/appConst";
+import { useFormik } from 'formik';
+import { useNavigate } from 'react-router-dom';
+import { registerAccountYupSchema } from '../../validators/validators';
+import Button from '../Button';
+import Input from '../Form/Input';
+import { useRegisterUser } from '../../api/mutations/users/useRegisterUser';
+import { RANDOM_IMG_URL } from '../../constants/appConst';
+import { Tables } from '../../../types/supabase';
+import { errorInfoClass } from '../../utils/helpers';
+
+type FormValuesFromSupabase = Omit<Tables<'dm-project-1-users'>, 'id'>;
 
 export default function Register() {
   const { addNewUser } = useRegisterUser();
   const navigate = useNavigate();
-  const formik = useFormik<UserAccount>({
+  const formik = useFormik<FormValuesFromSupabase>({
     initialValues: {
-      name: "",
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      name: '',
+      username: '',
       avatar: RANDOM_IMG_URL,
     },
-    onSubmit: (values: UserAccount) => {
-      addNewUser(values);
-      formik.resetForm();
-      navigate("/");
+    onSubmit: (values: FormValuesFromSupabase) => {
+      try {
+        addNewUser(values);
+        formik.resetForm();
+        navigate('/');
+      } catch (error) {
+        // showNotification('Coś poszło nie tak...', 'error'); //FIXME: przenesienie notifikacje z useRegisterUser.ts
+      }
     },
     validationSchema: registerAccountYupSchema,
   });
 
   return (
     <>
-      <h1 className="mb-5 pt-2 text-center text-5xl text-stone-200">Rejestracja</h1>
+      <h1 className="mb-5 pt-2 text-center text-5xl text-stone-200">
+        Rejestracja
+      </h1>
       <form onSubmit={formik.handleSubmit}>
         <div className="mx-auto grid max-w-lg grid-cols-1 sm:grid-cols-2 sm:gap-10">
           <div className="mb-5">
@@ -36,7 +43,7 @@ export default function Register() {
               type="text"
               label="Imię"
               name="name"
-              value={formik.values.name}
+              value={formik.values.name ?? ''} //FIXME: lepiej ?? nullish
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
@@ -49,51 +56,12 @@ export default function Register() {
               type="text"
               label="Username"
               name="username"
-              value={formik.values.username}
+              value={formik.values.username || ''} //FIXME: czy lepiej OR
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
             />
             {formik.touched.username && formik.errors.username && (
               <p className={`${errorInfoClass}`}>{formik.errors.username}</p>
-            )}
-          </div>
-          <div className="mb-5">
-            <Input
-              label="Email"
-              name="email"
-              type="email"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.email && formik.errors.email && (
-              <p className={`${errorInfoClass}`}>{formik.errors.email}</p>
-            )}
-          </div>
-          <div className="mb-5">
-            <Input
-              label="Hasło"
-              name="password"
-              type="password"
-              value={formik.values.password}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.password && formik.errors.password && (
-              <p className={`${errorInfoClass}`}>{formik.errors.password}</p>
-            )}
-          </div>
-          <div className="mb-5">
-            <Input
-              label="Powtórz hasło"
-              name="confirmPassword"
-              type="password"
-              value={formik.values.confirmPassword}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-            />
-            {formik.touched.confirmPassword && formik.errors.confirmPassword && (
-              <p className={`${errorInfoClass}`}>{formik.errors.confirmPassword}</p>
             )}
           </div>
         </div>
@@ -106,5 +74,3 @@ export default function Register() {
     </>
   );
 }
-
-const errorInfoClass = "text-rose-400 text-sm";

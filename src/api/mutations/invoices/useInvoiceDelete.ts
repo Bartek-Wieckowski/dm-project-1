@@ -1,19 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteClient as deleteClientApi } from '../../apiClients';
 import { useNotification } from '../../../contexts/NotificationContext';
 import { QUERY_KEYS } from '../../constants';
+import { deleteInvoice as deleteInvoiceApi } from '../../apiInvoices';
 
-export function useClientDelete() {
+export function useInvoiceDelete() {
   const { showNotification } = useNotification();
   const queryClient = useQueryClient();
 
   const { mutate: deleteClient } = useMutation({
-    mutationFn: deleteClientApi,
+    mutationFn: deleteInvoiceApi,
     onSuccess: async () => {
       await queryClient.invalidateQueries({
-        queryKey: [QUERY_KEYS.clientsAll],
+        queryKey: [QUERY_KEYS.invoicesAll],
       });
-      showNotification('Klient usunięty poprawnie', 'success');
+      showNotification('Faktura usunięta poprawnie', 'success');
     },
     onError: () => {
       showNotification('Coś poszło nie tak...', 'error');

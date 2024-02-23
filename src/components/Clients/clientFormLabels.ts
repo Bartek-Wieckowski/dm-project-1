@@ -6,9 +6,9 @@ export const labelMap: LabelMapType = {
   name: "Imię",
   surname: "Nazwisko",
   street: "Ulica",
-  postCode: "Kod pocztowy",
-  town: "Miasto",
-  subRegion: "Region",
-  imgSrc: "Zdjęcie (podaj url)",
+  code: "Kod pocztowy",
+  city: "Miasto",
+  region: "Region",
+  imageUrl: "Zdjęcie (podaj url)",
   phoneNumber: "Numer telefonu",
 };

@@ -7,10 +7,13 @@ type UserContextType = {
   dispatch: React.Dispatch<UserAction>;
   logIn: (username: string) => Promise<void>;
   logOut: () => void;
+  updatedUser: (newUserData: UserState['user']) => void;
 };
 
 type UserState = {
   user: {
+    id: number;
+    name: string;
     username: string;
     avatar: string;
   } | null;
@@ -19,9 +22,16 @@ type UserState = {
 };
 
 type UserAction =
-  | { type: 'LOGIN'; payload: { username: string; avatar: string } }
+  | {
+      type: 'LOGIN';
+      payload: { id: number; name: string; username: string; avatar: string };
+    }
   | { type: 'LOGIN_ERROR' }
-  | { type: 'LOGOUT' };
+  | { type: 'LOGOUT' }
+  | {
+      type: 'UPDATE_USER';
+      payload: { id: number; name: string; username: string; avatar: string };
+    };
 
 const initialState: UserState = {
   user: null,
@@ -36,6 +46,8 @@ function reducer(state: UserState, action: UserAction): UserState {
     case 'LOGIN':
       return {
         user: {
+          id: action.payload.id,
+          name: action.payload.name,
           username: action.payload.username,
           avatar: action.payload.avatar,
         },
@@ -53,6 +65,16 @@ function reducer(state: UserState, action: UserAction): UserState {
         user: null,
         isAuth: false,
         isLoginError: false,
+      };
+    case 'UPDATE_USER':
+      return {
+        ...state,
+        user: {
+          id: action.payload.id,
+          name: action.payload.name,
+          username: action.payload.username,
+          avatar: action.payload.avatar,
+        },
       };
     default:
       return state;
@@ -73,7 +95,9 @@ function UserProvider({ children }: { children: React.ReactNode }) {
         dispatch({
           type: 'LOGIN',
           payload: {
-            username: userData.username,
+            id: userData.id || 0,
+            name: userData.name || '',
+            username: userData.username || '',
             avatar: userData?.avatar || '',
           },
         });
@@ -83,12 +107,19 @@ function UserProvider({ children }: { children: React.ReactNode }) {
         showNotification('Logowanie niepoprawne!', 'error');
       }
     } catch (error) {
-      console.error('Wystąpił błąd podczas logowania:', error);
+      dispatch({ type: 'LOGIN_ERROR' });
+      showNotification('Logowanie niepoprawne!', 'error');
     }
   }
 
   function logOut() {
     dispatch({ type: 'LOGOUT' });
+  }
+
+  function updatedUser(newUserData: UserState['user']) {
+    if (newUserData !== null) {
+      dispatch({ type: 'UPDATE_USER', payload: newUserData });
+    }
   }
 
   return (
@@ -97,6 +128,7 @@ function UserProvider({ children }: { children: React.ReactNode }) {
         dispatch,
         logIn,
         logOut,
+        updatedUser,
         userData: { user, isAuth, isLoginError },
       }}
     >

@@ -8,6 +8,7 @@ interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: React.FocusEvent<HTMLInputElement>) => void;
   min?: number;
+  labelColor?: string;
 }
 
 export default function Input({
@@ -18,10 +19,11 @@ export default function Input({
   onChange,
   onBlur,
   min,
+  labelColor = 'text-slate-900',
 }: InputProps) {
   return (
     <>
-      <label htmlFor={name} className={`${labelClass}`}>
+      <label htmlFor={name} className={`${labelClass} ${labelColor}`}>
         {label}:
       </label>
       <input
